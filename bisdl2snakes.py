@@ -30,17 +30,25 @@ class BiSDLCompiler(object):
             walker = ParseTreeWalker()
             walker.walk(model, tree)
             output.write("\n".join(model.buf))
+            print(f'Compiled file saved to {self._dest}')
 
 
 # TODO controllo errori
-def main(src, dest=None):
-    src_path = Path(src)
-    if dest is None:
-        dest = os.path.join(src_path.parent, src_path.stem + ".py")
-    print(dest)
+def main(argc, argv):
+    if argc < 2:
+        help()
+    src = argv[1]
+    dest = Path(src).stem + ".py"
+    if argc > 2:
+        if not Path(argv[2]).exists():
+            print(f'Destination folder {argv[2]} does not exist.')
+            return
+        dest = os.path.join(Path(argv[2]), dest)
+    else:
+        dest = os.path.join(Path(src).parent, dest)
     compiler = BiSDLCompiler(src, dest)
     compiler.compile()
 
 
 if __name__ == '__main__':
-    main(sys.argv[1])
+    main(len(sys.argv), sys.argv)
