@@ -1,7 +1,7 @@
 BiSDL - Biological Systems Description Language
 =======================================
 
-This package provide the **BiSDL** language, a high-level model description language supporting the design
+This package provides the **BiSDL** language, a high-level model description language supporting the design
 cycle of complex biological processes.
 
 A prototype version of our BiSDL compiler is currently able to translate BiSDL models into executable Python code based
