@@ -7,7 +7,7 @@ scopes         : ( 'SCOPE' scope )* ;
 scope          : ID coords processes? juxtacrine_signal* ;
 coords         : RO INT COMMA INT RC ;
 processes      : ( 'PROCESS' process )+ ;
-process        : ID timescale? process_type* ;
+process        : ID (timescale process_type+)? ;
 process_type   : transcription //#type_transcription
                  | translation //#type_translation
                  | degradation //#type_degradation

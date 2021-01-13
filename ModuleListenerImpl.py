@@ -1,4 +1,6 @@
+import re
 from collections import defaultdict
+from copy import deepcopy
 
 import numpy as np
 
@@ -43,6 +45,21 @@ def _mlist_to_dict(mlist):
         d[molecule] = mult
     return d
 
+def recursive_replace(d, old_val, new_val):
+    # check whether it's a dict, list, tuple, or scalar
+    if isinstance(d, dict):
+        items = d.items()
+    elif isinstance(d, (list, tuple)):
+        items = enumerate(d)
+    else:
+        # just a value, split and return
+        return str(d).replace(old_val, new_val)
+
+    # now call ourself for every value and replace in the input
+    for key, value in items:
+        d[key] = recursive_replace(value, old_val, new_val)
+    return d
+
 
 # This class defines a complete listener for a parse tree produced by ModuleParser.
 class ModuleListenerImpl(ModuleListener):
@@ -58,11 +75,13 @@ class ModuleListenerImpl(ModuleListener):
         self._place_coords = defaultdict(tuple)
         self._neighbors = defaultdict(list)
         self._counter = 0
+        self._def_processes = defaultdict()
+        self._make_def = False
 
     def _make_net(self, net_name, timescale):
         if not net_name.endswith("_net"):
             net_name += "_net"
-        n = net_name + " = PetriNet(\"" + net_name + "\", timescale = " + str(timescale) + ")"
+        n = f'{net_name} = PetriNet("{net_name}", timescale={timescale})'
         self._nodes[net_name]["net"] = n
 
     def _make_place(self, net, place, net_token="", activation=0):
@@ -182,27 +201,6 @@ class ModuleListenerImpl(ModuleListener):
             self.buf.append('\n'.join([ f'{self._t}{_t}' for _t in self._nodes[n]["output_arcs"] ]))
         self.buf.append(f'\n{self._t}return {self._parent_net}\n')
 
-    # Enter a parse tree produced by ModuleParser#scopes.
-    def enterScopes(self, ctx: ModuleParser.ScopesContext):
-        # LAMMERDA
-        for scope in ctx.scope():
-            self._parent_places[scope.ID().getText()] = list()
-            self._place_coords[scope.ID().getText()] = tuple(
-                int(x) for x in scope.coords().getText().strip('()').split(","))
-            for processes in scope.getChildren():
-                if type(processes) == ModuleParser.ProcessesContext:
-                    for process in processes.getChildren():
-                        if type(process) == ModuleParser.ProcessContext:
-                            _net = process.ID().getText() + "_net"
-                            self._parent_places[scope.ID().getText()].append(_net)  # risale a processes e da là a scope
-                            self._make_net(_net, process.timescale().INT().getText())
-                            for process_type in process.getChildren():
-                                if type(process_type) == ModuleParser.Process_typeContext:
-                                    for child in process_type.getChildren():
-                                        if type(child) == ModuleParser.TranscriptionContext:
-                                            self._make_place(_net, child.GENE().getText())
-                                            self._make_place(_net, child.MRNA().getText())
-
     # Exit a parse tree produced by ModuleParser#scopes.
     def exitScopes(self, ctx: ModuleParser.ScopesContext):
         self._build_neighborhood()
@@ -210,9 +208,39 @@ class ModuleListenerImpl(ModuleListener):
             net_tokens = ", [ " + ", ".join(nets) + " ]" if len(nets) > 0 else ""
             self._make_place(self._parent_net, place, net_tokens)
 
+    def exitScope(self, ctx:ModuleParser.ScopeContext):
+        self._place_coords[ctx.ID().getText()] = tuple(int(x) for x in ctx.coords().getText().strip('()').split(","))
+        self._parent_places[ctx.ID().getText()].extend(self._curr_subnets)
+
+    # Enter a parse tree produced by ModuleParser#processes.
+    def enterProcesses(self, ctx: ModuleParser.ProcessesContext):
+        self._curr_subnets = list()
+
     # Enter a parse tree produced by ModuleParser#process.
     def enterProcess(self, ctx: ModuleParser.ProcessContext):
-        self._sub_net = ctx.ID().getText() + "_net"
+        _p_id = ctx.ID().getText()
+        if ctx.timescale() is not None:
+            if _p_id in self._def_processes.keys():
+                raise Exception(f'Process {_p_id} already defined')
+            data = defaultdict()
+            data['COUNT'] = 0
+            data['TIMESCALE'] = ctx.timescale().INT().getText()
+            data['ARCS'] = list()
+            self._def_processes[_p_id] = data
+        else:
+            self._def_processes[_p_id]['COUNT'] += 1
+            data = self._def_processes[_p_id]
+
+        _net = f'{_p_id}_{data["COUNT"]}_net'
+        # se il PROCESS esisteva già (cioè count>0):
+        # copia le stringhe di quella net/process
+        # e sostituisci il nome della net
+        if data['COUNT'] > 0:
+            self._nodes[_net] = deepcopy(self._nodes[f'{_p_id}_0_net'])
+            recursive_replace(self._nodes[_net], "0", str(data['COUNT']))
+        self._make_net(_net, data['TIMESCALE'])
+        self._curr_subnets.append(_net)
+        self._sub_net = _net
 
     # Exit a parse tree produced by ModuleParser#transcription.
     def exitTranscription(self, ctx: ModuleParser.TranscriptionContext):
