@@ -52,9 +52,8 @@ def recursive_replace(d, old_val, new_val):
     elif isinstance(d, (list, tuple)):
         items = enumerate(d)
     else:
-        # just a value, split and return
+        # just a value, replace and return
         return str(d).replace(old_val, new_val)
-
     # now call ourself for every value and replace in the input
     for key, value in items:
         d[key] = recursive_replace(value, old_val, new_val)
@@ -77,6 +76,7 @@ class ModuleListenerImpl(ModuleListener):
         self._counter = 0
         self._def_processes = defaultdict()
         self._make_def = False
+        self._t_names = defaultdict()
 
     def _make_net(self, net_name, timescale):
         if not net_name.endswith("_net"):
@@ -91,7 +91,16 @@ class ModuleListenerImpl(ModuleListener):
             s = net + ".add_place(Place(\"" + place + "\"" + tk + "))"
             self._nodes[net]["places"][place] = s
 
+    def _unique_t_name(self, transition):
+        if transition in self._t_names.keys():
+            self._t_names[transition] += 1
+            transition = f"{transition}_{str(self._t_names[transition])}"
+        else:
+            self._t_names[transition] = 0
+        return transition
+
     def _make_transition(self, net, transition, rule=None):
+        transition = self._unique_t_name(transition)
         t = net + ".add_transition(Transition(\"" + transition + "\"" + (", " + rule if rule is not None else "") + "))"
         self._nodes[net]["transitions"][transition] = t
 
@@ -233,11 +242,19 @@ class ModuleListenerImpl(ModuleListener):
 
         _net = f'{_p_id}_{data["COUNT"]}_net'
         # se il PROCESS esisteva già (cioè count>0):
-        # copia le stringhe di quella net/process
+        # copia le stringhe di quella net/process (places, transitions, in/out arcs)
         # e sostituisci il nome della net
         if data['COUNT'] > 0:
             self._nodes[_net] = deepcopy(self._nodes[f'{_p_id}_0_net'])
             recursive_replace(self._nodes[_net], "0", str(data['COUNT']))
+
+        # SNAKES needs unique transition names...
+        list_t = defaultdict()
+        for t in self._nodes[_net]['transitions'].keys():
+            _t = self._unique_t_name(t)
+            list_t[_t] = self._nodes[_net]['transitions'][t].replace(t, _t)
+        self._nodes[_net]['transitions'] = deepcopy(list_t)
+
         self._make_net(_net, data['TIMESCALE'])
         self._curr_subnets.append(_net)
         self._sub_net = _net
