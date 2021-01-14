@@ -52,9 +52,8 @@ def recursive_replace(d, old_val, new_val):
     elif isinstance(d, (list, tuple)):
         items = enumerate(d)
     else:
-        # just a value, split and return
+        # just a value, replace and return
         return str(d).replace(old_val, new_val)
-
     # now call ourself for every value and replace in the input
     for key, value in items:
         d[key] = recursive_replace(value, old_val, new_val)
@@ -66,7 +65,6 @@ class ModuleListenerImpl(ModuleListener):
 
     def __init__(self):
         self.buf = list()
-        # self._sub_nets = set()
         self._parent_places = defaultdict(list)
         self._child_places = defaultdict(set)
         self._regulation_elems = defaultdict(dict)
@@ -74,9 +72,9 @@ class ModuleListenerImpl(ModuleListener):
         self._paracrine_signals = list()
         self._place_coords = defaultdict(tuple)
         self._neighbors = defaultdict(list)
-        self._counter = 0
         self._def_processes = defaultdict()
         self._make_def = False
+        self._t_names = defaultdict(int)
 
     def _make_net(self, net_name, timescale):
         if not net_name.endswith("_net"):
@@ -91,11 +89,14 @@ class ModuleListenerImpl(ModuleListener):
             s = net + ".add_place(Place(\"" + place + "\"" + tk + "))"
             self._nodes[net]["places"][place] = s
 
+    def _unique_t_name(self, transition):
+        self._t_names[transition] += 1
+        return f"{transition}_{str(self._t_names[transition])}"
+
     def _make_transition(self, net, transition, rule=None):
         t = net + ".add_transition(Transition(\"" + transition + "\"" + (", " + rule if rule is not None else "") + "))"
         self._nodes[net]["transitions"][transition] = t
 
-    # TODO notify
     def _make_input_arc(self, net, place, transition, mult="1", token_type="Value(dot)"):
         tk = token_type if mult == "1" else "MultiArc([" + token_type + "]*" + mult + ")"
         if net == self._parent_net:
@@ -136,14 +137,13 @@ class ModuleListenerImpl(ModuleListener):
     def _make_regulation(self, transitions, src, dest, mult):
         addToken = 0
         for regulation_type in self._regulation_elems:
-            #print(regulation_type, self._regulation_elems[regulation_type])
             molecules = self._regulation_elems[regulation_type]
             if regulation_type == "INHIBITORS":
                 #for _t in transitions:
                 for molecule, count in molecules.items():
                     self._make_place(self._sub_net, molecule)
                     for i in range(int(count)):
-                        _t = src + "_inhibition_" + molecule + ("_" + str(i) if i > 0 else "")
+                        _t = self._unique_t_name(src + "_inhibition_" + molecule)# + ("_" + str(i) if i > 0 else ""))
                         self._make_transition(self._sub_net, _t)
                         self._make_input_arc(self._sub_net, molecule, _t)
                         self._make_input_arc(self._sub_net, src, _t)
@@ -158,7 +158,7 @@ class ModuleListenerImpl(ModuleListener):
                         self._make_place(self._sub_net, molecule)
                         for i in range(int(count)):
                             addToken += 1
-                            _tt = _t + "_activated_" + molecule + ("_" + str(i) if i > 0 else "")
+                            _tt = self._unique_t_name(_t + "_activated_" + molecule)# + ("_" + str(i) if i > 0 else ""))
                             self._make_transition(self._sub_net, _tt)
                             self._make_input_arc(self._sub_net, src, _tt)
                             if "gene" in src:
@@ -210,11 +210,11 @@ class ModuleListenerImpl(ModuleListener):
 
     def exitScope(self, ctx:ModuleParser.ScopeContext):
         self._place_coords[ctx.ID().getText()] = tuple(int(x) for x in ctx.coords().getText().strip('()').split(","))
-        self._parent_places[ctx.ID().getText()].extend(self._curr_subnets)
 
     # Enter a parse tree produced by ModuleParser#processes.
     def enterProcesses(self, ctx: ModuleParser.ProcessesContext):
-        self._curr_subnets = list()
+        self._curr_scope_id = ctx.parentCtx.ID().getText()
+        self._parent_places[self._curr_scope_id] = list()
 
     # Enter a parse tree produced by ModuleParser#process.
     def enterProcess(self, ctx: ModuleParser.ProcessContext):
@@ -233,13 +233,23 @@ class ModuleListenerImpl(ModuleListener):
 
         _net = f'{_p_id}_{data["COUNT"]}_net'
         # se il PROCESS esisteva già (cioè count>0):
-        # copia le stringhe di quella net/process
+        # copia le stringhe di quella net/process (places, transitions, in/out arcs)
         # e sostituisci il nome della net
         if data['COUNT'] > 0:
             self._nodes[_net] = deepcopy(self._nodes[f'{_p_id}_0_net'])
             recursive_replace(self._nodes[_net], "0", str(data['COUNT']))
+
+        # SNAKES needs unique transition names...
+        list_t = defaultdict()
+        for t in self._nodes[_net]['transitions'].keys():
+            _t = self._unique_t_name(t)
+            list_t[_t] = self._nodes[_net]['transitions'][t].replace(t, _t)
+            self._nodes[_net]['input_arcs'] = [ _a.replace(t, _t) for _a in self._nodes[_net]['input_arcs'] ]
+            self._nodes[_net]['output_arcs'] = [ _a.replace(t, _t) for _a in self._nodes[_net]['output_arcs'] ]
+        self._nodes[_net]['transitions'] = deepcopy(list_t)
+
         self._make_net(_net, data['TIMESCALE'])
-        self._curr_subnets.append(_net)
+        self._parent_places[self._curr_scope_id].append(_net)
         self._sub_net = _net
 
     # Exit a parse tree produced by ModuleParser#transcription.
@@ -249,7 +259,7 @@ class ModuleListenerImpl(ModuleListener):
         mrna = ctx.MRNA().getText()
         _transitions = list()
         # for i in range(int(mult)):
-        transition = gene + "_transcription"  # + ("_" + str(i) if i > 0 else "")
+        transition = self._unique_t_name(f"{gene}_transcription")  # + ("_" + str(i) if i > 0 else "")
         _transitions.append(transition)
         self._make_transition(self._sub_net, transition)
         self._make_input_arc(self._sub_net, gene, transition)
@@ -268,7 +278,7 @@ class ModuleListenerImpl(ModuleListener):
         self._make_place(self._sub_net, protein)
         _transitions = list()
         # for i in range(int(mult)):
-        transition = mrna + "_translation"  # + ("_" + str(i) if i > 0 else "")
+        transition = self._unique_t_name(f"{mrna}_translation")  # + ("_" + str(i) if i > 0 else "")
         _transitions.append(transition)
         self._make_transition(self._sub_net, transition)
         self._make_input_arc(self._sub_net, mrna, transition)
@@ -283,7 +293,7 @@ class ModuleListenerImpl(ModuleListener):
         mult = ctx.mult().INT().getText() if ctx.mult() is not None else "1"
         self._make_place(self._sub_net, molecule)
         for i in range(int(mult)):
-            transition = molecule + "_degradation" + ("_" + str(i) if i > 0 else "")
+            transition = self._unique_t_name(molecule + "_degradation" + ("_" + str(i) if i > 0 else ""))
             self._make_transition(self._sub_net, transition)
             self._make_input_arc(self._sub_net, molecule, transition)
 
@@ -298,8 +308,7 @@ class ModuleListenerImpl(ModuleListener):
         l1 = ctx.m_list()[1].getText()
         proteins_in = _mlist_to_dict(l0)
         proteins_out = _mlist_to_dict(l1)
-        transition = "enzymatic_reaction_translation_" + str(self._counter)
-        self._counter += 1
+        transition = self._unique_t_name(f"enzymatic_reaction_translation")
         self._make_transition(self._sub_net, transition)
         self._make_place(self._sub_net, e)
         self._make_input_arc(self._sub_net, e, transition)
@@ -339,12 +348,12 @@ class ModuleListenerImpl(ModuleListener):
         rule = "Expression(\"" + (" or ".join([("str(x) == " + repr(m)) for m in molecules])) + "\")"
         for n1, n1_neighbors in self._neighbors.items():
             for n2 in n1_neighbors:
-                transition = "paracrine_signaling_" + n1 + "_" + n2
+                transition = self._unique_t_name(f"paracrine_signaling_{n1}_{n2}")
                 self._make_transition(net, transition, rule)
-                self._make_input_arc(net, n1, transition, token_type="Variable('x')")
-                self._make_output_arc(net, n2, transition, token_type="Variable('x')")
+                self._make_input_arc(net, n1, transition, token_type=f"Variable('x')")
+                self._make_output_arc(net, n2, transition, token_type=f"Variable('x')")
 
-                transition = "paracrine_signaling_" + n2 + "_" + n1
+                transition = self._unique_t_name(f"paracrine_signaling_{n2}_{n1}")
                 self._make_transition(net, transition, rule)
                 self._make_input_arc(net, n2, transition, token_type="Variable('x')")
                 self._make_output_arc(net, n1, transition, token_type="Variable('x')")
@@ -355,13 +364,12 @@ class ModuleListenerImpl(ModuleListener):
     def exitJuxtacrine_signal(self, ctx: ModuleParser.Juxtacrine_signalContext):
         src_scope = ctx.parentCtx.ID().getText()
         dest_scope = ctx.ID().getText()
-        #print(self._neighbors)
         #if src_scope in self._neighbors[dest_scope] or dest_scope in self._neighbors[src_scope]:
         molecule = ctx.PROTEIN().getText()
         net = self._parent_net
-        rule = "Expression(\"str(x) == " + repr(molecule) + "\")"
-        transition = "juxtacrine_signaling_" + molecule + "_" + src_scope + "_" + dest_scope
+        rule = f"Expression(\"str(x) == {repr(molecule)}\")"
+        transition = self._unique_t_name(f"juxtacrine_signaling_{molecule}_{src_scope}_{dest_scope}")
         self._make_transition(net, transition, rule)
-        self._make_input_arc(net, src_scope, transition, token_type="Variable('x')")
+        self._make_input_arc(net, src_scope, transition, token_type=f"Variable('x')")
         self._make_output_arc(net, dest_scope, transition,
-                              token_type="Expression('x.replace(\"protein\", \"receptor_active_protein\")')")
+                              token_type=f"Expression('x.replace(\"protein\", \"receptor_active_protein\")')")
