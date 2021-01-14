@@ -249,7 +249,7 @@ class ModuleListenerImpl(ModuleListener):
         mrna = ctx.MRNA().getText()
         _transitions = list()
         # for i in range(int(mult)):
-        transition = gene + "_transcription"  # + ("_" + str(i) if i > 0 else "")
+        transition = f"{gene}_transcription"  # + ("_" + str(i) if i > 0 else "")
         _transitions.append(transition)
         self._make_transition(self._sub_net, transition)
         self._make_input_arc(self._sub_net, gene, transition)
@@ -268,7 +268,7 @@ class ModuleListenerImpl(ModuleListener):
         self._make_place(self._sub_net, protein)
         _transitions = list()
         # for i in range(int(mult)):
-        transition = mrna + "_translation"  # + ("_" + str(i) if i > 0 else "")
+        transition = f"{mrna}_translation"  # + ("_" + str(i) if i > 0 else "")
         _transitions.append(transition)
         self._make_transition(self._sub_net, transition)
         self._make_input_arc(self._sub_net, mrna, transition)
@@ -298,7 +298,7 @@ class ModuleListenerImpl(ModuleListener):
         l1 = ctx.m_list()[1].getText()
         proteins_in = _mlist_to_dict(l0)
         proteins_out = _mlist_to_dict(l1)
-        transition = "enzymatic_reaction_translation_" + str(self._counter)
+        transition = f"enzymatic_reaction_translation_{str(self._counter)}"
         self._counter += 1
         self._make_transition(self._sub_net, transition)
         self._make_place(self._sub_net, e)
@@ -339,12 +339,12 @@ class ModuleListenerImpl(ModuleListener):
         rule = "Expression(\"" + (" or ".join([("str(x) == " + repr(m)) for m in molecules])) + "\")"
         for n1, n1_neighbors in self._neighbors.items():
             for n2 in n1_neighbors:
-                transition = "paracrine_signaling_" + n1 + "_" + n2
+                transition = f"paracrine_signaling_{n1}_{n2}"
                 self._make_transition(net, transition, rule)
-                self._make_input_arc(net, n1, transition, token_type="Variable('x')")
-                self._make_output_arc(net, n2, transition, token_type="Variable('x')")
+                self._make_input_arc(net, n1, transition, token_type=f"Variable('x')")
+                self._make_output_arc(net, n2, transition, token_type=f"Variable('x')")
 
-                transition = "paracrine_signaling_" + n2 + "_" + n1
+                transition = f"paracrine_signaling_{n2}_{n1}"
                 self._make_transition(net, transition, rule)
                 self._make_input_arc(net, n2, transition, token_type="Variable('x')")
                 self._make_output_arc(net, n1, transition, token_type="Variable('x')")
@@ -359,9 +359,9 @@ class ModuleListenerImpl(ModuleListener):
         #if src_scope in self._neighbors[dest_scope] or dest_scope in self._neighbors[src_scope]:
         molecule = ctx.PROTEIN().getText()
         net = self._parent_net
-        rule = "Expression(\"str(x) == " + repr(molecule) + "\")"
-        transition = "juxtacrine_signaling_" + molecule + "_" + src_scope + "_" + dest_scope
+        rule = f"Expression(\"str(x) == {repr(molecule)}\")"
+        transition = f"juxtacrine_signaling_{molecule}_{src_scope}_{dest_scope}"
         self._make_transition(net, transition, rule)
-        self._make_input_arc(net, src_scope, transition, token_type="Variable('x')")
+        self._make_input_arc(net, src_scope, transition, token_type=f"Variable('x')")
         self._make_output_arc(net, dest_scope, transition,
-                              token_type="Expression('x.replace(\"protein\", \"receptor_active_protein\")')")
+                              token_type=f"Expression('x.replace(\"protein\", \"receptor_active_protein\")')")
