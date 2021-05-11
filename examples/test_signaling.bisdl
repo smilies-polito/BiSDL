@@ -1,4 +1,5 @@
-MODULE test_net
+# Module for testing the notify mechanism correctness.
+MODULE test_signaling
 TIMESCALE 1
 SCOPE cell_1 (0, 0)
     PROCESS cell_1_process
