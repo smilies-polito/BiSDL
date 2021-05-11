@@ -50,7 +50,7 @@ TBD
 Examples
 -------------
 
-The examples folder contains some bisdl code that can be compiled like this (with the virtual environment active):
+The examples folder contains some bisdl code that can be compiled as follows:
 ```
 python bisdl2snakes examples/test_net.bisdl
 python bisdl2snakes examples/rgb_pattern.bisdl
