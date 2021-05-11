@@ -45,6 +45,7 @@ def _mlist_to_dict(mlist):
         d[molecule] = mult
     return d
 
+
 def recursive_replace(d, old_val, new_val):
     # check whether it's a dict, list, tuple, or scalar
     if isinstance(d, dict):
@@ -201,6 +202,32 @@ class ModuleListenerImpl(ModuleListener):
             self.buf.append('\n'.join([ f'{self._t}{_t}' for _t in self._nodes[n]["output_arcs"] ]))
         self.buf.append(f'\n{self._t}return {self._parent_net}\n')
 
+
+    # Enter a parse tree produced by ModuleParser#scopes.
+    def enterScopes(self, ctx: ModuleParser.ScopesContext):
+        # LAMMERDA
+        for scope in ctx.scope():
+            _scope_id = scope.ID().getText()
+            self._parent_places[_scope_id] = list()
+            self._place_coords[scope.ID().getText()] = tuple(int(x) for x in scope.coords().getText().strip('()').split(","))
+            for processes in scope.getChildren():
+                if type(processes) == ModuleParser.ProcessesContext:
+                    for process in processes.getChildren():
+                        if type(process) == ModuleParser.ProcessContext:
+                            pass
+                            #_net = process.ID().getText() + "_net"
+                            #self._parent_places[scope.ID().getText()].append(_net)  # risale a processes e da là a scope
+                            #self._make_net(_net, process.timescale().INT().getText())
+
+
+
+                            #for process_type in process.getChildren():
+                            #    if type(process_type) == ModuleParser.Process_typeContext:
+                            #        for child in process_type.getChildren():
+                            #            if type(child) == ModuleParser.TranscriptionContext:
+                            #                self._make_place(_net, child.GENE().getText())
+                            #                self._make_place(_net, child.MRNA().getText())
+
     # Exit a parse tree produced by ModuleParser#scopes.
     def exitScopes(self, ctx: ModuleParser.ScopesContext):
         self._build_neighborhood()
@@ -213,15 +240,17 @@ class ModuleListenerImpl(ModuleListener):
 
     # Enter a parse tree produced by ModuleParser#processes.
     def enterProcesses(self, ctx: ModuleParser.ProcessesContext):
-        self._curr_scope_id = ctx.parentCtx.ID().getText()
-        self._parent_places[self._curr_scope_id] = list()
+        __curr_scope_id = ctx.parentCtx.ID().getText()
+        p_names = [ p.ID().getText() for p in ctx.getChildren() if type(p) == ModuleParser.ProcessContext ]
+        duplicates = set([x for x in p_names if p_names.count(x) > 1])
+        if duplicates:
+            raise Exception(f'Duplicate PROCESS names {p_names} in SCOPE {__curr_scope_id}')
 
     # Enter a parse tree produced by ModuleParser#process.
     def enterProcess(self, ctx: ModuleParser.ProcessContext):
         _p_id = ctx.ID().getText()
-        if ctx.timescale() is not None:
-            if _p_id in self._def_processes.keys():
-                raise Exception(f'Process {_p_id} already defined')
+        __curr_scope_id = ctx.parentCtx.parentCtx.ID().getText()
+        if _p_id not in self._def_processes.keys():
             data = defaultdict()
             data['COUNT'] = 0
             data['TIMESCALE'] = ctx.timescale().INT().getText()
@@ -244,12 +273,14 @@ class ModuleListenerImpl(ModuleListener):
         for t in self._nodes[_net]['transitions'].keys():
             _t = self._unique_t_name(t)
             list_t[_t] = self._nodes[_net]['transitions'][t].replace(t, _t)
-            self._nodes[_net]['input_arcs'] = [ _a.replace(t, _t) for _a in self._nodes[_net]['input_arcs'] ]
-            self._nodes[_net]['output_arcs'] = [ _a.replace(t, _t) for _a in self._nodes[_net]['output_arcs'] ]
+            self._nodes[_net]['input_arcs'] = [_a.replace(t, _t) for _a in self._nodes[_net]['input_arcs']]
+            self._nodes[_net]['output_arcs'] = [_a.replace(t, _t) for _a in self._nodes[_net]['output_arcs']]
+            self._nodes[_net]['input_arcs'] = [re.sub(r'place\(\'\w+\'\)', f"place('{__curr_scope_id}')", _a) for _a in self._nodes[_net]['input_arcs']]
+            self._nodes[_net]['output_arcs'] = [re.sub(r'place\(\'\w+\'\)', f"place('{__curr_scope_id}')", _a) for _a in self._nodes[_net]['output_arcs']]
         self._nodes[_net]['transitions'] = deepcopy(list_t)
-
         self._make_net(_net, data['TIMESCALE'])
-        self._parent_places[self._curr_scope_id].append(_net)
+        self._parent_places[__curr_scope_id].append(_net)
+
         self._sub_net = _net
 
     # Exit a parse tree produced by ModuleParser#transcription.
@@ -308,7 +339,7 @@ class ModuleListenerImpl(ModuleListener):
         l1 = ctx.m_list()[1].getText()
         proteins_in = _mlist_to_dict(l0)
         proteins_out = _mlist_to_dict(l1)
-        transition = self._unique_t_name(f"enzymatic_reaction_translation")
+        transition = self._unique_t_name(f"enzymatic_reaction")
         self._make_transition(self._sub_net, transition)
         self._make_place(self._sub_net, e)
         self._make_input_arc(self._sub_net, e, transition)
@@ -358,6 +389,7 @@ class ModuleListenerImpl(ModuleListener):
                 self._make_input_arc(net, n2, transition, token_type="Variable('x')")
                 self._make_output_arc(net, n1, transition, token_type="Variable('x')")
 
+    # TODO in una versione futura si potrebbe rimuovere la necessità di scrivere un JUXTACRINE_SIGNAL per ogni vicino:
     # TODO il vicinato viene costruito dopo il signaling! spostare la roba qua sotto in un altro listener (oppure spostare build_neighborhood)
     # TODO forse meglio cercare le coordinate dello scope dest e calcolare la distanza dentro questa funzione, senza spostare nulla
     # Exit a parse tree produced by ModuleParser#juxtacrine_signal.
