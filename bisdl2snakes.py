@@ -4,7 +4,7 @@ from pathlib import Path
 from antlr4 import *
 
 from gen.ModuleLexer import ModuleLexer
-from ModuleListenerImpl import *
+from bisdl.ModuleListenerImpl import *
 
 
 class BiSDLCompiler(object):
@@ -13,7 +13,7 @@ class BiSDLCompiler(object):
     all subsequent requirements
     """
 
-    def __init__(self, src, dest):  # this method creates the class object.
+    def __init__(self, src, dest):
         self._src = src
         self._dest = dest
 
@@ -47,7 +47,11 @@ def main(argc, argv):
     else:
         dest = os.path.join(Path(src).parent, dest)
     compiler = BiSDLCompiler(src, dest)
-    compiler.compile()
+    try:
+        compiler.compile()
+    except Exception as e:
+        raise e
+
 
 
 if __name__ == '__main__':
