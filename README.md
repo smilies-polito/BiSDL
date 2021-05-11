@@ -24,15 +24,15 @@ sudo apt-get install python3 python3-pip
 ```
 
 
-Download the code, then from a command line do the following:
+Download the code, then install the required packages:
 
 ```
 # cd /path/to/BiSDL
 
-# Create a python 3 environment.
+# [optional] Create a python 3 environment.
 virtualenv -p /usr/bin/python3 ~/.virtualenvs/bisdlvenv
 
-# Activate the environment
+# [optional] Activate the environment
 source ~/.virtualenvs/bisdlvenv/bin/activate
 
 # Install required packages
