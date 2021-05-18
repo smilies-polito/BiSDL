@@ -1,7 +1,7 @@
 from collections import defaultdict
 
-from gen.ModuleParser import ModuleParser
-from gen.ModuleListener import ModuleListener
+from bisdl.gen.ModuleParser import ModuleParser
+from bisdl.gen.ModuleListener import ModuleListener
 
 #tree = lambda: defaultdict(tree)
 

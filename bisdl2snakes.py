@@ -3,8 +3,8 @@ import sys
 from pathlib import Path
 from antlr4 import *
 
-from gen.ModuleLexer import ModuleLexer
-from bisdl.ModuleListenerImpl import *
+from bisdl.gen.ModuleLexer import ModuleLexer
+from bisdl.impl.ModuleListener import *
 
 
 class BiSDLCompiler(object):

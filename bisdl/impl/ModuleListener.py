@@ -13,8 +13,8 @@ import numpy as np
 # TODO contatore globale per avere nomi univoci (correggere nomi transizioni già fatte)
 
 
-from gen.ModuleParser import ModuleParser
-from gen.ModuleListener import ModuleListener
+from bisdl.gen.ModuleParser import ModuleParser
+from bisdl.gen.ModuleListener import ModuleListener
 
 tree = lambda: defaultdict(tree)
 
