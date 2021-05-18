@@ -1,6 +1,6 @@
 # In this test module first_proc is defined once in cell_1 SCOPE,
 # and then reused in cell_2.
-MODULE test_reuse_process
+MODULE reuse_process
 TIMESCALE 1
 SCOPE cell_1 (0, 0)
     PROCESS first_proc
