@@ -76,6 +76,7 @@ class ModuleListenerImpl(ModuleListener):
         self._def_processes = defaultdict()
         self._make_def = False
         self._t_names = defaultdict(int)
+        self._juxtacrine_transitions = list()
 
     def _make_net(self, net_name, timescale):
         if not net_name.endswith("_net"):
@@ -110,7 +111,6 @@ class ModuleListenerImpl(ModuleListener):
             self._nodes[net]["input_arcs"] = list()
         self._nodes[net]["input_arcs"].append(a)
 
-    # TODO notify
     def _make_output_arc(self, net, place, transition, mult="1", token_type="Value(dot)"):
         tk = token_type if mult == "1" else "MultiArc([" + token_type + "]*" + mult + ")"
         if net == self._parent_net:
@@ -234,6 +234,13 @@ class ModuleListenerImpl(ModuleListener):
         for place, nets in self._parent_places.items():
             net_tokens = ", [ " + ", ".join(nets) + " ]" if len(nets) > 0 else ""
             self._make_place(self._parent_net, place, net_tokens)
+        # TODO assert all src_ and dest_ scopes exist
+        for _jt in self._juxtacrine_transitions:
+            net, transition, rule, src_scope, dest_scope = _jt
+            self._make_transition(net, transition, rule)
+            self._make_input_arc(net, src_scope, transition, token_type=f"Variable('x')")
+            self._make_output_arc(net, dest_scope, transition,
+                                  token_type=f"Expression('x.replace(\"protein\", \"receptor_active_protein\")')")
 
     def exitScope(self, ctx:ModuleParser.ScopeContext):
         self._place_coords[ctx.ID().getText()] = tuple(int(x) for x in ctx.coords().getText().strip('()').split(","))
@@ -401,7 +408,4 @@ class ModuleListenerImpl(ModuleListener):
         net = self._parent_net
         rule = f"Expression(\"str(x) == {repr(molecule)}\")"
         transition = self._unique_t_name(f"juxtacrine_signaling_{molecule}_{src_scope}_{dest_scope}")
-        self._make_transition(net, transition, rule)
-        self._make_input_arc(net, src_scope, transition, token_type=f"Variable('x')")
-        self._make_output_arc(net, dest_scope, transition,
-                              token_type=f"Expression('x.replace(\"protein\", \"receptor_active_protein\")')")
+        self._juxtacrine_transitions.append((net, transition, rule, src_scope, dest_scope))
