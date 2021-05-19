@@ -1,7 +1,7 @@
 import errno
 
-from wrapping import *
-import pylab as plt
+from .wrapping import *
+import matplotlib.pyplot as plt
 import pandas as pd
 
 #TODO controlli!
