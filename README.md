@@ -24,15 +24,15 @@ sudo apt-get install python3 python3-pip
 ```
 
 
-Download the code, then from a command line do the following:
+Download the code, then install the required packages:
 
 ```
 # cd /path/to/BiSDL
 
-# Create a python 3 environment.
+# [optional] Create a python 3 environment.
 virtualenv -p /usr/bin/python3 ~/.virtualenvs/bisdlvenv
 
-# Activate the environment
+# [optional] Activate the environment
 source ~/.virtualenvs/bisdlvenv/bin/activate
 
 # Install required packages
@@ -50,7 +50,7 @@ TBD
 Examples
 -------------
 
-The examples folder contains some bisdl code that can be compiled like this (with the virtual environment active):
+The examples folder contains some bisdl code that can be compiled as follows:
 ```
 python bisdl2snakes examples/test_net.bisdl
 python bisdl2snakes examples/rgb_pattern.bisdl
