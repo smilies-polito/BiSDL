@@ -32,7 +32,7 @@ molecule       : GENE #type_gene
                | MRNA #type_mrna
                | PROTEIN #type_protein
                ;
-paracrine_signals  : 'PARACRINE_SIGNALS' molecule (COMMA molecule)* ;
+paracrine_signals  : 'PARACRINE_SIGNALS' molecule (COMMA molecule)* ; //TODO: molecule->PROTEIN; test
 juxtacrine_signal  : 'JUXTACRINE_SIGNAL' PROTEIN RARROW ID ;
 
 // lexer rules
