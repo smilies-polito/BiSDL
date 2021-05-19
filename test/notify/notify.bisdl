@@ -1,0 +1,24 @@
+# Module for testing the notify mechanism correctness.
+MODULE notify
+TIMESCALE 1
+SCOPE cell_1 (0, 0)
+    PROCESS cell_1_process1
+        TIMESCALE 1
+        TRANSCRIPTION(pippo_gene, pippo_mrna)
+        TRANSLATION(pippo_mrna, 5*pippo_protein)
+    PROCESS cell_1_process2
+        TIMESCALE 1
+        ENZYMATIC_REACTION(paperino_receptor_active_protein, [pippo_protein], [quiquoqua_protein])
+    PROCESS cell_1_process3
+        TIMESCALE 2
+        TRANSCRIPTION(quiquoqua_gene, quiquoqua_mrna)
+        TRANSLATION(quiquoqua_mrna, quiquoqua_protein)
+    JUXTACRINE_SIGNAL quiquoqua_protein -> cell_2
+SCOPE cell_2 (0, 1)
+    PROCESS cell_2_process
+        TIMESCALE 1
+        TRANSCRIPTION(pluto_gene, pluto_mrna)
+        TRANSLATION(pluto_mrna, pluto_protein)
+        ENZYMATIC_REACTION(quiquoqua_receptor_active_protein, [pluto_protein], [paperino_protein])
+    JUXTACRINE_SIGNAL paperino_protein -> cell_1
+

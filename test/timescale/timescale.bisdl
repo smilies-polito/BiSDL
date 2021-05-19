@@ -1,0 +1,14 @@
+# Module for testing the notify mechanism correctness.
+MODULE timescale
+TIMESCALE 15
+SCOPE cell_A (0, 0)
+    PROCESS cell_A_process
+        TIMESCALE 5
+        TRANSCRIPTION(a_gene, a_mrna)
+        TRANSLATION(a_mrna, a_protein)
+    JUXTACRINE_SIGNAL a_protein -> cell_B
+SCOPE cell_B (0, 1)
+    PROCESS cell_B_process
+        TIMESCALE 10
+        ENZYMATIC_REACTION(a_receptor_active_protein, [b_protein], [c_protein])
+
