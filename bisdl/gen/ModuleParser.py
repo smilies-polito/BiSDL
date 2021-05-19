@@ -1,4 +1,4 @@
-# Generated from /home/lg/PycharmProjects/BiSDL/bisdl/Module.g4 by ANTLR 4.9
+# Generated from /home/lg/PycharmProjects/BiSDL/bisdl/Module.g4 by ANTLR 4.9.1
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -197,7 +197,7 @@ class ModuleParser ( Parser ):
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
-        self.checkVersion("4.9")
+        self.checkVersion("4.9.1")
         self._interp = ParserATNSimulator(self, self.atn, self.decisionsToDFA, self.sharedContextCache)
         self._predicates = None
 
@@ -205,6 +205,7 @@ class ModuleParser ( Parser ):
 
 
     class RootContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -284,6 +285,7 @@ class ModuleParser ( Parser ):
 
 
     class TimescaleContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -332,6 +334,7 @@ class ModuleParser ( Parser ):
 
 
     class ScopesContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -393,6 +396,7 @@ class ModuleParser ( Parser ):
 
 
     class ScopeContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -475,6 +479,7 @@ class ModuleParser ( Parser ):
 
 
     class CoordsContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -541,6 +546,7 @@ class ModuleParser ( Parser ):
 
 
     class ProcessesContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -604,6 +610,7 @@ class ModuleParser ( Parser ):
 
 
     class ProcessContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -684,6 +691,7 @@ class ModuleParser ( Parser ):
 
 
     class Process_typeContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -784,6 +792,7 @@ class ModuleParser ( Parser ):
 
 
     class TranscriptionContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -887,6 +896,7 @@ class ModuleParser ( Parser ):
 
 
     class TranslationContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -990,6 +1000,7 @@ class ModuleParser ( Parser ):
 
 
     class DegradationContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1069,6 +1080,7 @@ class ModuleParser ( Parser ):
 
 
     class Protein_complex_formationContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1152,6 +1164,7 @@ class ModuleParser ( Parser ):
 
 
     class Enzymatic_reactionContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1251,6 +1264,7 @@ class ModuleParser ( Parser ):
 
 
     class Custom_processContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1366,6 +1380,7 @@ class ModuleParser ( Parser ):
 
 
     class RegulationContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1424,6 +1439,7 @@ class ModuleParser ( Parser ):
 
 
     class Regulation_typeContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1545,6 +1561,7 @@ class ModuleParser ( Parser ):
 
 
     class M_listContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1638,6 +1655,7 @@ class ModuleParser ( Parser ):
 
 
     class MultContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1689,6 +1707,7 @@ class ModuleParser ( Parser ):
 
 
     class MoleculeContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1816,6 +1835,7 @@ class ModuleParser ( Parser ):
 
 
     class Paracrine_signalsContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
@@ -1887,6 +1907,7 @@ class ModuleParser ( Parser ):
 
 
     class Juxtacrine_signalContext(ParserRuleContext):
+        __slots__ = 'parser'
 
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)

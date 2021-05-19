@@ -49,7 +49,7 @@ COMMA : ',' ;
 COLON : ':' ;
 STAR : '*' ;
 RARROW : '->' ;
-ID   : [a-zA-Z_][a-zA-Z_0-9]+ ;
+ID   : [a-zA-Z_][a-zA-Z_0-9]* ;
 //NL   : [\r\n] ;
 //TAB  : [\t] ;
 WS   : [ \t\r\n]+ -> skip ;
