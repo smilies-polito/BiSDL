@@ -28,7 +28,7 @@ SCOPE receiver_cell_5_6 (5, 6)
         ENZYMATIC_REACTION(CD19_mCherry_receptor_active_protein, [CD19_mCherry_receptor_protein], [CD19_mCherry_activation_mediator_protein])
 
         TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
-        TRANSLATION(CD19_mCherry_mrna, CD19_mCherry_protein)
+        TRANSLATION(CD19_mCherry_mrna, 5*CD19_mCherry_protein)
 
         TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
         TRANSLATION(BFP_mrna, BFP_protein)
@@ -53,7 +53,7 @@ SCOPE receiver_cell_5_7 (5, 7)
         DEGRADATION(CD19_mCherry_receptor_active_protein)
 
         TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
-        TRANSLATION(CD19_mCherry_mrna, CD19_mCherry_protein)
+        TRANSLATION(CD19_mCherry_mrna, 5*CD19_mCherry_protein)
 
         TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
         TRANSLATION(BFP_mrna, BFP_protein)
@@ -78,7 +78,7 @@ SCOPE receiver_cell_6_6 (6, 6)
         DEGRADATION(CD19_mCherry_receptor_active_protein)
 
         TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
-        TRANSLATION(CD19_mCherry_mrna, CD19_mCherry_protein)
+        TRANSLATION(CD19_mCherry_mrna, 5*CD19_mCherry_protein)
 
         TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
         TRANSLATION(BFP_mrna, BFP_protein)
@@ -100,7 +100,7 @@ SCOPE receiver_cell_7_7 (7, 7)
         DEGRADATION(CD19_mCherry_receptor_active_protein)
 
         TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
-        TRANSLATION(CD19_mCherry_mrna, CD19_mCherry_protein)
+        TRANSLATION(CD19_mCherry_mrna, 5*CD19_mCherry_protein)
 
         TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
         TRANSLATION(BFP_mrna, BFP_protein)
@@ -125,7 +125,7 @@ SCOPE receiver_cell_6_5 (6, 5)
         DEGRADATION(CD19_mCherry_receptor_active_protein)
 
         TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
-        TRANSLATION(CD19_mCherry_mrna, CD19_mCherry_protein)
+        TRANSLATION(CD19_mCherry_mrna, 5*CD19_mCherry_protein)
 
         TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
         TRANSLATION(BFP_mrna, BFP_protein)
@@ -147,7 +147,7 @@ SCOPE receiver_cell_7_5 (7, 5)
         DEGRADATION(CD19_mCherry_receptor_active_protein)
 
         TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
-        TRANSLATION(CD19_mCherry_mrna, CD19_mCherry_protein)
+        TRANSLATION(CD19_mCherry_mrna, 5*CD19_mCherry_protein)
 
         TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
         TRANSLATION(BFP_mrna, BFP_protein)
@@ -170,7 +170,7 @@ SCOPE receiver_cell_6_4 (6,4)
         DEGRADATION(CD19_mCherry_receptor_active_protein)
 
         TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
-        TRANSLATION(CD19_mCherry_mrna, CD19_mCherry_protein)
+        TRANSLATION(CD19_mCherry_mrna, 5*CD19_mCherry_protein)
 
         TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
         TRANSLATION(BFP_mrna, BFP_protein)
@@ -192,7 +192,7 @@ SCOPE receiver_cell_7_3 (7,3)
         DEGRADATION(CD19_mCherry_receptor_active_protein)
 
         TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
-        TRANSLATION(CD19_mCherry_mrna, CD19_mCherry_protein)
+        TRANSLATION(CD19_mCherry_mrna, 5*CD19_mCherry_protein)
 
         TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
         TRANSLATION(BFP_mrna, BFP_protein)
@@ -216,7 +216,7 @@ SCOPE receiver_cell_5_4 (5,4)
         DEGRADATION(CD19_mCherry_receptor_active_protein)
 
         TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
-        TRANSLATION(CD19_mCherry_mrna, CD19_mCherry_protein)
+        TRANSLATION(CD19_mCherry_mrna, 5*CD19_mCherry_protein)
 
         TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
         TRANSLATION(BFP_mrna, BFP_protein)
@@ -238,7 +238,7 @@ SCOPE receiver_cell_5_3 (5, 3)
         DEGRADATION(CD19_mCherry_receptor_active_protein)
 
         TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
-        TRANSLATION(CD19_mCherry_mrna, CD19_mCherry_protein)
+        TRANSLATION(CD19_mCherry_mrna, 5*CD19_mCherry_protein)
 
         TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
         TRANSLATION(BFP_mrna, BFP_protein)
@@ -261,7 +261,7 @@ SCOPE receiver_cell_4_4 (4,4)
         DEGRADATION(CD19_mCherry_receptor_active_protein)
 
         TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
-        TRANSLATION(CD19_mCherry_mrna, CD19_mCherry_protein)
+        TRANSLATION(CD19_mCherry_mrna, 5*CD19_mCherry_protein)
 
         TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
         TRANSLATION(BFP_mrna, BFP_protein)
@@ -283,7 +283,7 @@ SCOPE receiver_cell_3_3 (3,3)
         DEGRADATION(CD19_mCherry_receptor_active_protein)
 
         TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
-        TRANSLATION(CD19_mCherry_mrna, CD19_mCherry_protein)
+        TRANSLATION(CD19_mCherry_mrna, 5*CD19_mCherry_protein)
 
         TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
         TRANSLATION(BFP_mrna, BFP_protein)
@@ -307,7 +307,7 @@ SCOPE receiver_cell_4_5 (4,5)
         DEGRADATION(CD19_mCherry_receptor_active_protein)
 
         TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
-        TRANSLATION(CD19_mCherry_mrna, CD19_mCherry_protein)
+        TRANSLATION(CD19_mCherry_mrna, 5*CD19_mCherry_protein)
 
         TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
         TRANSLATION(BFP_mrna, BFP_protein)
@@ -329,7 +329,7 @@ SCOPE receiver_cell_3_5 (3,5)
         DEGRADATION(CD19_mCherry_receptor_active_protein)
 
         TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
-        TRANSLATION(CD19_mCherry_mrna, CD19_mCherry_protein)
+        TRANSLATION(CD19_mCherry_mrna, 5*CD19_mCherry_protein)
 
         TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
         TRANSLATION(BFP_mrna, BFP_protein)
@@ -354,7 +354,7 @@ SCOPE receiver_cell_4_6 (4, 6)
         DEGRADATION(CD19_mCherry_receptor_active_protein)
 
         TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
-        TRANSLATION(CD19_mCherry_mrna, CD19_mCherry_protein)
+        TRANSLATION(CD19_mCherry_mrna, 5*CD19_mCherry_protein)
 
         TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
         TRANSLATION(BFP_mrna, BFP_protein)
@@ -376,7 +376,7 @@ SCOPE receiver_cell_3_7 (3, 7)
         DEGRADATION(CD19_mCherry_receptor_active_protein)
 
         TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
-        TRANSLATION(CD19_mCherry_mrna, CD19_mCherry_protein)
+        TRANSLATION(CD19_mCherry_mrna, 5*CD19_mCherry_protein)
 
         TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
         TRANSLATION(BFP_mrna, BFP_protein)

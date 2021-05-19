@@ -28,7 +28,7 @@ SCOPE receiver_cell_5_6 (5, 6)
         ENZYMATIC_REACTION(CD19_mCherry_receptor_active_protein, [CD19_mCherry_receptor_protein], [CD19_mCherry_activation_mediator_protein])
 
         TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
-        TRANSLATION(CD19_mCherry_mrna, CD19_mCherry_protein)
+        TRANSLATION(CD19_mCherry_mrna, 5*CD19_mCherry_protein)
 
         TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
         TRANSLATION(BFP_mrna, BFP_protein)
