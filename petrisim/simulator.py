@@ -17,18 +17,6 @@ class Simulator():
         if not os.path.exists(self._output_path):
             os.mkdir(self._output_path)
 
-    def set_module(self, m: Module):
-        self._module = m
-
-    def set_steps(self, steps):
-        self._steps = steps
-
-    def set_output_path(self, output_path):
-        self._output_path = output_path
-
-    def set_draw(self, draw):
-        self._draw = draw
-
     #TODO sistemare il marking iniziale
     def execute(self, initial_marking, stimuli): #TODO livello di output (quiet, verbose, debug), tipi di output (csv e/o img)
         self._module.draw(os.path.join(self._output_path, self._module.name + "_"))
