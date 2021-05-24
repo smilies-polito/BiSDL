@@ -1,15 +1,19 @@
 import errno
+import os
+from collections import defaultdict
 
-from .wrapping import *
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 
-#TODO controlli!
-class Simulator():
-    def __init__(self, m, steps, firing_prob = 0.6, output_path = ".", draw_nets = False):
+
+# TODO controlli!
+class Simulator:
+    def __init__(self, m, steps=None, firing_prob=0.6, output_path=".", draw_nets=False):
         self._module = m
         self._steps = steps
-        #self._stimuli = self._read_stimuli(stimuli)
+        self._curr_step = 0
+        # self._stimuli = self._read_stimuli(stimuli)
         self._firing_prob = firing_prob
         self._output_path = output_path
         self._draw_nets = draw_nets
@@ -17,24 +21,42 @@ class Simulator():
         if not os.path.exists(self._output_path):
             os.mkdir(self._output_path)
 
-    #TODO sistemare il marking iniziale
-    def execute(self, initial_marking, stimuli): #TODO livello di output (quiet, verbose, debug), tipi di output (csv e/o img)
-        self._module.draw(os.path.join(self._output_path, self._module.name + "_"))
+    # TODO sistemare il marking iniziale
+    # TODO livello di output (quiet, verbose, debug), tipi di output (csv e/o img)
+    def execute(self, nstep=None, initial_marking=None, stimuli=None):
+        assert not(self._steps is None and nstep is None), f"Number of steps is None."
         if initial_marking is not None:
             self._module.set_marking(initial_marking)
-        self._markings[0] = self._module.get_marking_count()
+        self._markings[self._curr_step] = self._module.get_marking_count()
         if self._draw_nets:
             self._module.draw(os.path.join(self._output_path, "0_" + self._module.name + "_"))
-        self._module.print_marking_count(0, output_path=self._output_path)
-        for i in range(self._steps):
-            if stimuli[i] is not None:
-                self._administer(stimuli[i])
-            self._module.fire(i, prob=self._firing_prob)
-            if self._draw_nets:
-                self._module.draw(os.path.join(self._output_path, str(i+1) + "_" + self._module.name + "_"))
-            if self._output_path:
-                self._module.print_marking_count(i+1, output_path = self._output_path)
-            self._markings[i+1] = self._module.get_marking_count()
+        s = nstep if nstep else self._steps
+        for i in range(s):
+            self.step(initial_marking if i == 0 else None, stimuli[i] if stimuli else None)
+
+    def set_initial_marking(self, initial_marking):
+        self._module.set_marking(initial_marking)
+
+    def step(self, init_marking=None, stimuli=None):
+        if init_marking is not None:
+            self._module.set_marking(init_marking)
+        if stimuli is not None:
+            self._administer(stimuli)
+        if self._curr_step == 0:
+            self._module.print_marking_count(0, output_path=self._output_path)
+        self._module.fire(self._curr_step, prob=self._firing_prob)
+        if self._draw_nets:
+            self._module.draw(os.path.join(self._output_path, str(self._curr_step + 1) + "_" + self._module.name + "_"))
+        if self._output_path:
+            self._module.print_marking_count(self._curr_step + 1, output_path=self._output_path)
+        self._markings[self._curr_step + 1] = self._module.get_marking_count()
+        self._curr_step += 1
+
+    def draw_nets(self, path='.'):
+        if not os.path.exists(path):
+            os.mkdir(path)
+        self._module.draw(os.path.join(path, self._module.name + "_"))
+
 
     def _administer(self, stimulus):
         self._module.add_marking(stimulus)
@@ -48,10 +70,6 @@ class Simulator():
         self._stimuli = pd.read_csv(filename)
         print(self._stimuli.head())
         return
-
-
-    def execute_step_by_step(self):
-        pass
 
     def make_charts(self, exclude=[]):
         custom_cmap = defaultdict()
@@ -92,14 +110,15 @@ class Simulator():
                         if max(Y) > ymax:
                             ymax = max(Y)
 
-                plt.xlim(xmin = 0)
-                plt.ylim(ymin = 0)
+                plt.xlim(xmin=0)
+                plt.ylim(ymin=0)
                 ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))
                 ax.yaxis.set_major_locator(plt.MaxNLocator(integer=True))
-                ax.xaxis.set_ticks(np.arange(0, self._steps + 1, int(self._steps / 10)))
-                ax.yaxis.set_ticks(np.arange(0, ymax + np.ceil(ymax/10), 1 if ymax <= 10 else 5 if ymax <= 50 else 10 if ymax <=100 else 50))
+                ax.xaxis.set_ticks(np.arange(0, self._curr_step + 1, int(self._curr_step / 10) if self._curr_step >= 100 else self._curr_step))
+                ax.yaxis.set_ticks(np.arange(0, ymax + np.ceil(ymax / 10),
+                                             1 if ymax <= 10 else 5 if ymax <= 50 else 10 if ymax <= 100 else 50))
                 fig.legend()
-                #plt.show()
+                # plt.show()
                 plt.savefig(os.path.join(self._output_path, title), bbox_inches="tight")
                 plt.close()
         print(f"Simulation results saved to {self._output_path}")
