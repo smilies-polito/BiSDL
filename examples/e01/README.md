@@ -20,7 +20,7 @@ place **B_molecule**
 * **p1_net** is a net token in palce s1
   * its evolution takes place in the s1 place (i.e. it does not move to place s2)
   * black tokens produced and consumed in p1_net places correspond to colored tokens (strings) in the top level s1 place
-    * a low-level black token corresponds to a top-level colored token by the same name of the place it is prodcued or 
+    * a low-level black token corresponds to a top-level colored token by the same name of the place it is produced or 
     consumed in
 * **p2_net** is a net token in place s2
 * the transition **juxtacrine_signaling_...** is enabled by *"A_molecule"* **colored tokens** from s1, and outputs the 
