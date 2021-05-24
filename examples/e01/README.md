@@ -1,7 +1,7 @@
 # Example 1
 ## High-level description
 This simple example models a mock process involving two biological *scopes*, **s1** and **s2**.  
-![Scope s1 produces 3 B molecules from 1 A molecule and signals B to scope s2; scope s2 degrades B molecules.](e1_drawing.png "Example 1 process illustration"){width=500px}   
+![Scope s1 produces 3 B molecules from 1 A molecule and signals B to scope s2; scope s2 degrades B molecules.](e1_drawing.png "Example 1 process illustration")   
 * s1 is the location where three **B molecules** (in blue) are produced through **process_1** (gray arrows in scope s1), 
   starting from one **A molecule**.
 * B molecules are [*signaled*](https://en.wikipedia.org/wiki/Juxtacrine_signalling) (red arrow), to scope s2 by scope s1.
