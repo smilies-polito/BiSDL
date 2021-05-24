@@ -5,7 +5,7 @@ This simple example models a mock process involving two biological *scopes*, **s
 * s1 is the location where three **B molecules** (in blue) are produced through **process_1** (gray arrows in scope s1), 
   starting from one **A molecule**.
 * B molecules are [*signaled*](https://en.wikipedia.org/wiki/Juxtacrine_signalling) (red arrow), to scope s2 by scope s1.
-* In s2, B molecules are constantly degraded.
+* In s2, B molecules are constantly degraded by a **process_2** (gray arrow).
 
 ## Nets within nets formalism
 The process described above is translated into Petri Nets as follows.  
