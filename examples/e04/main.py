@@ -1733,13 +1733,13 @@ if __name__ == "__main__":
 
     test_module = rgb_pattern()
     output_path = os.path.join(".", "results")
-    n_steps = 100
+    n_steps = 500
     s = Simulator(m=test_module, output_path=output_path, draw_nets=False)
     s.draw_nets(os.path.join(output_path, "../topology"))
 
     for _ in range(n_steps):
         s.step()
 
-    s.make_charts(exclude=['gene', 'mrna'])
+    s.make_charts(exclude=['gene', 'mrna', 'mediator', 'receptor'])
     with open(os.path.join(output_path, "ascii_net_structure.txt"), 'w') as fp:
         print(test_module, file=fp)
