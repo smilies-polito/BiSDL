@@ -170,7 +170,7 @@ class ModuleListenerImpl(ModuleListener):
         return addToken
 
     def _make_header(self, ctx: ModuleParser.RootContext):
-        header = f"from wrapping import *\n\n\n" \
+        header = f"from petrisim.utils import *\n\n\n" \
                  f"class {self._module_name}(Module):\n" \
                  f"\tdef __init__(self, name):\n" \
                  f"\t\tsuper().__init__(name)\n\n" \
