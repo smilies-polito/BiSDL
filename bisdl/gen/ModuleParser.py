@@ -11,8 +11,8 @@ else:
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3!")
-        buf.write("\u00d2\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3#")
+        buf.write("\u00ce\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
         buf.write("\4\24\t\24\4\25\t\25\3\2\3\2\3\2\5\2.\n\2\3\2\3\2\5\2")
@@ -28,70 +28,68 @@ def serializedATN():
         buf.write("\3\17\3\17\3\17\3\17\3\17\7\17\u00a2\n\17\f\17\16\17\u00a5")
         buf.write("\13\17\3\17\3\17\3\20\3\20\3\20\3\20\3\21\3\21\3\21\5")
         buf.write("\21\u00b0\n\21\3\22\3\22\3\22\7\22\u00b5\n\22\f\22\16")
-        buf.write("\22\u00b8\13\22\3\23\3\23\3\23\3\23\3\23\5\23\u00bf\n")
-        buf.write("\23\3\23\5\23\u00c2\n\23\3\24\3\24\3\24\3\24\7\24\u00c8")
-        buf.write("\n\24\f\24\16\24\u00cb\13\24\3\25\3\25\3\25\3\25\3\25")
-        buf.write("\3\25\2\2\26\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"")
-        buf.write("$&(\2\2\2\u00d5\2*\3\2\2\2\4\63\3\2\2\2\6:\3\2\2\2\b=")
-        buf.write("\3\2\2\2\nH\3\2\2\2\fP\3\2\2\2\16T\3\2\2\2\20c\3\2\2\2")
-        buf.write("\22e\3\2\2\2\24s\3\2\2\2\26\u0081\3\2\2\2\30\u0086\3\2")
-        buf.write("\2\2\32\u008d\3\2\2\2\34\u009a\3\2\2\2\36\u00a8\3\2\2")
-        buf.write("\2 \u00af\3\2\2\2\"\u00b1\3\2\2\2$\u00c1\3\2\2\2&\u00c3")
-        buf.write("\3\2\2\2(\u00cc\3\2\2\2*+\7\3\2\2+-\7\25\2\2,.\5\4\3\2")
-        buf.write("-,\3\2\2\2-.\3\2\2\2./\3\2\2\2/\61\5\6\4\2\60\62\5&\24")
-        buf.write("\2\61\60\3\2\2\2\61\62\3\2\2\2\62\3\3\2\2\2\63\64\7\4")
-        buf.write("\2\2\64\65\7\26\2\2\65\5\3\2\2\2\66\67\7\5\2\2\679\5\b")
-        buf.write("\5\28\66\3\2\2\29<\3\2\2\2:8\3\2\2\2:;\3\2\2\2;\7\3\2")
-        buf.write("\2\2<:\3\2\2\2=>\7\25\2\2>@\5\n\6\2?A\5\f\7\2@?\3\2\2")
-        buf.write("\2@A\3\2\2\2AE\3\2\2\2BD\5(\25\2CB\3\2\2\2DG\3\2\2\2E")
-        buf.write("C\3\2\2\2EF\3\2\2\2F\t\3\2\2\2GE\3\2\2\2HI\7\27\2\2IJ")
-        buf.write("\7\26\2\2JK\7\33\2\2KL\7\26\2\2LM\7\30\2\2M\13\3\2\2\2")
-        buf.write("NO\7\6\2\2OQ\5\16\b\2PN\3\2\2\2QR\3\2\2\2RP\3\2\2\2RS")
-        buf.write("\3\2\2\2S\r\3\2\2\2T[\7\25\2\2UW\5\4\3\2VX\5\20\t\2WV")
-        buf.write("\3\2\2\2XY\3\2\2\2YW\3\2\2\2YZ\3\2\2\2Z\\\3\2\2\2[U\3")
-        buf.write("\2\2\2[\\\3\2\2\2\\\17\3\2\2\2]d\5\22\n\2^d\5\24\13\2")
-        buf.write("_d\5\26\f\2`d\5\30\r\2ad\5\32\16\2bd\5\34\17\2c]\3\2\2")
-        buf.write("\2c^\3\2\2\2c_\3\2\2\2c`\3\2\2\2ca\3\2\2\2cb\3\2\2\2d")
-        buf.write("\21\3\2\2\2ef\7\7\2\2fg\7\27\2\2gh\7\21\2\2hi\7\33\2\2")
-        buf.write("in\7\22\2\2jk\7\33\2\2km\5\36\20\2lj\3\2\2\2mp\3\2\2\2")
-        buf.write("nl\3\2\2\2no\3\2\2\2oq\3\2\2\2pn\3\2\2\2qr\7\30\2\2r\23")
-        buf.write("\3\2\2\2st\7\b\2\2tu\7\27\2\2uv\7\22\2\2vw\7\33\2\2w|")
-        buf.write("\7\23\2\2xy\7\33\2\2y{\5\36\20\2zx\3\2\2\2{~\3\2\2\2|")
-        buf.write("z\3\2\2\2|}\3\2\2\2}\177\3\2\2\2~|\3\2\2\2\177\u0080\7")
-        buf.write("\30\2\2\u0080\25\3\2\2\2\u0081\u0082\7\t\2\2\u0082\u0083")
-        buf.write("\7\27\2\2\u0083\u0084\5$\23\2\u0084\u0085\7\30\2\2\u0085")
-        buf.write("\27\3\2\2\2\u0086\u0087\7\n\2\2\u0087\u0088\7\27\2\2\u0088")
-        buf.write("\u0089\5\"\22\2\u0089\u008a\7\33\2\2\u008a\u008b\5$\23")
-        buf.write("\2\u008b\u008c\7\30\2\2\u008c\31\3\2\2\2\u008d\u008e\7")
-        buf.write("\13\2\2\u008e\u008f\7\27\2\2\u008f\u0090\7\23\2\2\u0090")
-        buf.write("\u0091\7\33\2\2\u0091\u0092\7\31\2\2\u0092\u0093\5\"\22")
-        buf.write("\2\u0093\u0094\7\32\2\2\u0094\u0095\7\33\2\2\u0095\u0096")
-        buf.write("\7\31\2\2\u0096\u0097\5\"\22\2\u0097\u0098\7\32\2\2\u0098")
-        buf.write("\u0099\7\30\2\2\u0099\33\3\2\2\2\u009a\u009b\7\6\2\2\u009b")
-        buf.write("\u009c\7\27\2\2\u009c\u009d\5$\23\2\u009d\u009e\7\33\2")
-        buf.write("\2\u009e\u00a3\5$\23\2\u009f\u00a0\7\33\2\2\u00a0\u00a2")
-        buf.write("\5\36\20\2\u00a1\u009f\3\2\2\2\u00a2\u00a5\3\2\2\2\u00a3")
-        buf.write("\u00a1\3\2\2\2\u00a3\u00a4\3\2\2\2\u00a4\u00a6\3\2\2\2")
-        buf.write("\u00a5\u00a3\3\2\2\2\u00a6\u00a7\7\30\2\2\u00a7\35\3\2")
-        buf.write("\2\2\u00a8\u00a9\5 \21\2\u00a9\u00aa\7\34\2\2\u00aa\u00ab")
-        buf.write("\5\"\22\2\u00ab\37\3\2\2\2\u00ac\u00b0\7\f\2\2\u00ad\u00b0")
-        buf.write("\7\r\2\2\u00ae\u00b0\7\16\2\2\u00af\u00ac\3\2\2\2\u00af")
-        buf.write("\u00ad\3\2\2\2\u00af\u00ae\3\2\2\2\u00b0!\3\2\2\2\u00b1")
-        buf.write("\u00b6\5$\23\2\u00b2\u00b3\7\33\2\2\u00b3\u00b5\5$\23")
-        buf.write("\2\u00b4\u00b2\3\2\2\2\u00b5\u00b8\3\2\2\2\u00b6\u00b4")
-        buf.write("\3\2\2\2\u00b6\u00b7\3\2\2\2\u00b7#\3\2\2\2\u00b8\u00b6")
-        buf.write("\3\2\2\2\u00b9\u00c2\7\21\2\2\u00ba\u00c2\7\22\2\2\u00bb")
-        buf.write("\u00c2\7\23\2\2\u00bc\u00bd\7\37\2\2\u00bd\u00bf\7\35")
-        buf.write("\2\2\u00be\u00bc\3\2\2\2\u00be\u00bf\3\2\2\2\u00bf\u00c0")
-        buf.write("\3\2\2\2\u00c0\u00c2\7\25\2\2\u00c1\u00b9\3\2\2\2\u00c1")
-        buf.write("\u00ba\3\2\2\2\u00c1\u00bb\3\2\2\2\u00c1\u00be\3\2\2\2")
-        buf.write("\u00c2%\3\2\2\2\u00c3\u00c4\7\17\2\2\u00c4\u00c9\5$\23")
-        buf.write("\2\u00c5\u00c6\7\33\2\2\u00c6\u00c8\5$\23\2\u00c7\u00c5")
-        buf.write("\3\2\2\2\u00c8\u00cb\3\2\2\2\u00c9\u00c7\3\2\2\2\u00c9")
-        buf.write("\u00ca\3\2\2\2\u00ca\'\3\2\2\2\u00cb\u00c9\3\2\2\2\u00cc")
-        buf.write("\u00cd\7\20\2\2\u00cd\u00ce\5$\23\2\u00ce\u00cf\7\36\2")
-        buf.write("\2\u00cf\u00d0\7\25\2\2\u00d0)\3\2\2\2\23-\61:@ERY[cn")
-        buf.write("|\u00a3\u00af\u00b6\u00be\u00c1\u00c9")
+        buf.write("\22\u00b8\13\22\3\23\3\23\3\23\3\23\5\23\u00be\n\23\3")
+        buf.write("\24\3\24\3\24\3\24\7\24\u00c4\n\24\f\24\16\24\u00c7\13")
+        buf.write("\24\3\25\3\25\3\25\3\25\3\25\3\25\2\2\26\2\4\6\b\n\f\16")
+        buf.write("\20\22\24\26\30\32\34\36 \"$&(\2\2\2\u00d0\2*\3\2\2\2")
+        buf.write("\4\63\3\2\2\2\6:\3\2\2\2\b=\3\2\2\2\nH\3\2\2\2\fP\3\2")
+        buf.write("\2\2\16T\3\2\2\2\20c\3\2\2\2\22e\3\2\2\2\24s\3\2\2\2\26")
+        buf.write("\u0081\3\2\2\2\30\u0086\3\2\2\2\32\u008d\3\2\2\2\34\u009a")
+        buf.write("\3\2\2\2\36\u00a8\3\2\2\2 \u00af\3\2\2\2\"\u00b1\3\2\2")
+        buf.write("\2$\u00bd\3\2\2\2&\u00bf\3\2\2\2(\u00c8\3\2\2\2*+\7\3")
+        buf.write("\2\2+-\7\27\2\2,.\5\4\3\2-,\3\2\2\2-.\3\2\2\2./\3\2\2")
+        buf.write("\2/\61\5\6\4\2\60\62\5&\24\2\61\60\3\2\2\2\61\62\3\2\2")
+        buf.write("\2\62\3\3\2\2\2\63\64\7\4\2\2\64\65\7\30\2\2\65\5\3\2")
+        buf.write("\2\2\66\67\7\5\2\2\679\5\b\5\28\66\3\2\2\29<\3\2\2\2:")
+        buf.write("8\3\2\2\2:;\3\2\2\2;\7\3\2\2\2<:\3\2\2\2=>\7\27\2\2>@")
+        buf.write("\5\n\6\2?A\5\f\7\2@?\3\2\2\2@A\3\2\2\2AE\3\2\2\2BD\5(")
+        buf.write("\25\2CB\3\2\2\2DG\3\2\2\2EC\3\2\2\2EF\3\2\2\2F\t\3\2\2")
+        buf.write("\2GE\3\2\2\2HI\7\31\2\2IJ\7\30\2\2JK\7\35\2\2KL\7\30\2")
+        buf.write("\2LM\7\32\2\2M\13\3\2\2\2NO\7\6\2\2OQ\5\16\b\2PN\3\2\2")
+        buf.write("\2QR\3\2\2\2RP\3\2\2\2RS\3\2\2\2S\r\3\2\2\2T[\7\27\2\2")
+        buf.write("UW\5\4\3\2VX\5\20\t\2WV\3\2\2\2XY\3\2\2\2YW\3\2\2\2YZ")
+        buf.write("\3\2\2\2Z\\\3\2\2\2[U\3\2\2\2[\\\3\2\2\2\\\17\3\2\2\2")
+        buf.write("]d\5\22\n\2^d\5\24\13\2_d\5\26\f\2`d\5\30\r\2ad\5\32\16")
+        buf.write("\2bd\5\34\17\2c]\3\2\2\2c^\3\2\2\2c_\3\2\2\2c`\3\2\2\2")
+        buf.write("ca\3\2\2\2cb\3\2\2\2d\21\3\2\2\2ef\7\7\2\2fg\7\31\2\2")
+        buf.write("gh\7\22\2\2hi\7\35\2\2in\7\23\2\2jk\7\35\2\2km\5\36\20")
+        buf.write("\2lj\3\2\2\2mp\3\2\2\2nl\3\2\2\2no\3\2\2\2oq\3\2\2\2p")
+        buf.write("n\3\2\2\2qr\7\32\2\2r\23\3\2\2\2st\7\b\2\2tu\7\31\2\2")
+        buf.write("uv\7\23\2\2vw\7\35\2\2w|\7\24\2\2xy\7\35\2\2y{\5\36\20")
+        buf.write("\2zx\3\2\2\2{~\3\2\2\2|z\3\2\2\2|}\3\2\2\2}\177\3\2\2")
+        buf.write("\2~|\3\2\2\2\177\u0080\7\32\2\2\u0080\25\3\2\2\2\u0081")
+        buf.write("\u0082\7\t\2\2\u0082\u0083\7\31\2\2\u0083\u0084\5$\23")
+        buf.write("\2\u0084\u0085\7\32\2\2\u0085\27\3\2\2\2\u0086\u0087\7")
+        buf.write("\n\2\2\u0087\u0088\7\31\2\2\u0088\u0089\5\"\22\2\u0089")
+        buf.write("\u008a\7\35\2\2\u008a\u008b\5$\23\2\u008b\u008c\7\32\2")
+        buf.write("\2\u008c\31\3\2\2\2\u008d\u008e\7\13\2\2\u008e\u008f\7")
+        buf.write("\31\2\2\u008f\u0090\7\24\2\2\u0090\u0091\7\35\2\2\u0091")
+        buf.write("\u0092\7\33\2\2\u0092\u0093\5\"\22\2\u0093\u0094\7\34")
+        buf.write("\2\2\u0094\u0095\7\35\2\2\u0095\u0096\7\33\2\2\u0096\u0097")
+        buf.write("\5\"\22\2\u0097\u0098\7\34\2\2\u0098\u0099\7\32\2\2\u0099")
+        buf.write("\33\3\2\2\2\u009a\u009b\7\f\2\2\u009b\u009c\7\31\2\2\u009c")
+        buf.write("\u009d\5$\23\2\u009d\u009e\7\35\2\2\u009e\u00a3\5$\23")
+        buf.write("\2\u009f\u00a0\7\35\2\2\u00a0\u00a2\5\36\20\2\u00a1\u009f")
+        buf.write("\3\2\2\2\u00a2\u00a5\3\2\2\2\u00a3\u00a1\3\2\2\2\u00a3")
+        buf.write("\u00a4\3\2\2\2\u00a4\u00a6\3\2\2\2\u00a5\u00a3\3\2\2\2")
+        buf.write("\u00a6\u00a7\7\32\2\2\u00a7\35\3\2\2\2\u00a8\u00a9\5 ")
+        buf.write("\21\2\u00a9\u00aa\7\36\2\2\u00aa\u00ab\5\"\22\2\u00ab")
+        buf.write("\37\3\2\2\2\u00ac\u00b0\7\r\2\2\u00ad\u00b0\7\16\2\2\u00ae")
+        buf.write("\u00b0\7\17\2\2\u00af\u00ac\3\2\2\2\u00af\u00ad\3\2\2")
+        buf.write("\2\u00af\u00ae\3\2\2\2\u00b0!\3\2\2\2\u00b1\u00b6\5$\23")
+        buf.write("\2\u00b2\u00b3\7\35\2\2\u00b3\u00b5\5$\23\2\u00b4\u00b2")
+        buf.write("\3\2\2\2\u00b5\u00b8\3\2\2\2\u00b6\u00b4\3\2\2\2\u00b6")
+        buf.write("\u00b7\3\2\2\2\u00b7#\3\2\2\2\u00b8\u00b6\3\2\2\2\u00b9")
+        buf.write("\u00be\7\22\2\2\u00ba\u00be\7\23\2\2\u00bb\u00be\7\24")
+        buf.write("\2\2\u00bc\u00be\7\26\2\2\u00bd\u00b9\3\2\2\2\u00bd\u00ba")
+        buf.write("\3\2\2\2\u00bd\u00bb\3\2\2\2\u00bd\u00bc\3\2\2\2\u00be")
+        buf.write("%\3\2\2\2\u00bf\u00c0\7\20\2\2\u00c0\u00c5\5$\23\2\u00c1")
+        buf.write("\u00c2\7\35\2\2\u00c2\u00c4\5$\23\2\u00c3\u00c1\3\2\2")
+        buf.write("\2\u00c4\u00c7\3\2\2\2\u00c5\u00c3\3\2\2\2\u00c5\u00c6")
+        buf.write("\3\2\2\2\u00c6\'\3\2\2\2\u00c7\u00c5\3\2\2\2\u00c8\u00c9")
+        buf.write("\7\21\2\2\u00c9\u00ca\5$\23\2\u00ca\u00cb\7 \2\2\u00cb")
+        buf.write("\u00cc\7\27\2\2\u00cc)\3\2\2\2\22-\61:@ERY[cn|\u00a3\u00af")
+        buf.write("\u00b6\u00bd\u00c5")
         return buf.getvalue()
 
 
@@ -108,18 +106,19 @@ class ModuleParser ( Parser ):
     literalNames = [ "<INVALID>", "'MODULE'", "'TIMESCALE'", "'SCOPE'", 
                      "'PROCESS'", "'TRANSCRIPTION'", "'TRANSLATION'", "'DEGRADATION'", 
                      "'PROTEIN_COMPLEX_FORMATION'", "'ENZYMATIC_REACTION'", 
-                     "'INHIBITORS'", "'INDUCERS'", "'ACTIVATORS'", "'PARACRINE_SIGNALS'", 
-                     "'JUXTACRINE_SIGNAL'", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "<INVALID>", "<INVALID>", "<INVALID>", "'('", "')'", 
-                     "'['", "']'", "','", "':'", "'*'", "'->'" ]
+                     "'CUSTOM_PROCESS'", "'INHIBITORS'", "'INDUCERS'", "'ACTIVATORS'", 
+                     "'PARACRINE_SIGNALS'", "'JUXTACRINE_SIGNAL'", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "'('", "')'", "'['", "']'", 
+                     "','", "':'", "'*'", "'->'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "GENE", "MRNA", 
-                      "PROTEIN", "RECEPTOR", "ID", "INT", "RO", "RC", "SO", 
-                      "SC", "COMMA", "COLON", "STAR", "RARROW", "MULT", 
-                      "WS", "LINE_COMMENT" ]
+                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                      "GENE", "MRNA", "PROTEIN", "RECEPTOR", "MOLECULE", 
+                      "ID", "INT", "RO", "RC", "SO", "SC", "COMMA", "COLON", 
+                      "STAR", "RARROW", "MULT", "WS", "LINE_COMMENT" ]
 
     RULE_root = 0
     RULE_timescale = 1
@@ -163,23 +162,25 @@ class ModuleParser ( Parser ):
     T__11=12
     T__12=13
     T__13=14
-    GENE=15
-    MRNA=16
-    PROTEIN=17
-    RECEPTOR=18
-    ID=19
-    INT=20
-    RO=21
-    RC=22
-    SO=23
-    SC=24
-    COMMA=25
-    COLON=26
-    STAR=27
-    RARROW=28
-    MULT=29
-    WS=30
-    LINE_COMMENT=31
+    T__14=15
+    GENE=16
+    MRNA=17
+    PROTEIN=18
+    RECEPTOR=19
+    MOLECULE=20
+    ID=21
+    INT=22
+    RO=23
+    RC=24
+    SO=25
+    SC=26
+    COMMA=27
+    COLON=28
+    STAR=29
+    RARROW=30
+    MULT=31
+    WS=32
+    LINE_COMMENT=33
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -256,7 +257,7 @@ class ModuleParser ( Parser ):
             self.state = 47
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==ModuleParser.T__12:
+            if _la==ModuleParser.T__13:
                 self.state = 46
                 self.paracrine_signals()
 
@@ -448,7 +449,7 @@ class ModuleParser ( Parser ):
             self.state = 67
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==ModuleParser.T__13:
+            while _la==ModuleParser.T__14:
                 self.state = 64
                 self.juxtacrine_signal()
                 self.state = 69
@@ -653,17 +654,15 @@ class ModuleParser ( Parser ):
                 self.timescale()
                 self.state = 85 
                 self._errHandler.sync(self)
-                _alt = 1
-                while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
-                    if _alt == 1:
-                        self.state = 84
-                        self.process_type()
-
-                    else:
-                        raise NoViableAltException(self)
+                _la = self._input.LA(1)
+                while True:
+                    self.state = 84
+                    self.process_type()
                     self.state = 87 
                     self._errHandler.sync(self)
-                    _alt = self._interp.adaptivePredict(self._input,6,self._ctx)
+                    _la = self._input.LA(1)
+                    if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << ModuleParser.T__4) | (1 << ModuleParser.T__5) | (1 << ModuleParser.T__6) | (1 << ModuleParser.T__7) | (1 << ModuleParser.T__8) | (1 << ModuleParser.T__9))) != 0)):
+                        break
 
 
 
@@ -760,7 +759,7 @@ class ModuleParser ( Parser ):
                 self.state = 95
                 self.enzymatic_reaction()
                 pass
-            elif token in [ModuleParser.T__3]:
+            elif token in [ModuleParser.T__9]:
                 self.enterOuterAlt(localctx, 6)
                 self.state = 96
                 self.custom_process()
@@ -1253,7 +1252,7 @@ class ModuleParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 152
-            self.match(ModuleParser.T__3)
+            self.match(ModuleParser.T__9)
             self.state = 153
             self.match(ModuleParser.RO)
             self.state = 154
@@ -1436,23 +1435,23 @@ class ModuleParser ( Parser ):
             self.state = 173
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [ModuleParser.T__9]:
+            if token in [ModuleParser.T__10]:
                 localctx = ModuleParser.Type_inhibitorsContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
                 self.state = 170
-                self.match(ModuleParser.T__9)
-                pass
-            elif token in [ModuleParser.T__10]:
-                localctx = ModuleParser.Type_inducersContext(self, localctx)
-                self.enterOuterAlt(localctx, 2)
-                self.state = 171
                 self.match(ModuleParser.T__10)
                 pass
             elif token in [ModuleParser.T__11]:
+                localctx = ModuleParser.Type_inducersContext(self, localctx)
+                self.enterOuterAlt(localctx, 2)
+                self.state = 171
+                self.match(ModuleParser.T__11)
+                pass
+            elif token in [ModuleParser.T__12]:
                 localctx = ModuleParser.Type_activatorsContext(self, localctx)
                 self.enterOuterAlt(localctx, 3)
                 self.state = 172
-                self.match(ModuleParser.T__11)
+                self.match(ModuleParser.T__12)
                 pass
             else:
                 raise NoViableAltException(self)
@@ -1607,12 +1606,8 @@ class ModuleParser ( Parser ):
             super().__init__(parser)
             self.copyFrom(ctx)
 
-        def ID(self):
-            return self.getToken(ModuleParser.ID, 0)
-        def MULT(self):
-            return self.getToken(ModuleParser.MULT, 0)
-        def STAR(self):
-            return self.getToken(ModuleParser.STAR, 0)
+        def MOLECULE(self):
+            return self.getToken(ModuleParser.MOLECULE, 0)
 
         def enterRule(self, listener:ParseTreeListener):
             if hasattr( listener, "enterType_molecule" ):
@@ -1658,9 +1653,8 @@ class ModuleParser ( Parser ):
 
         localctx = ModuleParser.MoleculeContext(self, self._ctx, self.state)
         self.enterRule(localctx, 34, self.RULE_molecule)
-        self._la = 0 # Token type
         try:
-            self.state = 191
+            self.state = 187
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [ModuleParser.GENE]:
@@ -1681,21 +1675,11 @@ class ModuleParser ( Parser ):
                 self.state = 185
                 self.match(ModuleParser.PROTEIN)
                 pass
-            elif token in [ModuleParser.ID, ModuleParser.MULT]:
+            elif token in [ModuleParser.MOLECULE]:
                 localctx = ModuleParser.Type_moleculeContext(self, localctx)
                 self.enterOuterAlt(localctx, 4)
-                self.state = 188
-                self._errHandler.sync(self)
-                _la = self._input.LA(1)
-                if _la==ModuleParser.MULT:
-                    self.state = 186
-                    self.match(ModuleParser.MULT)
-                    self.state = 187
-                    self.match(ModuleParser.STAR)
-
-
-                self.state = 190
-                self.match(ModuleParser.ID)
+                self.state = 186
+                self.match(ModuleParser.MOLECULE)
                 pass
             else:
                 raise NoViableAltException(self)
@@ -1756,19 +1740,19 @@ class ModuleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 193
-            self.match(ModuleParser.T__12)
-            self.state = 194
+            self.state = 189
+            self.match(ModuleParser.T__13)
+            self.state = 190
             self.molecule()
-            self.state = 199
+            self.state = 195
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==ModuleParser.COMMA:
-                self.state = 195
+                self.state = 191
                 self.match(ModuleParser.COMMA)
-                self.state = 196
+                self.state = 192
                 self.molecule()
-                self.state = 201
+                self.state = 197
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -1824,13 +1808,13 @@ class ModuleParser ( Parser ):
         self.enterRule(localctx, 38, self.RULE_juxtacrine_signal)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 202
-            self.match(ModuleParser.T__13)
-            self.state = 203
+            self.state = 198
+            self.match(ModuleParser.T__14)
+            self.state = 199
             self.molecule()
-            self.state = 204
+            self.state = 200
             self.match(ModuleParser.RARROW)
-            self.state = 205
+            self.state = 201
             self.match(ModuleParser.ID)
         except RecognitionException as re:
             localctx.exception = re

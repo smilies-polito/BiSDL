@@ -20,7 +20,7 @@ translation    : 'TRANSLATION' RO MRNA COMMA PROTEIN (COMMA regulation )* RC ;
 degradation    : 'DEGRADATION' RO molecule RC ;
 protein_complex_formation : 'PROTEIN_COMPLEX_FORMATION' RO m_list COMMA molecule RC ;
 enzymatic_reaction : 'ENZYMATIC_REACTION' RO PROTEIN COMMA SO m_list SC COMMA SO m_list SC RC ;
-custom_process : 'PROCESS' RO molecule COMMA molecule (COMMA regulation )* RC ;
+custom_process : 'CUSTOM_PROCESS' RO molecule COMMA molecule (COMMA regulation )* RC ;
 regulation     : regulation_type COLON m_list ;
 regulation_type : 'INHIBITORS' #type_inhibitors
                 | 'INDUCERS' #type_inducers
@@ -30,7 +30,7 @@ m_list         : molecule ( COMMA molecule )* ;
 molecule       : GENE #type_gene
                | MRNA #type_mrna
                | PROTEIN #type_protein
-               | (MULT STAR)?ID #type_molecule
+               | MOLECULE #type_molecule
                ;
 paracrine_signals  : 'PARACRINE_SIGNALS' molecule (COMMA molecule)* ; //TODO: molecule->PROTEIN; test
 juxtacrine_signal  : 'JUXTACRINE_SIGNAL' molecule RARROW ID ;
@@ -40,6 +40,7 @@ GENE : (MULT STAR)?ID'_gene' ;
 MRNA : (MULT STAR)?ID'_mrna' ;
 PROTEIN : (MULT STAR)?ID'_protein' ;
 RECEPTOR : (MULT STAR)?ID'_receptor'ID* ;
+MOLECULE : (MULT STAR)?ID'_molecule' ;
 ID   : [a-zA-Z_][a-zA-Z_0-9]* ;
 INT  : '0' | [1-9][0-9]* ;
 RO : '(' ;
