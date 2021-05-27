@@ -40,7 +40,7 @@ GENE : (MULT STAR)?ID'_gene' ;
 MRNA : (MULT STAR)?ID'_mrna' ;
 PROTEIN : (MULT STAR)?ID'_protein' ;
 RECEPTOR : (MULT STAR)?ID'_receptor'ID* ;
-ID   : [a-zA-Z_][a-zA-Z_0-9]* ;
+ID   : [a-zA-Z_]+ ;
 INT  : '0' | [1-9][0-9]* ;
 RO : '(' ;
 RC : ')' ;
