@@ -58,7 +58,7 @@ same colored tokens in the output place s2
 ## Compile the example
 Move to the example folder *e01* and run
 ```shell
-python3 /path/to/bisdl2snakes.py net.bisdl
+python3 /path/to/bisdl2snakes.py net.bisdl [/path/to/dest]
 ```
 to obtain the compiled [net.py](net.py) file.  
 Use [nwn-petrisim](https://github.com/leonardogian/nwn-petrisim) to simulate the compiled module.
