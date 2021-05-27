@@ -1,0 +1,11 @@
+MODULE E01
+TIMESCALE 10
+SCOPE s1 (0, 0)
+    PROCESS p1
+        TIMESCALE 1
+        CUSTOM_PROCESS(A_molecule, 3*B_molecule)
+    JUXTACRINE_SIGNAL A_molecule -> s2
+SCOPE s2 (0, 1)
+    PROCESS p2
+        TIMESCALE 1
+        DEGRADATION(B_molecule)
