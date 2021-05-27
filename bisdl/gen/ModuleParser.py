@@ -11,102 +11,85 @@ else:
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3 ")
-        buf.write("\u00ea\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3#")
+        buf.write("\u00ce\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
-        buf.write("\4\24\t\24\4\25\t\25\4\26\t\26\3\2\3\2\3\2\5\2\60\n\2")
-        buf.write("\3\2\3\2\5\2\64\n\2\3\3\3\3\3\3\3\4\3\4\7\4;\n\4\f\4\16")
-        buf.write("\4>\13\4\3\5\3\5\3\5\5\5C\n\5\3\5\7\5F\n\5\f\5\16\5I\13")
-        buf.write("\5\3\6\3\6\3\6\3\6\3\6\3\6\3\7\3\7\6\7S\n\7\r\7\16\7T")
-        buf.write("\3\b\3\b\3\b\6\bZ\n\b\r\b\16\b[\5\b^\n\b\3\t\3\t\3\t\3")
-        buf.write("\t\3\t\3\t\5\tf\n\t\3\n\3\n\3\n\3\n\3\n\5\nm\n\n\3\n\3")
-        buf.write("\n\3\n\7\nr\n\n\f\n\16\nu\13\n\3\n\3\n\3\13\3\13\3\13")
-        buf.write("\3\13\3\13\5\13~\n\13\3\13\3\13\3\13\7\13\u0083\n\13\f")
-        buf.write("\13\16\13\u0086\13\13\3\13\3\13\3\f\3\f\3\f\5\f\u008d")
-        buf.write("\n\f\3\f\3\f\3\f\3\r\3\r\3\r\3\r\3\r\5\r\u0097\n\r\3\r")
-        buf.write("\3\r\3\r\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16")
-        buf.write("\3\16\3\16\3\16\3\16\3\17\3\17\3\17\5\17\u00ac\n\17\3")
-        buf.write("\17\3\17\3\17\5\17\u00b1\n\17\3\17\3\17\3\17\7\17\u00b6")
-        buf.write("\n\17\f\17\16\17\u00b9\13\17\3\17\3\17\3\20\3\20\3\20")
-        buf.write("\3\20\3\21\3\21\3\21\5\21\u00c4\n\21\3\22\5\22\u00c7\n")
-        buf.write("\22\3\22\3\22\3\22\5\22\u00cc\n\22\3\22\7\22\u00cf\n\22")
-        buf.write("\f\22\16\22\u00d2\13\22\3\23\3\23\3\23\3\24\3\24\3\24")
-        buf.write("\5\24\u00da\n\24\3\25\3\25\3\25\3\25\7\25\u00e0\n\25\f")
-        buf.write("\25\16\25\u00e3\13\25\3\26\3\26\3\26\3\26\3\26\3\26\2")
-        buf.write("\2\27\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*\2")
-        buf.write("\3\3\2\22\23\2\u00f2\2,\3\2\2\2\4\65\3\2\2\2\6<\3\2\2")
-        buf.write("\2\b?\3\2\2\2\nJ\3\2\2\2\fR\3\2\2\2\16V\3\2\2\2\20e\3")
-        buf.write("\2\2\2\22g\3\2\2\2\24x\3\2\2\2\26\u0089\3\2\2\2\30\u0091")
-        buf.write("\3\2\2\2\32\u009b\3\2\2\2\34\u00a8\3\2\2\2\36\u00bc\3")
-        buf.write("\2\2\2 \u00c3\3\2\2\2\"\u00c6\3\2\2\2$\u00d3\3\2\2\2&")
-        buf.write("\u00d9\3\2\2\2(\u00db\3\2\2\2*\u00e4\3\2\2\2,-\7\3\2\2")
-        buf.write("-/\7\36\2\2.\60\5\4\3\2/.\3\2\2\2/\60\3\2\2\2\60\61\3")
-        buf.write("\2\2\2\61\63\5\6\4\2\62\64\5(\25\2\63\62\3\2\2\2\63\64")
-        buf.write("\3\2\2\2\64\3\3\2\2\2\65\66\7\4\2\2\66\67\7\25\2\2\67")
-        buf.write("\5\3\2\2\289\7\5\2\29;\5\b\5\2:8\3\2\2\2;>\3\2\2\2<:\3")
-        buf.write("\2\2\2<=\3\2\2\2=\7\3\2\2\2><\3\2\2\2?@\7\36\2\2@B\5\n")
-        buf.write("\6\2AC\5\f\7\2BA\3\2\2\2BC\3\2\2\2CG\3\2\2\2DF\5*\26\2")
-        buf.write("ED\3\2\2\2FI\3\2\2\2GE\3\2\2\2GH\3\2\2\2H\t\3\2\2\2IG")
-        buf.write("\3\2\2\2JK\7\26\2\2KL\7\25\2\2LM\7\32\2\2MN\7\25\2\2N")
-        buf.write("O\7\27\2\2O\13\3\2\2\2PQ\7\6\2\2QS\5\16\b\2RP\3\2\2\2")
-        buf.write("ST\3\2\2\2TR\3\2\2\2TU\3\2\2\2U\r\3\2\2\2V]\7\36\2\2W")
-        buf.write("Y\5\4\3\2XZ\5\20\t\2YX\3\2\2\2Z[\3\2\2\2[Y\3\2\2\2[\\")
-        buf.write("\3\2\2\2\\^\3\2\2\2]W\3\2\2\2]^\3\2\2\2^\17\3\2\2\2_f")
-        buf.write("\5\22\n\2`f\5\24\13\2af\5\26\f\2bf\5\30\r\2cf\5\32\16")
-        buf.write("\2df\5\34\17\2e_\3\2\2\2e`\3\2\2\2ea\3\2\2\2eb\3\2\2\2")
-        buf.write("ec\3\2\2\2ed\3\2\2\2f\21\3\2\2\2gh\7\7\2\2hi\7\26\2\2")
-        buf.write("ij\7\21\2\2jl\7\32\2\2km\5$\23\2lk\3\2\2\2lm\3\2\2\2m")
-        buf.write("n\3\2\2\2ns\7\22\2\2op\7\32\2\2pr\5\36\20\2qo\3\2\2\2")
-        buf.write("ru\3\2\2\2sq\3\2\2\2st\3\2\2\2tv\3\2\2\2us\3\2\2\2vw\7")
-        buf.write("\27\2\2w\23\3\2\2\2xy\7\b\2\2yz\7\26\2\2z{\7\22\2\2{}")
-        buf.write("\7\32\2\2|~\5$\23\2}|\3\2\2\2}~\3\2\2\2~\177\3\2\2\2\177")
-        buf.write("\u0084\7\23\2\2\u0080\u0081\7\32\2\2\u0081\u0083\5\36")
-        buf.write("\20\2\u0082\u0080\3\2\2\2\u0083\u0086\3\2\2\2\u0084\u0082")
-        buf.write("\3\2\2\2\u0084\u0085\3\2\2\2\u0085\u0087\3\2\2\2\u0086")
-        buf.write("\u0084\3\2\2\2\u0087\u0088\7\27\2\2\u0088\25\3\2\2\2\u0089")
-        buf.write("\u008a\7\t\2\2\u008a\u008c\7\26\2\2\u008b\u008d\5$\23")
-        buf.write("\2\u008c\u008b\3\2\2\2\u008c\u008d\3\2\2\2\u008d\u008e")
-        buf.write("\3\2\2\2\u008e\u008f\t\2\2\2\u008f\u0090\7\27\2\2\u0090")
-        buf.write("\27\3\2\2\2\u0091\u0092\7\n\2\2\u0092\u0093\7\26\2\2\u0093")
-        buf.write("\u0094\5\"\22\2\u0094\u0096\7\32\2\2\u0095\u0097\5$\23")
-        buf.write("\2\u0096\u0095\3\2\2\2\u0096\u0097\3\2\2\2\u0097\u0098")
-        buf.write("\3\2\2\2\u0098\u0099\5&\24\2\u0099\u009a\7\27\2\2\u009a")
-        buf.write("\31\3\2\2\2\u009b\u009c\7\13\2\2\u009c\u009d\7\26\2\2")
-        buf.write("\u009d\u009e\7\23\2\2\u009e\u009f\7\32\2\2\u009f\u00a0")
-        buf.write("\7\30\2\2\u00a0\u00a1\5\"\22\2\u00a1\u00a2\7\31\2\2\u00a2")
-        buf.write("\u00a3\7\32\2\2\u00a3\u00a4\7\30\2\2\u00a4\u00a5\5\"\22")
-        buf.write("\2\u00a5\u00a6\7\31\2\2\u00a6\u00a7\7\27\2\2\u00a7\33")
-        buf.write("\3\2\2\2\u00a8\u00a9\7\6\2\2\u00a9\u00ab\7\26\2\2\u00aa")
-        buf.write("\u00ac\5$\23\2\u00ab\u00aa\3\2\2\2\u00ab\u00ac\3\2\2\2")
-        buf.write("\u00ac\u00ad\3\2\2\2\u00ad\u00ae\5&\24\2\u00ae\u00b0\7")
-        buf.write("\32\2\2\u00af\u00b1\5$\23\2\u00b0\u00af\3\2\2\2\u00b0")
-        buf.write("\u00b1\3\2\2\2\u00b1\u00b2\3\2\2\2\u00b2\u00b7\5&\24\2")
-        buf.write("\u00b3\u00b4\7\32\2\2\u00b4\u00b6\5\36\20\2\u00b5\u00b3")
-        buf.write("\3\2\2\2\u00b6\u00b9\3\2\2\2\u00b7\u00b5\3\2\2\2\u00b7")
-        buf.write("\u00b8\3\2\2\2\u00b8\u00ba\3\2\2\2\u00b9\u00b7\3\2\2\2")
-        buf.write("\u00ba\u00bb\7\27\2\2\u00bb\35\3\2\2\2\u00bc\u00bd\5 ")
-        buf.write("\21\2\u00bd\u00be\7\33\2\2\u00be\u00bf\5\"\22\2\u00bf")
-        buf.write("\37\3\2\2\2\u00c0\u00c4\7\f\2\2\u00c1\u00c4\7\r\2\2\u00c2")
-        buf.write("\u00c4\7\16\2\2\u00c3\u00c0\3\2\2\2\u00c3\u00c1\3\2\2")
-        buf.write("\2\u00c3\u00c2\3\2\2\2\u00c4!\3\2\2\2\u00c5\u00c7\5$\23")
-        buf.write("\2\u00c6\u00c5\3\2\2\2\u00c6\u00c7\3\2\2\2\u00c7\u00c8")
-        buf.write("\3\2\2\2\u00c8\u00d0\5&\24\2\u00c9\u00cb\7\32\2\2\u00ca")
-        buf.write("\u00cc\5$\23\2\u00cb\u00ca\3\2\2\2\u00cb\u00cc\3\2\2\2")
-        buf.write("\u00cc\u00cd\3\2\2\2\u00cd\u00cf\5&\24\2\u00ce\u00c9\3")
-        buf.write("\2\2\2\u00cf\u00d2\3\2\2\2\u00d0\u00ce\3\2\2\2\u00d0\u00d1")
-        buf.write("\3\2\2\2\u00d1#\3\2\2\2\u00d2\u00d0\3\2\2\2\u00d3\u00d4")
-        buf.write("\7\25\2\2\u00d4\u00d5\7\34\2\2\u00d5%\3\2\2\2\u00d6\u00da")
-        buf.write("\7\21\2\2\u00d7\u00da\7\22\2\2\u00d8\u00da\7\23\2\2\u00d9")
-        buf.write("\u00d6\3\2\2\2\u00d9\u00d7\3\2\2\2\u00d9\u00d8\3\2\2\2")
-        buf.write("\u00da\'\3\2\2\2\u00db\u00dc\7\17\2\2\u00dc\u00e1\5&\24")
-        buf.write("\2\u00dd\u00de\7\32\2\2\u00de\u00e0\5&\24\2\u00df\u00dd")
-        buf.write("\3\2\2\2\u00e0\u00e3\3\2\2\2\u00e1\u00df\3\2\2\2\u00e1")
-        buf.write("\u00e2\3\2\2\2\u00e2)\3\2\2\2\u00e3\u00e1\3\2\2\2\u00e4")
-        buf.write("\u00e5\7\20\2\2\u00e5\u00e6\7\23\2\2\u00e6\u00e7\7\35")
-        buf.write("\2\2\u00e7\u00e8\7\36\2\2\u00e8+\3\2\2\2\32/\63<BGT[]")
-        buf.write("els}\u0084\u008c\u0096\u00ab\u00b0\u00b7\u00c3\u00c6\u00cb")
-        buf.write("\u00d0\u00d9\u00e1")
+        buf.write("\4\24\t\24\4\25\t\25\3\2\3\2\3\2\5\2.\n\2\3\2\3\2\5\2")
+        buf.write("\62\n\2\3\3\3\3\3\3\3\4\3\4\7\49\n\4\f\4\16\4<\13\4\3")
+        buf.write("\5\3\5\3\5\5\5A\n\5\3\5\7\5D\n\5\f\5\16\5G\13\5\3\6\3")
+        buf.write("\6\3\6\3\6\3\6\3\6\3\7\3\7\6\7Q\n\7\r\7\16\7R\3\b\3\b")
+        buf.write("\3\b\6\bX\n\b\r\b\16\bY\5\b\\\n\b\3\t\3\t\3\t\3\t\3\t")
+        buf.write("\3\t\5\td\n\t\3\n\3\n\3\n\3\n\3\n\3\n\3\n\7\nm\n\n\f\n")
+        buf.write("\16\np\13\n\3\n\3\n\3\13\3\13\3\13\3\13\3\13\3\13\3\13")
+        buf.write("\7\13{\n\13\f\13\16\13~\13\13\3\13\3\13\3\f\3\f\3\f\3")
+        buf.write("\f\3\f\3\r\3\r\3\r\3\r\3\r\3\r\3\r\3\16\3\16\3\16\3\16")
+        buf.write("\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\16\3\17\3\17")
+        buf.write("\3\17\3\17\3\17\3\17\3\17\7\17\u00a2\n\17\f\17\16\17\u00a5")
+        buf.write("\13\17\3\17\3\17\3\20\3\20\3\20\3\20\3\21\3\21\3\21\5")
+        buf.write("\21\u00b0\n\21\3\22\3\22\3\22\7\22\u00b5\n\22\f\22\16")
+        buf.write("\22\u00b8\13\22\3\23\3\23\3\23\3\23\5\23\u00be\n\23\3")
+        buf.write("\24\3\24\3\24\3\24\7\24\u00c4\n\24\f\24\16\24\u00c7\13")
+        buf.write("\24\3\25\3\25\3\25\3\25\3\25\3\25\2\2\26\2\4\6\b\n\f\16")
+        buf.write("\20\22\24\26\30\32\34\36 \"$&(\2\2\2\u00d0\2*\3\2\2\2")
+        buf.write("\4\63\3\2\2\2\6:\3\2\2\2\b=\3\2\2\2\nH\3\2\2\2\fP\3\2")
+        buf.write("\2\2\16T\3\2\2\2\20c\3\2\2\2\22e\3\2\2\2\24s\3\2\2\2\26")
+        buf.write("\u0081\3\2\2\2\30\u0086\3\2\2\2\32\u008d\3\2\2\2\34\u009a")
+        buf.write("\3\2\2\2\36\u00a8\3\2\2\2 \u00af\3\2\2\2\"\u00b1\3\2\2")
+        buf.write("\2$\u00bd\3\2\2\2&\u00bf\3\2\2\2(\u00c8\3\2\2\2*+\7\3")
+        buf.write("\2\2+-\7\27\2\2,.\5\4\3\2-,\3\2\2\2-.\3\2\2\2./\3\2\2")
+        buf.write("\2/\61\5\6\4\2\60\62\5&\24\2\61\60\3\2\2\2\61\62\3\2\2")
+        buf.write("\2\62\3\3\2\2\2\63\64\7\4\2\2\64\65\7\30\2\2\65\5\3\2")
+        buf.write("\2\2\66\67\7\5\2\2\679\5\b\5\28\66\3\2\2\29<\3\2\2\2:")
+        buf.write("8\3\2\2\2:;\3\2\2\2;\7\3\2\2\2<:\3\2\2\2=>\7\27\2\2>@")
+        buf.write("\5\n\6\2?A\5\f\7\2@?\3\2\2\2@A\3\2\2\2AE\3\2\2\2BD\5(")
+        buf.write("\25\2CB\3\2\2\2DG\3\2\2\2EC\3\2\2\2EF\3\2\2\2F\t\3\2\2")
+        buf.write("\2GE\3\2\2\2HI\7\31\2\2IJ\7\30\2\2JK\7\35\2\2KL\7\30\2")
+        buf.write("\2LM\7\32\2\2M\13\3\2\2\2NO\7\6\2\2OQ\5\16\b\2PN\3\2\2")
+        buf.write("\2QR\3\2\2\2RP\3\2\2\2RS\3\2\2\2S\r\3\2\2\2T[\7\27\2\2")
+        buf.write("UW\5\4\3\2VX\5\20\t\2WV\3\2\2\2XY\3\2\2\2YW\3\2\2\2YZ")
+        buf.write("\3\2\2\2Z\\\3\2\2\2[U\3\2\2\2[\\\3\2\2\2\\\17\3\2\2\2")
+        buf.write("]d\5\22\n\2^d\5\24\13\2_d\5\26\f\2`d\5\30\r\2ad\5\32\16")
+        buf.write("\2bd\5\34\17\2c]\3\2\2\2c^\3\2\2\2c_\3\2\2\2c`\3\2\2\2")
+        buf.write("ca\3\2\2\2cb\3\2\2\2d\21\3\2\2\2ef\7\7\2\2fg\7\31\2\2")
+        buf.write("gh\7\22\2\2hi\7\35\2\2in\7\23\2\2jk\7\35\2\2km\5\36\20")
+        buf.write("\2lj\3\2\2\2mp\3\2\2\2nl\3\2\2\2no\3\2\2\2oq\3\2\2\2p")
+        buf.write("n\3\2\2\2qr\7\32\2\2r\23\3\2\2\2st\7\b\2\2tu\7\31\2\2")
+        buf.write("uv\7\23\2\2vw\7\35\2\2w|\7\24\2\2xy\7\35\2\2y{\5\36\20")
+        buf.write("\2zx\3\2\2\2{~\3\2\2\2|z\3\2\2\2|}\3\2\2\2}\177\3\2\2")
+        buf.write("\2~|\3\2\2\2\177\u0080\7\32\2\2\u0080\25\3\2\2\2\u0081")
+        buf.write("\u0082\7\t\2\2\u0082\u0083\7\31\2\2\u0083\u0084\5$\23")
+        buf.write("\2\u0084\u0085\7\32\2\2\u0085\27\3\2\2\2\u0086\u0087\7")
+        buf.write("\n\2\2\u0087\u0088\7\31\2\2\u0088\u0089\5\"\22\2\u0089")
+        buf.write("\u008a\7\35\2\2\u008a\u008b\5$\23\2\u008b\u008c\7\32\2")
+        buf.write("\2\u008c\31\3\2\2\2\u008d\u008e\7\13\2\2\u008e\u008f\7")
+        buf.write("\31\2\2\u008f\u0090\7\24\2\2\u0090\u0091\7\35\2\2\u0091")
+        buf.write("\u0092\7\33\2\2\u0092\u0093\5\"\22\2\u0093\u0094\7\34")
+        buf.write("\2\2\u0094\u0095\7\35\2\2\u0095\u0096\7\33\2\2\u0096\u0097")
+        buf.write("\5\"\22\2\u0097\u0098\7\34\2\2\u0098\u0099\7\32\2\2\u0099")
+        buf.write("\33\3\2\2\2\u009a\u009b\7\f\2\2\u009b\u009c\7\31\2\2\u009c")
+        buf.write("\u009d\5$\23\2\u009d\u009e\7\35\2\2\u009e\u00a3\5$\23")
+        buf.write("\2\u009f\u00a0\7\35\2\2\u00a0\u00a2\5\36\20\2\u00a1\u009f")
+        buf.write("\3\2\2\2\u00a2\u00a5\3\2\2\2\u00a3\u00a1\3\2\2\2\u00a3")
+        buf.write("\u00a4\3\2\2\2\u00a4\u00a6\3\2\2\2\u00a5\u00a3\3\2\2\2")
+        buf.write("\u00a6\u00a7\7\32\2\2\u00a7\35\3\2\2\2\u00a8\u00a9\5 ")
+        buf.write("\21\2\u00a9\u00aa\7\36\2\2\u00aa\u00ab\5\"\22\2\u00ab")
+        buf.write("\37\3\2\2\2\u00ac\u00b0\7\r\2\2\u00ad\u00b0\7\16\2\2\u00ae")
+        buf.write("\u00b0\7\17\2\2\u00af\u00ac\3\2\2\2\u00af\u00ad\3\2\2")
+        buf.write("\2\u00af\u00ae\3\2\2\2\u00b0!\3\2\2\2\u00b1\u00b6\5$\23")
+        buf.write("\2\u00b2\u00b3\7\35\2\2\u00b3\u00b5\5$\23\2\u00b4\u00b2")
+        buf.write("\3\2\2\2\u00b5\u00b8\3\2\2\2\u00b6\u00b4\3\2\2\2\u00b6")
+        buf.write("\u00b7\3\2\2\2\u00b7#\3\2\2\2\u00b8\u00b6\3\2\2\2\u00b9")
+        buf.write("\u00be\7\22\2\2\u00ba\u00be\7\23\2\2\u00bb\u00be\7\24")
+        buf.write("\2\2\u00bc\u00be\7\26\2\2\u00bd\u00b9\3\2\2\2\u00bd\u00ba")
+        buf.write("\3\2\2\2\u00bd\u00bb\3\2\2\2\u00bd\u00bc\3\2\2\2\u00be")
+        buf.write("%\3\2\2\2\u00bf\u00c0\7\20\2\2\u00c0\u00c5\5$\23\2\u00c1")
+        buf.write("\u00c2\7\35\2\2\u00c2\u00c4\5$\23\2\u00c3\u00c1\3\2\2")
+        buf.write("\2\u00c4\u00c7\3\2\2\2\u00c5\u00c3\3\2\2\2\u00c5\u00c6")
+        buf.write("\3\2\2\2\u00c6\'\3\2\2\2\u00c7\u00c5\3\2\2\2\u00c8\u00c9")
+        buf.write("\7\21\2\2\u00c9\u00ca\5$\23\2\u00ca\u00cb\7 \2\2\u00cb")
+        buf.write("\u00cc\7\27\2\2\u00cc)\3\2\2\2\22-\61:@ERY[cn|\u00a3\u00af")
+        buf.write("\u00b6\u00bd\u00c5")
         return buf.getvalue()
 
 
@@ -123,17 +106,19 @@ class ModuleParser ( Parser ):
     literalNames = [ "<INVALID>", "'MODULE'", "'TIMESCALE'", "'SCOPE'", 
                      "'PROCESS'", "'TRANSCRIPTION'", "'TRANSLATION'", "'DEGRADATION'", 
                      "'PROTEIN_COMPLEX_FORMATION'", "'ENZYMATIC_REACTION'", 
-                     "'INHIBITORS'", "'INDUCERS'", "'ACTIVATORS'", "'PARACRINE_SIGNALS'", 
-                     "'JUXTACRINE_SIGNAL'", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "'CUSTOM_PROCESS'", "'INHIBITORS'", "'INDUCERS'", "'ACTIVATORS'", 
+                     "'PARACRINE_SIGNALS'", "'JUXTACRINE_SIGNAL'", "<INVALID>", 
+                     "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "'('", "')'", "'['", "']'", 
                      "','", "':'", "'*'", "'->'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "GENE", "MRNA", 
-                      "PROTEIN", "RECEPTOR", "INT", "RO", "RC", "SO", "SC", 
-                      "COMMA", "COLON", "STAR", "RARROW", "ID", "WS", "LINE_COMMENT" ]
+                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                      "GENE", "MRNA", "PROTEIN", "RECEPTOR", "MOLECULE", 
+                      "ID", "INT", "RO", "RC", "SO", "SC", "COMMA", "COLON", 
+                      "STAR", "RARROW", "MULT", "WS", "LINE_COMMENT" ]
 
     RULE_root = 0
     RULE_timescale = 1
@@ -152,16 +137,15 @@ class ModuleParser ( Parser ):
     RULE_regulation = 14
     RULE_regulation_type = 15
     RULE_m_list = 16
-    RULE_mult = 17
-    RULE_molecule = 18
-    RULE_paracrine_signals = 19
-    RULE_juxtacrine_signal = 20
+    RULE_molecule = 17
+    RULE_paracrine_signals = 18
+    RULE_juxtacrine_signal = 19
 
     ruleNames =  [ "root", "timescale", "scopes", "scope", "coords", "processes", 
                    "process", "process_type", "transcription", "translation", 
                    "degradation", "protein_complex_formation", "enzymatic_reaction", 
                    "custom_process", "regulation", "regulation_type", "m_list", 
-                   "mult", "molecule", "paracrine_signals", "juxtacrine_signal" ]
+                   "molecule", "paracrine_signals", "juxtacrine_signal" ]
 
     EOF = Token.EOF
     T__0=1
@@ -178,22 +162,25 @@ class ModuleParser ( Parser ):
     T__11=12
     T__12=13
     T__13=14
-    GENE=15
-    MRNA=16
-    PROTEIN=17
-    RECEPTOR=18
-    INT=19
-    RO=20
-    RC=21
-    SO=22
-    SC=23
-    COMMA=24
-    COLON=25
-    STAR=26
-    RARROW=27
-    ID=28
-    WS=29
-    LINE_COMMENT=30
+    T__14=15
+    GENE=16
+    MRNA=17
+    PROTEIN=18
+    RECEPTOR=19
+    MOLECULE=20
+    ID=21
+    INT=22
+    RO=23
+    RC=24
+    SO=25
+    SC=26
+    COMMA=27
+    COLON=28
+    STAR=29
+    RARROW=30
+    MULT=31
+    WS=32
+    LINE_COMMENT=33
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -253,25 +240,25 @@ class ModuleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 42
+            self.state = 40
             self.match(ModuleParser.T__0)
-            self.state = 43
+            self.state = 41
             self.match(ModuleParser.ID)
-            self.state = 45
+            self.state = 43
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==ModuleParser.T__1:
-                self.state = 44
+                self.state = 42
                 self.timescale()
 
 
-            self.state = 47
+            self.state = 45
             self.scopes()
-            self.state = 49
+            self.state = 47
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==ModuleParser.T__12:
-                self.state = 48
+            if _la==ModuleParser.T__13:
+                self.state = 46
                 self.paracrine_signals()
 
 
@@ -320,9 +307,9 @@ class ModuleParser ( Parser ):
         self.enterRule(localctx, 2, self.RULE_timescale)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 51
+            self.state = 49
             self.match(ModuleParser.T__1)
-            self.state = 52
+            self.state = 50
             self.match(ModuleParser.INT)
         except RecognitionException as re:
             localctx.exception = re
@@ -374,15 +361,15 @@ class ModuleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 58
+            self.state = 56
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==ModuleParser.T__2:
-                self.state = 54
+                self.state = 52
                 self.match(ModuleParser.T__2)
-                self.state = 55
+                self.state = 53
                 self.scope()
-                self.state = 60
+                self.state = 58
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -447,25 +434,25 @@ class ModuleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 61
+            self.state = 59
             self.match(ModuleParser.ID)
-            self.state = 62
+            self.state = 60
             self.coords()
-            self.state = 64
+            self.state = 62
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==ModuleParser.T__3:
-                self.state = 63
+                self.state = 61
                 self.processes()
 
 
-            self.state = 69
+            self.state = 67
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==ModuleParser.T__13:
-                self.state = 66
+            while _la==ModuleParser.T__14:
+                self.state = 64
                 self.juxtacrine_signal()
-                self.state = 71
+                self.state = 69
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -526,15 +513,15 @@ class ModuleParser ( Parser ):
         self.enterRule(localctx, 8, self.RULE_coords)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 72
+            self.state = 70
             self.match(ModuleParser.RO)
+            self.state = 71
+            self.match(ModuleParser.INT)
+            self.state = 72
+            self.match(ModuleParser.COMMA)
             self.state = 73
             self.match(ModuleParser.INT)
             self.state = 74
-            self.match(ModuleParser.COMMA)
-            self.state = 75
-            self.match(ModuleParser.INT)
-            self.state = 76
             self.match(ModuleParser.RC)
         except RecognitionException as re:
             localctx.exception = re
@@ -586,15 +573,15 @@ class ModuleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 80 
+            self.state = 78 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 78
+                self.state = 76
                 self.match(ModuleParser.T__3)
-                self.state = 79
+                self.state = 77
                 self.process()
-                self.state = 82 
+                self.state = 80 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not (_la==ModuleParser.T__3):
@@ -657,27 +644,25 @@ class ModuleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 84
+            self.state = 82
             self.match(ModuleParser.ID)
-            self.state = 91
+            self.state = 89
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==ModuleParser.T__1:
-                self.state = 85
+                self.state = 83
                 self.timescale()
-                self.state = 87 
+                self.state = 85 
                 self._errHandler.sync(self)
-                _alt = 1
-                while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
-                    if _alt == 1:
-                        self.state = 86
-                        self.process_type()
-
-                    else:
-                        raise NoViableAltException(self)
-                    self.state = 89 
+                _la = self._input.LA(1)
+                while True:
+                    self.state = 84
+                    self.process_type()
+                    self.state = 87 
                     self._errHandler.sync(self)
-                    _alt = self._interp.adaptivePredict(self._input,6,self._ctx)
+                    _la = self._input.LA(1)
+                    if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << ModuleParser.T__4) | (1 << ModuleParser.T__5) | (1 << ModuleParser.T__6) | (1 << ModuleParser.T__7) | (1 << ModuleParser.T__8) | (1 << ModuleParser.T__9))) != 0)):
+                        break
 
 
 
@@ -746,37 +731,37 @@ class ModuleParser ( Parser ):
         localctx = ModuleParser.Process_typeContext(self, self._ctx, self.state)
         self.enterRule(localctx, 14, self.RULE_process_type)
         try:
-            self.state = 99
+            self.state = 97
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [ModuleParser.T__4]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 93
+                self.state = 91
                 self.transcription()
                 pass
             elif token in [ModuleParser.T__5]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 94
+                self.state = 92
                 self.translation()
                 pass
             elif token in [ModuleParser.T__6]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 95
+                self.state = 93
                 self.degradation()
                 pass
             elif token in [ModuleParser.T__7]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 96
+                self.state = 94
                 self.protein_complex_formation()
                 pass
             elif token in [ModuleParser.T__8]:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 97
+                self.state = 95
                 self.enzymatic_reaction()
                 pass
-            elif token in [ModuleParser.T__3]:
+            elif token in [ModuleParser.T__9]:
                 self.enterOuterAlt(localctx, 6)
-                self.state = 98
+                self.state = 96
                 self.custom_process()
                 pass
             else:
@@ -816,10 +801,6 @@ class ModuleParser ( Parser ):
         def RC(self):
             return self.getToken(ModuleParser.RC, 0)
 
-        def mult(self):
-            return self.getTypedRuleContext(ModuleParser.MultContext,0)
-
-
         def regulation(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(ModuleParser.RegulationContext)
@@ -854,37 +835,29 @@ class ModuleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 101
+            self.state = 99
             self.match(ModuleParser.T__4)
-            self.state = 102
+            self.state = 100
             self.match(ModuleParser.RO)
-            self.state = 103
+            self.state = 101
             self.match(ModuleParser.GENE)
-            self.state = 104
+            self.state = 102
             self.match(ModuleParser.COMMA)
-            self.state = 106
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            if _la==ModuleParser.INT:
-                self.state = 105
-                self.mult()
-
-
-            self.state = 108
+            self.state = 103
             self.match(ModuleParser.MRNA)
-            self.state = 113
+            self.state = 108
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==ModuleParser.COMMA:
-                self.state = 109
+                self.state = 104
                 self.match(ModuleParser.COMMA)
-                self.state = 110
+                self.state = 105
                 self.regulation()
-                self.state = 115
+                self.state = 110
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 116
+            self.state = 111
             self.match(ModuleParser.RC)
         except RecognitionException as re:
             localctx.exception = re
@@ -920,10 +893,6 @@ class ModuleParser ( Parser ):
         def RC(self):
             return self.getToken(ModuleParser.RC, 0)
 
-        def mult(self):
-            return self.getTypedRuleContext(ModuleParser.MultContext,0)
-
-
         def regulation(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(ModuleParser.RegulationContext)
@@ -958,37 +927,29 @@ class ModuleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 118
+            self.state = 113
             self.match(ModuleParser.T__5)
-            self.state = 119
+            self.state = 114
             self.match(ModuleParser.RO)
-            self.state = 120
+            self.state = 115
             self.match(ModuleParser.MRNA)
-            self.state = 121
+            self.state = 116
             self.match(ModuleParser.COMMA)
-            self.state = 123
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            if _la==ModuleParser.INT:
-                self.state = 122
-                self.mult()
-
-
-            self.state = 125
+            self.state = 117
             self.match(ModuleParser.PROTEIN)
-            self.state = 130
+            self.state = 122
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==ModuleParser.COMMA:
-                self.state = 126
+                self.state = 118
                 self.match(ModuleParser.COMMA)
-                self.state = 127
+                self.state = 119
                 self.regulation()
-                self.state = 132
+                self.state = 124
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 133
+            self.state = 125
             self.match(ModuleParser.RC)
         except RecognitionException as re:
             localctx.exception = re
@@ -1009,18 +970,12 @@ class ModuleParser ( Parser ):
         def RO(self):
             return self.getToken(ModuleParser.RO, 0)
 
+        def molecule(self):
+            return self.getTypedRuleContext(ModuleParser.MoleculeContext,0)
+
+
         def RC(self):
             return self.getToken(ModuleParser.RC, 0)
-
-        def MRNA(self):
-            return self.getToken(ModuleParser.MRNA, 0)
-
-        def PROTEIN(self):
-            return self.getToken(ModuleParser.PROTEIN, 0)
-
-        def mult(self):
-            return self.getTypedRuleContext(ModuleParser.MultContext,0)
-
 
         def getRuleIndex(self):
             return ModuleParser.RULE_degradation
@@ -1046,29 +1001,15 @@ class ModuleParser ( Parser ):
 
         localctx = ModuleParser.DegradationContext(self, self._ctx, self.state)
         self.enterRule(localctx, 20, self.RULE_degradation)
-        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 135
+            self.state = 127
             self.match(ModuleParser.T__6)
-            self.state = 136
+            self.state = 128
             self.match(ModuleParser.RO)
-            self.state = 138
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            if _la==ModuleParser.INT:
-                self.state = 137
-                self.mult()
-
-
-            self.state = 140
-            _la = self._input.LA(1)
-            if not(_la==ModuleParser.MRNA or _la==ModuleParser.PROTEIN):
-                self._errHandler.recoverInline(self)
-            else:
-                self._errHandler.reportMatch(self)
-                self.consume()
-            self.state = 141
+            self.state = 129
+            self.molecule()
+            self.state = 130
             self.match(ModuleParser.RC)
         except RecognitionException as re:
             localctx.exception = re
@@ -1103,10 +1044,6 @@ class ModuleParser ( Parser ):
         def RC(self):
             return self.getToken(ModuleParser.RC, 0)
 
-        def mult(self):
-            return self.getTypedRuleContext(ModuleParser.MultContext,0)
-
-
         def getRuleIndex(self):
             return ModuleParser.RULE_protein_complex_formation
 
@@ -1131,28 +1068,19 @@ class ModuleParser ( Parser ):
 
         localctx = ModuleParser.Protein_complex_formationContext(self, self._ctx, self.state)
         self.enterRule(localctx, 22, self.RULE_protein_complex_formation)
-        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 143
+            self.state = 132
             self.match(ModuleParser.T__7)
-            self.state = 144
+            self.state = 133
             self.match(ModuleParser.RO)
-            self.state = 145
+            self.state = 134
             self.m_list()
-            self.state = 146
+            self.state = 135
             self.match(ModuleParser.COMMA)
-            self.state = 148
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            if _la==ModuleParser.INT:
-                self.state = 147
-                self.mult()
-
-
-            self.state = 150
+            self.state = 136
             self.molecule()
-            self.state = 151
+            self.state = 137
             self.match(ModuleParser.RC)
         except RecognitionException as re:
             localctx.exception = re
@@ -1230,29 +1158,29 @@ class ModuleParser ( Parser ):
         self.enterRule(localctx, 24, self.RULE_enzymatic_reaction)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 153
+            self.state = 139
             self.match(ModuleParser.T__8)
-            self.state = 154
+            self.state = 140
             self.match(ModuleParser.RO)
-            self.state = 155
+            self.state = 141
             self.match(ModuleParser.PROTEIN)
-            self.state = 156
+            self.state = 142
             self.match(ModuleParser.COMMA)
-            self.state = 157
+            self.state = 143
             self.match(ModuleParser.SO)
-            self.state = 158
+            self.state = 144
             self.m_list()
-            self.state = 159
+            self.state = 145
             self.match(ModuleParser.SC)
-            self.state = 160
+            self.state = 146
             self.match(ModuleParser.COMMA)
-            self.state = 161
+            self.state = 147
             self.match(ModuleParser.SO)
-            self.state = 162
+            self.state = 148
             self.m_list()
-            self.state = 163
+            self.state = 149
             self.match(ModuleParser.SC)
-            self.state = 164
+            self.state = 150
             self.match(ModuleParser.RC)
         except RecognitionException as re:
             localctx.exception = re
@@ -1289,13 +1217,6 @@ class ModuleParser ( Parser ):
         def RC(self):
             return self.getToken(ModuleParser.RC, 0)
 
-        def mult(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(ModuleParser.MultContext)
-            else:
-                return self.getTypedRuleContext(ModuleParser.MultContext,i)
-
-
         def regulation(self, i:int=None):
             if i is None:
                 return self.getTypedRuleContexts(ModuleParser.RegulationContext)
@@ -1330,45 +1251,29 @@ class ModuleParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 166
-            self.match(ModuleParser.T__3)
-            self.state = 167
+            self.state = 152
+            self.match(ModuleParser.T__9)
+            self.state = 153
             self.match(ModuleParser.RO)
-            self.state = 169
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            if _la==ModuleParser.INT:
-                self.state = 168
-                self.mult()
-
-
-            self.state = 171
+            self.state = 154
             self.molecule()
-            self.state = 172
+            self.state = 155
             self.match(ModuleParser.COMMA)
-            self.state = 174
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            if _la==ModuleParser.INT:
-                self.state = 173
-                self.mult()
-
-
-            self.state = 176
+            self.state = 156
             self.molecule()
-            self.state = 181
+            self.state = 161
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==ModuleParser.COMMA:
-                self.state = 177
+                self.state = 157
                 self.match(ModuleParser.COMMA)
-                self.state = 178
+                self.state = 158
                 self.regulation()
-                self.state = 183
+                self.state = 163
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 184
+            self.state = 164
             self.match(ModuleParser.RC)
         except RecognitionException as re:
             localctx.exception = re
@@ -1423,11 +1328,11 @@ class ModuleParser ( Parser ):
         self.enterRule(localctx, 28, self.RULE_regulation)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 186
+            self.state = 166
             self.regulation_type()
-            self.state = 187
+            self.state = 167
             self.match(ModuleParser.COLON)
-            self.state = 188
+            self.state = 168
             self.m_list()
         except RecognitionException as re:
             localctx.exception = re
@@ -1527,26 +1432,26 @@ class ModuleParser ( Parser ):
         localctx = ModuleParser.Regulation_typeContext(self, self._ctx, self.state)
         self.enterRule(localctx, 30, self.RULE_regulation_type)
         try:
-            self.state = 193
+            self.state = 173
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [ModuleParser.T__9]:
+            if token in [ModuleParser.T__10]:
                 localctx = ModuleParser.Type_inhibitorsContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
-                self.state = 190
-                self.match(ModuleParser.T__9)
-                pass
-            elif token in [ModuleParser.T__10]:
-                localctx = ModuleParser.Type_inducersContext(self, localctx)
-                self.enterOuterAlt(localctx, 2)
-                self.state = 191
+                self.state = 170
                 self.match(ModuleParser.T__10)
                 pass
             elif token in [ModuleParser.T__11]:
+                localctx = ModuleParser.Type_inducersContext(self, localctx)
+                self.enterOuterAlt(localctx, 2)
+                self.state = 171
+                self.match(ModuleParser.T__11)
+                pass
+            elif token in [ModuleParser.T__12]:
                 localctx = ModuleParser.Type_activatorsContext(self, localctx)
                 self.enterOuterAlt(localctx, 3)
-                self.state = 192
-                self.match(ModuleParser.T__11)
+                self.state = 172
+                self.match(ModuleParser.T__12)
                 pass
             else:
                 raise NoViableAltException(self)
@@ -1572,13 +1477,6 @@ class ModuleParser ( Parser ):
                 return self.getTypedRuleContexts(ModuleParser.MoleculeContext)
             else:
                 return self.getTypedRuleContext(ModuleParser.MoleculeContext,i)
-
-
-        def mult(self, i:int=None):
-            if i is None:
-                return self.getTypedRuleContexts(ModuleParser.MultContext)
-            else:
-                return self.getTypedRuleContext(ModuleParser.MultContext,i)
 
 
         def COMMA(self, i:int=None):
@@ -1611,92 +1509,23 @@ class ModuleParser ( Parser ):
 
         localctx = ModuleParser.M_listContext(self, self._ctx, self.state)
         self.enterRule(localctx, 32, self.RULE_m_list)
-        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 196
-            self._errHandler.sync(self)
-            _la = self._input.LA(1)
-            if _la==ModuleParser.INT:
-                self.state = 195
-                self.mult()
-
-
-            self.state = 198
+            self.state = 175
             self.molecule()
-            self.state = 206
+            self.state = 180
             self._errHandler.sync(self)
-            _alt = self._interp.adaptivePredict(self._input,21,self._ctx)
+            _alt = self._interp.adaptivePredict(self._input,13,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
-                    self.state = 199
+                    self.state = 176
                     self.match(ModuleParser.COMMA)
-                    self.state = 201
-                    self._errHandler.sync(self)
-                    _la = self._input.LA(1)
-                    if _la==ModuleParser.INT:
-                        self.state = 200
-                        self.mult()
-
-
-                    self.state = 203
+                    self.state = 177
                     self.molecule() 
-                self.state = 208
+                self.state = 182
                 self._errHandler.sync(self)
-                _alt = self._interp.adaptivePredict(self._input,21,self._ctx)
+                _alt = self._interp.adaptivePredict(self._input,13,self._ctx)
 
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class MultContext(ParserRuleContext):
-        __slots__ = 'parser'
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def INT(self):
-            return self.getToken(ModuleParser.INT, 0)
-
-        def STAR(self):
-            return self.getToken(ModuleParser.STAR, 0)
-
-        def getRuleIndex(self):
-            return ModuleParser.RULE_mult
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterMult" ):
-                listener.enterMult(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitMult" ):
-                listener.exitMult(self)
-
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitMult" ):
-                return visitor.visitMult(self)
-            else:
-                return visitor.visitChildren(self)
-
-
-
-
-    def mult(self):
-
-        localctx = ModuleParser.MultContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 34, self.RULE_mult)
-        try:
-            self.enterOuterAlt(localctx, 1)
-            self.state = 209
-            self.match(ModuleParser.INT)
-            self.state = 210
-            self.match(ModuleParser.STAR)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1771,6 +1600,30 @@ class ModuleParser ( Parser ):
                 return visitor.visitChildren(self)
 
 
+    class Type_moleculeContext(MoleculeContext):
+
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a ModuleParser.MoleculeContext
+            super().__init__(parser)
+            self.copyFrom(ctx)
+
+        def MOLECULE(self):
+            return self.getToken(ModuleParser.MOLECULE, 0)
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterType_molecule" ):
+                listener.enterType_molecule(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitType_molecule" ):
+                listener.exitType_molecule(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitType_molecule" ):
+                return visitor.visitType_molecule(self)
+            else:
+                return visitor.visitChildren(self)
+
+
     class Type_mrnaContext(MoleculeContext):
 
         def __init__(self, parser, ctx:ParserRuleContext): # actually a ModuleParser.MoleculeContext
@@ -1799,28 +1652,34 @@ class ModuleParser ( Parser ):
     def molecule(self):
 
         localctx = ModuleParser.MoleculeContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 36, self.RULE_molecule)
+        self.enterRule(localctx, 34, self.RULE_molecule)
         try:
-            self.state = 215
+            self.state = 187
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [ModuleParser.GENE]:
                 localctx = ModuleParser.Type_geneContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
-                self.state = 212
+                self.state = 183
                 self.match(ModuleParser.GENE)
                 pass
             elif token in [ModuleParser.MRNA]:
                 localctx = ModuleParser.Type_mrnaContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
-                self.state = 213
+                self.state = 184
                 self.match(ModuleParser.MRNA)
                 pass
             elif token in [ModuleParser.PROTEIN]:
                 localctx = ModuleParser.Type_proteinContext(self, localctx)
                 self.enterOuterAlt(localctx, 3)
-                self.state = 214
+                self.state = 185
                 self.match(ModuleParser.PROTEIN)
+                pass
+            elif token in [ModuleParser.MOLECULE]:
+                localctx = ModuleParser.Type_moleculeContext(self, localctx)
+                self.enterOuterAlt(localctx, 4)
+                self.state = 186
+                self.match(ModuleParser.MOLECULE)
                 pass
             else:
                 raise NoViableAltException(self)
@@ -1877,23 +1736,23 @@ class ModuleParser ( Parser ):
     def paracrine_signals(self):
 
         localctx = ModuleParser.Paracrine_signalsContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 38, self.RULE_paracrine_signals)
+        self.enterRule(localctx, 36, self.RULE_paracrine_signals)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 217
-            self.match(ModuleParser.T__12)
-            self.state = 218
+            self.state = 189
+            self.match(ModuleParser.T__13)
+            self.state = 190
             self.molecule()
-            self.state = 223
+            self.state = 195
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==ModuleParser.COMMA:
-                self.state = 219
+                self.state = 191
                 self.match(ModuleParser.COMMA)
-                self.state = 220
+                self.state = 192
                 self.molecule()
-                self.state = 225
+                self.state = 197
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -1913,8 +1772,9 @@ class ModuleParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def PROTEIN(self):
-            return self.getToken(ModuleParser.PROTEIN, 0)
+        def molecule(self):
+            return self.getTypedRuleContext(ModuleParser.MoleculeContext,0)
+
 
         def RARROW(self):
             return self.getToken(ModuleParser.RARROW, 0)
@@ -1945,16 +1805,16 @@ class ModuleParser ( Parser ):
     def juxtacrine_signal(self):
 
         localctx = ModuleParser.Juxtacrine_signalContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 40, self.RULE_juxtacrine_signal)
+        self.enterRule(localctx, 38, self.RULE_juxtacrine_signal)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 226
-            self.match(ModuleParser.T__13)
-            self.state = 227
-            self.match(ModuleParser.PROTEIN)
-            self.state = 228
+            self.state = 198
+            self.match(ModuleParser.T__14)
+            self.state = 199
+            self.molecule()
+            self.state = 200
             self.match(ModuleParser.RARROW)
-            self.state = 229
+            self.state = 201
             self.match(ModuleParser.ID)
         except RecognitionException as re:
             localctx.exception = re

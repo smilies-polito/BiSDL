@@ -104,11 +104,6 @@ class ModuleVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by ModuleParser#mult.
-    def visitMult(self, ctx:ModuleParser.MultContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by ModuleParser#type_gene.
     def visitType_gene(self, ctx:ModuleParser.Type_geneContext):
         return self.visitChildren(ctx)
@@ -121,6 +116,11 @@ class ModuleVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by ModuleParser#type_protein.
     def visitType_protein(self, ctx:ModuleParser.Type_proteinContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ModuleParser#type_molecule.
+    def visitType_molecule(self, ctx:ModuleParser.Type_moleculeContext):
         return self.visitChildren(ctx)
 
 

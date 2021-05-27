@@ -179,15 +179,6 @@ class ModuleListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ModuleParser#mult.
-    def enterMult(self, ctx:ModuleParser.MultContext):
-        pass
-
-    # Exit a parse tree produced by ModuleParser#mult.
-    def exitMult(self, ctx:ModuleParser.MultContext):
-        pass
-
-
     # Enter a parse tree produced by ModuleParser#type_gene.
     def enterType_gene(self, ctx:ModuleParser.Type_geneContext):
         pass
@@ -212,6 +203,15 @@ class ModuleListener(ParseTreeListener):
 
     # Exit a parse tree produced by ModuleParser#type_protein.
     def exitType_protein(self, ctx:ModuleParser.Type_proteinContext):
+        pass
+
+
+    # Enter a parse tree produced by ModuleParser#type_molecule.
+    def enterType_molecule(self, ctx:ModuleParser.Type_moleculeContext):
+        pass
+
+    # Exit a parse tree produced by ModuleParser#type_molecule.
+    def exitType_molecule(self, ctx:ModuleParser.Type_moleculeContext):
         pass
 
 

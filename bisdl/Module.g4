@@ -15,31 +15,33 @@ process_type   : transcription //#type_transcription
                  | enzymatic_reaction //#type_enzymatic_reaction
                  | custom_process //#type_custom_process
                  ;
-transcription  : 'TRANSCRIPTION' RO GENE COMMA mult? MRNA (COMMA regulation )* RC ;
-translation    : 'TRANSLATION' RO MRNA COMMA mult? PROTEIN (COMMA regulation )* RC ;
-degradation    : 'DEGRADATION' RO mult? (MRNA | PROTEIN) RC ;
-protein_complex_formation : 'PROTEIN_COMPLEX_FORMATION' RO m_list COMMA mult? molecule RC ;
+transcription  : 'TRANSCRIPTION' RO GENE COMMA MRNA (COMMA regulation )* RC ;
+translation    : 'TRANSLATION' RO MRNA COMMA PROTEIN (COMMA regulation )* RC ;
+degradation    : 'DEGRADATION' RO molecule RC ;
+protein_complex_formation : 'PROTEIN_COMPLEX_FORMATION' RO m_list COMMA molecule RC ;
 enzymatic_reaction : 'ENZYMATIC_REACTION' RO PROTEIN COMMA SO m_list SC COMMA SO m_list SC RC ;
-custom_process : 'PROCESS' RO mult? molecule COMMA mult? molecule (COMMA regulation )* RC ;
+custom_process : 'CUSTOM_PROCESS' RO molecule COMMA molecule (COMMA regulation )* RC ;
 regulation     : regulation_type COLON m_list ;
 regulation_type : 'INHIBITORS' #type_inhibitors
                 | 'INDUCERS' #type_inducers
                 | 'ACTIVATORS' #type_activators
                 ;
-m_list         : mult? molecule ( COMMA mult? molecule )* ;
-mult           : INT STAR ;
+m_list         : molecule ( COMMA molecule )* ;
 molecule       : GENE #type_gene
                | MRNA #type_mrna
                | PROTEIN #type_protein
+               | MOLECULE #type_molecule
                ;
 paracrine_signals  : 'PARACRINE_SIGNALS' molecule (COMMA molecule)* ; //TODO: molecule->PROTEIN; test
-juxtacrine_signal  : 'JUXTACRINE_SIGNAL' PROTEIN RARROW ID ;
+juxtacrine_signal  : 'JUXTACRINE_SIGNAL' molecule RARROW ID ;
 
 // lexer rules
-GENE : ID'_gene' ;
-MRNA : ID'_mrna' ;
-PROTEIN : ID'_protein' ;
-RECEPTOR : ID'_receptor'ID* ;
+GENE : (MULT STAR)?ID'_gene' ;
+MRNA : (MULT STAR)?ID'_mrna' ;
+PROTEIN : (MULT STAR)?ID'_protein' ;
+RECEPTOR : (MULT STAR)?ID'_receptor'ID* ;
+MOLECULE : (MULT STAR)?ID'_molecule' ;
+ID   : [a-zA-Z_][a-zA-Z_0-9]* ;
 INT  : '0' | [1-9][0-9]* ;
 RO : '(' ;
 RC : ')' ;
@@ -49,7 +51,7 @@ COMMA : ',' ;
 COLON : ':' ;
 STAR : '*' ;
 RARROW : '->' ;
-ID   : [a-zA-Z_][a-zA-Z_0-9]* ;
+MULT : [1-9][0-9]* ;
 //NL   : [\r\n] ;
 //TAB  : [\t] ;
 WS   : [ \t\r\n]+ -> skip ;

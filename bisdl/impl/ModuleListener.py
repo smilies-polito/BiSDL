@@ -104,7 +104,7 @@ class ModuleListenerImpl(ModuleListener):
         if net == self._parent_net:
             notify = "[" + ", ".join(self._parent_places[place]) + "]"
         else:
-            parent_place = next((p for p, net_tokens in self._parent_places.items() if net in net_tokens), None) if "protein" in place else None
+            parent_place = next((p for p, net_tokens in self._parent_places.items() if net in net_tokens), None) if "gene" not in place and "mrna" not in place else None
             notify = ("[" + self._parent_net + ".place(" + repr(parent_place) + ")]") if parent_place is not None else None
         a = net + ".add_input(\"" + place + "\", \"" + transition + "\", " + tk + ((", notify=" + notify) if notify is not None else "") + ")"
         if not "input_arcs" in self._nodes[net].keys():
@@ -116,7 +116,7 @@ class ModuleListenerImpl(ModuleListener):
         if net == self._parent_net:
             notify = "[" + ", ".join(self._parent_places[place]) + "]"
         else:
-            parent_place = next((p for p, net_tokens in self._parent_places.items() if net in net_tokens), None) if "protein" in place else None
+            parent_place = next((p for p, net_tokens in self._parent_places.items() if net in net_tokens), None) if "gene" not in place and "mrna" not in place else None
             notify = ("[" + self._parent_net + ".place(" + repr(parent_place) + ")]") if parent_place is not None else None
         a = net + ".add_output(\"" + place + "\", \"" + transition + "\", " + tk + ((", notify=" + notify) if notify is not None else "") + ")"
         if not "output_arcs" in self._nodes[net].keys():
@@ -170,7 +170,7 @@ class ModuleListenerImpl(ModuleListener):
         return addToken
 
     def _make_header(self, ctx: ModuleParser.RootContext):
-        header = f"from wrapping import *\n\n\n" \
+        header = f"from petrisim.utils import *\n\n\n" \
                  f"class {self._module_name}(Module):\n" \
                  f"\tdef __init__(self, name):\n" \
                  f"\t\tsuper().__init__(name)\n\n" \
@@ -292,26 +292,34 @@ class ModuleListenerImpl(ModuleListener):
 
     # Exit a parse tree produced by ModuleParser#transcription.
     def exitTranscription(self, ctx: ModuleParser.TranscriptionContext):
-        gene = ctx.GENE().getText()
-        mult = ctx.mult().INT().getText() if ctx.mult() is not None else "1"
-        mrna = ctx.MRNA().getText()
+        id1 = ctx.GENE().getText()
+        id2 = ctx.MRNA().getText()
+        gene_mult, gene = id1.split("*") if "*" in id1 else ["1", id1]
+        mrna_mult, mrna = id2.split("*") if "*" in id2 else ["1", id2]
+        #gene = ctx.GENE().getText()
+        #mult = ctx.mult().INT().getText() if ctx.mult() is not None else "1"
+        #mrna = ctx.MRNA().getText()
         _transitions = list()
         # for i in range(int(mult)):
         transition = self._unique_t_name(f"{gene}_transcription")  # + ("_" + str(i) if i > 0 else "")
         _transitions.append(transition)
         self._make_transition(self._sub_net, transition)
-        self._make_input_arc(self._sub_net, gene, transition)
+        self._make_input_arc(self._sub_net, gene, transition, mult=gene_mult)
         self._make_output_arc(self._sub_net, gene, transition)
-        self._make_output_arc(self._sub_net, mrna, transition, mult=mult)
-        addToken = self._make_regulation(_transitions, gene, mrna, mult=mult)
+        self._make_output_arc(self._sub_net, mrna, transition, mult=mrna_mult)
+        addToken = self._make_regulation(_transitions, gene, mrna, mult=mrna_mult)
         self._make_place(self._sub_net, gene, activation=addToken)
         self._make_place(self._sub_net, mrna)
 
     # Exit a parse tree produced by ModuleParser#translation.
     def exitTranslation(self, ctx: ModuleParser.TranslationContext):
-        mrna = ctx.MRNA().getText()
-        mult = ctx.mult().INT().getText() if ctx.mult() is not None else "1"
-        protein = ctx.PROTEIN().getText()
+        # mrna = ctx.MRNA().getText()
+        # mult = ctx.mult().INT().getText() if ctx.mult() is not None else "1"
+        # protein = ctx.PROTEIN().getText()
+        id1 = ctx.MRNA().getText()
+        id2 = ctx.PROTEIN().getText()
+        mrna_mult, mrna = id1.split("*") if "*" in id1 else ["1", id1]
+        protein_mult, protein = id2.split("*") if "*" in id2 else ["1", id2]
         self._make_place(self._sub_net, mrna)
         self._make_place(self._sub_net, protein)
         _transitions = list()
@@ -319,18 +327,18 @@ class ModuleListenerImpl(ModuleListener):
         transition = self._unique_t_name(f"{mrna}_translation")  # + ("_" + str(i) if i > 0 else "")
         _transitions.append(transition)
         self._make_transition(self._sub_net, transition)
-        self._make_input_arc(self._sub_net, mrna, transition)
-        self._make_output_arc(self._sub_net, protein, transition, mult=mult)
+        self._make_input_arc(self._sub_net, mrna, transition, mult=mrna_mult)
+        self._make_output_arc(self._sub_net, protein, transition, mult=protein_mult)
         # self._make_regulation(_transitions, mrna, protein)
-        addToken = self._make_regulation(_transitions, mrna, protein, mult=mult)
+        addToken = self._make_regulation(_transitions, mrna, protein, mult=protein_mult)
         self._make_place(self._sub_net, protein)
 
     # Exit a parse tree produced by ModuleParser#degradation.
     def exitDegradation(self, ctx: ModuleParser.DegradationContext):
-        molecule = ctx.MRNA().getText() if ctx.MRNA() else ctx.PROTEIN().getText()
-        mult = ctx.mult().INT().getText() if ctx.mult() is not None else "1"
+        id = ctx.molecule().getText()
+        molecule_mult, molecule = id.split("*") if "*" in id else ["1", id]
         self._make_place(self._sub_net, molecule)
-        for i in range(int(mult)):
+        for i in range(int(molecule_mult)):
             transition = self._unique_t_name(molecule + "_degradation" + ("_" + str(i) if i > 0 else ""))
             self._make_transition(self._sub_net, transition)
             self._make_input_arc(self._sub_net, molecule, transition)
@@ -357,6 +365,22 @@ class ModuleListenerImpl(ModuleListener):
         for p in proteins_out:
             self._make_place(self._sub_net, p)
             self._make_output_arc(self._sub_net, p, transition)
+
+    # Enter a parse tree produced by ModuleParser#custom_process.
+    def enterCustom_process(self, ctx:ModuleParser.Custom_processContext):
+        pass
+
+    # Exit a parse tree produced by ModuleParser#custom_process.
+    def exitCustom_process(self, ctx:ModuleParser.Custom_processContext):
+        id1, id2 = [_x.getText() for _x in ctx.molecule()]
+        m1, p1 = id1.split("*") if "*" in id1 else ["1", id1]
+        m2, p2 = id2.split("*") if "*" in id2 else ["1", id2]
+        transition = self._unique_t_name(f"process")
+        self._make_transition(self._sub_net, transition)
+        self._make_place(self._sub_net, p1)
+        self._make_place(self._sub_net, p2)
+        self._make_input_arc(self._sub_net, p1, transition, mult=m1)
+        self._make_output_arc(self._sub_net, p2, transition, mult=m2)
 
     # Exit a parse tree produced by ModuleParser#type_inhibitors.
     def exitType_inhibitors(self, ctx: ModuleParser.Type_inhibitorsContext):
@@ -402,9 +426,8 @@ class ModuleListenerImpl(ModuleListener):
     # Exit a parse tree produced by ModuleParser#juxtacrine_signal.
     def exitJuxtacrine_signal(self, ctx: ModuleParser.Juxtacrine_signalContext):
         src_scope = ctx.parentCtx.ID().getText()
+        molecule = ctx.molecule().getText()
         dest_scope = ctx.ID().getText()
-        #if src_scope in self._neighbors[dest_scope] or dest_scope in self._neighbors[src_scope]:
-        molecule = ctx.PROTEIN().getText()
         net = self._parent_net
         rule = f"Expression(\"str(x) == {repr(molecule)}\")"
         transition = self._unique_t_name(f"juxtacrine_signaling_{molecule}_{src_scope}_{dest_scope}")
