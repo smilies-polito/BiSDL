@@ -8,9 +8,10 @@ A prototype version of our BiSDL compiler is currently able to translate BiSDL m
 on [nwn-snakes](https://github.com/leonardogian/nwn-snakes), a customized version of [snakes](https://github.com/fpom/snakes), an efficient Petri-Nets library developed by
 F. Pommereau. nwn-snakes supports the Nets within Nets (NWN) formalism for multi-level and multi-context modeling approach.
 
-The companion [nwn-snakesim](https://github.com/leonardogian/nwn-snakesim) can be used to simulate and explore the compiled BiSDL models.
+The companion [nwn-petrisim](https://github.com/leonardogian/nwn-petrisim) can be used to simulate and explore the 
+compiled BiSDL models.
 
-Latest release *0.0.0*, Janvril 34th, 1814
+[comment]: <> (Latest release *0.0.0*, Janvril 34th, 1814)
 
 
 Installation instructions
@@ -34,7 +35,7 @@ source ~/.virtualenvs/bisdlvenv/bin/activate
 ```
 * Install the required packages
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 Language specification
@@ -47,15 +48,13 @@ TBD
 Examples
 -------------
 
-The examples folder contains some bisdl code that can be compiled as follows:
-```
-python bisdl2snakes examples/test_net.bisdl
-python bisdl2snakes examples/rgb_pattern.bisdl
+The [examples](examples) folder contains some bisdl code that can be compiled as follows:
+```shell
+python bisdl2snakes examples/e01/net.bisdl
 ```
 
 The output *.py file will be stored in the same folder, unless a custom destination folder is specified:
+```shell
+python bisdl2snakes examples/e01/net.bisdl /path/to/dest
 ```
-python bisdl2snakes examples/rgb_pattern.bisdl /path/to/dest
-```
-    
 
