@@ -1,0 +1,13 @@
+MODULE e02
+TIMESCALE 1
+SCOPE cell_A (0, 0)
+    PROCESS process_A
+        TIMESCALE 1
+        TRANSCRIPTION(A_gene, A_mrna)
+        TRANSLATION(A_mrna, 3*A_protein)
+        DEGRADATION(A_protein)
+    JUXTACRINE_SIGNAL A_protein -> cell_B
+SCOPE cell_B (0, 1)
+    PROCESS process_B
+        TIMESCALE 1
+        DEGRADATION(A_receptor_active_protein)
