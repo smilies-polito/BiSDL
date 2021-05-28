@@ -16,6 +16,25 @@ SCOPE sender_cell (5, 5)
     JUXTACRINE_SIGNAL GFP_protein -> receiver_cell_6_6
 
 SCOPE receiver_cell_5_6 (5, 6)
+    PROCESS BFP_production
+        TIMESCALE 1
+
+        TRANSCRIPTION(GFP_receptor_gene, GFP_receptor_mrna)
+        TRANSLATION(GFP_receptor_mrna, GFP_receptor_protein)
+        ENZYMATIC_REACTION(GFP_receptor_active_protein, [GFP_receptor_protein], [GFP_activation_mediator_protein])
+        DEGRADATION(GFP_receptor_active_protein)
+
+        TRANSCRIPTION(CD19_mCherry_receptor_gene, CD19_mCherry_receptor_mrna)
+        TRANSLATION(CD19_mCherry_receptor_mrna, CD19_mCherry_receptor_protein)
+        ENZYMATIC_REACTION(CD19_mCherry_receptor_active_protein, [CD19_mCherry_receptor_protein], [CD19_mCherry_activation_mediator_protein])
+        DEGRADATION(CD19_mCherry_receptor_active_protein)
+
+        TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
+        TRANSLATION(CD19_mCherry_mrna, CD19_mCherry_protein)
+
+        TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
+        TRANSLATION(BFP_mrna, BFP_protein)
+
     PROCESS CD19_mCherry_production
         TIMESCALE 1
 
@@ -40,78 +59,115 @@ SCOPE receiver_cell_5_6 (5, 6)
 
 SCOPE receiver_cell_5_7 (5, 7)
     PROCESS BFP_production
-        TIMESCALE 1
-
-        TRANSCRIPTION(GFP_receptor_gene, GFP_receptor_mrna)
-        TRANSLATION(GFP_receptor_mrna, GFP_receptor_protein)
-        ENZYMATIC_REACTION(GFP_receptor_active_protein, [GFP_receptor_protein], [GFP_activation_mediator_protein])
-        DEGRADATION(GFP_receptor_active_protein)
-
-        TRANSCRIPTION(CD19_mCherry_receptor_gene, CD19_mCherry_receptor_mrna)
-        TRANSLATION(CD19_mCherry_receptor_mrna, CD19_mCherry_receptor_protein)
-        ENZYMATIC_REACTION(CD19_mCherry_receptor_active_protein, [CD19_mCherry_receptor_protein], [CD19_mCherry_activation_mediator_protein])
-        DEGRADATION(CD19_mCherry_receptor_active_protein)
-
-        TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
-        TRANSLATION(CD19_mCherry_mrna, CD19_mCherry_protein)
-
-        TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
-        TRANSLATION(BFP_mrna, BFP_protein)
-
+    PROCESS CD19_mCherry_production
     JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_5_6
 
 SCOPE receiver_cell_6_6 (6, 6)
+    PROCESS BFP_production
     PROCESS CD19_mCherry_production
     JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_7_7
 
 SCOPE receiver_cell_7_7 (7, 7)
     PROCESS BFP_production
+    PROCESS CD19_mCherry_production
     JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_6_6
 
 SCOPE receiver_cell_6_5 (6, 5)
+    PROCESS BFP_production
     PROCESS CD19_mCherry_production
     JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_7_5
 
 SCOPE receiver_cell_7_5 (7, 5)
     PROCESS BFP_production
+    PROCESS CD19_mCherry_production
     JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_6_5
 
 SCOPE receiver_cell_6_4 (6,4)
+    PROCESS BFP_production
     PROCESS CD19_mCherry_production
     JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_7_3
 
 SCOPE receiver_cell_7_3 (7,3)
     PROCESS BFP_production
+    PROCESS CD19_mCherry_production
     JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_6_4
 
 SCOPE receiver_cell_5_4 (5,4)
+    PROCESS BFP_production
     PROCESS CD19_mCherry_production
     JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_5_3
 
 SCOPE receiver_cell_5_3 (5, 3)
     PROCESS BFP_production
+    PROCESS CD19_mCherry_production
     JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_5_4
 
 SCOPE receiver_cell_4_4 (4,4)
+    PROCESS BFP_production
     PROCESS CD19_mCherry_production
     JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_3_3
 
 SCOPE receiver_cell_3_3 (3,3)
     PROCESS BFP_production
+    PROCESS CD19_mCherry_production
     JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_4_4
 
 SCOPE receiver_cell_4_5 (4,5)
+    PROCESS BFP_production
     PROCESS CD19_mCherry_production
     JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_3_5
 
 SCOPE receiver_cell_3_5 (3,5)
     PROCESS BFP_production
+    PROCESS CD19_mCherry_production
     JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_4_5
 
 SCOPE receiver_cell_4_6 (4, 6)
+    PROCESS BFP_production
     PROCESS CD19_mCherry_production
     JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_3_7
 
 SCOPE receiver_cell_3_7 (3, 7)
     PROCESS BFP_production
+    PROCESS CD19_mCherry_production
+    JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_4_6
+
+SCOPE receiver_cell_3_7 (3, 4)
+    PROCESS BFP_production
+    PROCESS CD19_mCherry_production
+    JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_4_6
+
+SCOPE receiver_cell_3_7 (3, 6)
+    PROCESS BFP_production
+    PROCESS CD19_mCherry_production
+    JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_4_6
+
+SCOPE receiver_cell_3_7 (4, 3)
+    PROCESS BFP_production
+    PROCESS CD19_mCherry_production
+    JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_4_6
+
+SCOPE receiver_cell_3_7 (4, 7)
+    PROCESS BFP_production
+    PROCESS CD19_mCherry_production
+    JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_4_6
+
+SCOPE receiver_cell_3_7 (6, 3)
+    PROCESS BFP_production
+    PROCESS CD19_mCherry_production
+    JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_4_6
+
+SCOPE receiver_cell_3_7 (6, 7)
+    PROCESS BFP_production
+    PROCESS CD19_mCherry_production
+    JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_4_6
+
+SCOPE receiver_cell_3_7 (7, 4)
+    PROCESS BFP_production
+    PROCESS CD19_mCherry_production
+    JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_4_6
+
+SCOPE receiver_cell_3_7 (7, 6)
+    PROCESS BFP_production
+    PROCESS CD19_mCherry_production
     JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_4_6
