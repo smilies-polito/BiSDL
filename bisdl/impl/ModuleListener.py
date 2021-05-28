@@ -30,6 +30,10 @@ def _legit_node_name(n):
     return n
 
 
+def first_lower(s: str):
+    return s[:1].lower() + s[1:] if s else ''
+
+
 def _get_places_from_mlist(mlist):
     table = str.maketrans(dict.fromkeys("[]"))
     return mlist.translate(table).split(",")
@@ -172,17 +176,19 @@ class ModuleListenerImpl(ModuleListener):
     def _make_header(self, ctx: ModuleParser.RootContext):
         header = f"from petrisim.utils import *\n\n\n" \
                  f"class {self._module_name}(Module):\n" \
-                 f"\tdef __init__(self, name):\n" \
+                 f"\tdef __init__(self, name: str = None):\n" \
+                 f"\t\tif not name:\n" \
+                 f"\t\t\tname = __class__.__name__\n" \
                  f"\t\tsuper().__init__(name)\n\n" \
                  f"\tdef build_net_structure(self) -> PetriNet:\n" \
-                 f"\t\tsuper(self.__class__, self).build_net_structure()\n"
+                 #f"\t\tsuper(self.__class__, self).build_net_structure()\n"
         self._t = "\t\t"
         return header
 
     # Enter a parse tree produced by ModuleParser#root.
     def enterRoot(self, ctx: ModuleParser.RootContext):
-        self._module_name = ctx.ID().getText()
-        self._parent_net = self._module_name + "_net"
+        self._module_name = ctx.ID().getText().title()
+        self._parent_net = first_lower(self._module_name) + "_net"
         timescale = ctx.timescale().INT().getText() if ctx.timescale() is not None else "1"
         self._make_net(self._parent_net, timescale)
 
@@ -200,7 +206,7 @@ class ModuleListenerImpl(ModuleListener):
             self.buf.append(f'\n{self._t}# {n} arcs')
             self.buf.append('\n'.join([ f'{self._t}{_t}' for _t in self._nodes[n]["input_arcs"] ]))
             self.buf.append('\n'.join([ f'{self._t}{_t}' for _t in self._nodes[n]["output_arcs"] ]))
-        self.buf.append(f'\n{self._t}return {self._parent_net}\n')
+        self.buf.append(f'{self._t}return {self._parent_net}\n')
 
 
     # Enter a parse tree produced by ModuleParser#scopes.
