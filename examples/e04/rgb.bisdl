@@ -1,4 +1,4 @@
-MODULE rgb_pattern
+MODULE rgb
 TIMESCALE 1
 
 SCOPE sender_cell (5, 5)
