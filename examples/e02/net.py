@@ -2,7 +2,7 @@ from petrisim.utils import *
 
 
 class E02(Module):
-	def __init__(self, name):
+	def __init__(self, name: str = None):
 		if not name:
 			name = __class__.__name__
 		super().__init__(name)
