@@ -1,20 +1,20 @@
 # Example 1
 This simple example models a mock process involving two biological *scopes*, **s1** and **s2**.  
-![Fig. 1](e1_drawing.png "Example 1 process illustration. Scope s1 produces 3 B molecules from 1 A molecule and signals B to scope s2; scope s2 degrades B molecules.")   
-* s1 is the location where three **B molecules** (in blue) are produced through **process_1** (gray arrows in scope s1), 
-  starting from one **A molecule**.
-* B molecules are [*signaled*](https://en.wikipedia.org/wiki/Juxtacrine_signalling) (red arrow), to scope s2 by scope s1.
-* In s2, B molecules are constantly degraded by a **process_2** (gray arrow).  
+![Fig. 1](e01.png "Example 1 process illustration.")   
+* s1 is the location where three **B molecules** are produced (1) starting from one **A molecule**.
+* B molecules transit (2, [*Juxtacrine signaling*](https://en.wikipedia.org/wiki/Juxtacrine_signalling)) through a 
+  communicating junction (*Channel*) from scope s1 to scope s2.
+* In s2, B molecules are constantly degraded (3).  
 
 ##BiSDL representation
-The process above can be described through BiSDL as follows ([source file](net.bisdl)).  
+The process above can be described in BiSDL as follows ([source file](net.bisdl)).  
 ```
 1     MODULE e01
 2     TIMESCALE 10
 3     SCOPE s1 (0, 0)
 4         PROCESS p1
 5             TIMESCALE 1
-6             PROCESS(A_molecule, 3*B_molecule)
+6             CUSTOM_PROCESS(A_molecule, 3*B_molecule)
 7         JUXTACRINE_SIGNAL A_molecule -> s2
 8     SCOPE s2 (0, 1)
 9         PROCESS p2
