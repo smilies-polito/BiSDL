@@ -2,10 +2,10 @@
 This example models a mock process involving two cells, **cell A** and **cell B**.  
 ![Fig. 1](./e02.png)
 * Cell A transcribes a gene to the corresponding mRNA (1)
-* Cell A produces 3 proteins starting from an mRNA molecule (2)  
+* Cell A produces 3 proteins (ligands) starting from an mRNA molecule (2)  
 * Cell A can   
    * degrade the protein (3a)   
-   * or (3b) place the protein specific ligand on its membrane. Cell B then binds it with the appropriate receptor 
+   * or (3b) place the ligand on its membrane. Cell B then binds it with the appropriate receptor 
    ([juxtacrine signaling](https://en.wikipedia.org/wiki/Juxtacrine_signalling)).  
 * The active receptor is continuously degraded by cell B (1). 
 
