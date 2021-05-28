@@ -9,7 +9,7 @@ This example models a mock process involving two cells, **cell A** and **cell B*
    ([juxtacrine signaling](https://en.wikipedia.org/wiki/Juxtacrine_signalling)).  
 * The active receptor is continuously degraded by cell B (1). 
 
-##BiSDL representation  
+## BiSDL representation  
 The process above can be described in BiSDL as follows ([source file](net.bisdl)).  
 ```
 1   MODULE e02
