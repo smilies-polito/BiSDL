@@ -233,5 +233,14 @@ class ModuleListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ModuleParser#diffusion.
+    def enterDiffusion(self, ctx:ModuleParser.DiffusionContext):
+        pass
+
+    # Exit a parse tree produced by ModuleParser#diffusion.
+    def exitDiffusion(self, ctx:ModuleParser.DiffusionContext):
+        pass
+
+
 
 del ModuleParser
