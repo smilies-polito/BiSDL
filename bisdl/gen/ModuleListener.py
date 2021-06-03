@@ -215,6 +215,33 @@ class ModuleListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ModuleParser#type_complex.
+    def enterType_complex(self, ctx:ModuleParser.Type_complexContext):
+        pass
+
+    # Exit a parse tree produced by ModuleParser#type_complex.
+    def exitType_complex(self, ctx:ModuleParser.Type_complexContext):
+        pass
+
+
+    # Enter a parse tree produced by ModuleParser#signal.
+    def enterSignal(self, ctx:ModuleParser.SignalContext):
+        pass
+
+    # Exit a parse tree produced by ModuleParser#signal.
+    def exitSignal(self, ctx:ModuleParser.SignalContext):
+        pass
+
+
+    # Enter a parse tree produced by ModuleParser#signals.
+    def enterSignals(self, ctx:ModuleParser.SignalsContext):
+        pass
+
+    # Exit a parse tree produced by ModuleParser#signals.
+    def exitSignals(self, ctx:ModuleParser.SignalsContext):
+        pass
+
+
     # Enter a parse tree produced by ModuleParser#paracrine_signals.
     def enterParacrine_signals(self, ctx:ModuleParser.Paracrine_signalsContext):
         pass

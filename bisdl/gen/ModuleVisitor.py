@@ -124,6 +124,21 @@ class ModuleVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by ModuleParser#type_complex.
+    def visitType_complex(self, ctx:ModuleParser.Type_complexContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ModuleParser#signal.
+    def visitSignal(self, ctx:ModuleParser.SignalContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by ModuleParser#signals.
+    def visitSignals(self, ctx:ModuleParser.SignalsContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by ModuleParser#paracrine_signals.
     def visitParacrine_signals(self, ctx:ModuleParser.Paracrine_signalsContext):
         return self.visitChildren(ctx)
