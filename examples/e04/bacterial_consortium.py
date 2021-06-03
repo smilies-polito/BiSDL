@@ -57,14 +57,20 @@ class Bacterialconsortium(Module):
 		bacterialconsortium_net.add_place(Place("target_compartment", [ target_0_net ]))
 
 		# bacterialconsortium_net transitions
-		bacterialconsortium_net.add_transition(Transition("diffusion_controller_compartment_target_compartment_1", Expression("str(x) == 'Lac1_protein' or str(x) == '_3OC6HSL_molecule'")))
-		bacterialconsortium_net.add_transition(Transition("diffusion_target_compartment_controller_compartment_1", Expression("str(x) == 'Lac1_protein' or str(x) == '_3OC6HSL_molecule'")))
+		bacterialconsortium_net.add_transition(Transition("diffusion_Lac1_protein_1", Expression("str(x) == 'Lac1_protein'")))
+		bacterialconsortium_net.add_transition(Transition("diffusion_Lac1_protein_2", Expression("str(x) == 'Lac1_protein'")))
+		bacterialconsortium_net.add_transition(Transition("diffusion__3OC6HSL_molecule_1", Expression("str(x) == '_3OC6HSL_molecule'")))
+		bacterialconsortium_net.add_transition(Transition("diffusion__3OC6HSL_molecule_2", Expression("str(x) == '_3OC6HSL_molecule'")))
 
 		# bacterialconsortium_net arcs
-		bacterialconsortium_net.add_input("controller_compartment", "diffusion_controller_compartment_target_compartment_1", Variable('x'), notify=[controller_0_net])
-		bacterialconsortium_net.add_input("target_compartment", "diffusion_target_compartment_controller_compartment_1", Variable('x'), notify=[target_0_net])
-		bacterialconsortium_net.add_output("target_compartment", "diffusion_controller_compartment_target_compartment_1", Variable('x'), notify=[target_0_net])
-		bacterialconsortium_net.add_output("controller_compartment", "diffusion_target_compartment_controller_compartment_1", Variable('x'), notify=[controller_0_net])
+		bacterialconsortium_net.add_input("controller_compartment", "diffusion_Lac1_protein_1", Variable('x'), notify=[controller_0_net])
+		bacterialconsortium_net.add_input("target_compartment", "diffusion_Lac1_protein_2", Variable('x'), notify=[target_0_net])
+		bacterialconsortium_net.add_input("controller_compartment", "diffusion__3OC6HSL_molecule_1", Variable('x'), notify=[controller_0_net])
+		bacterialconsortium_net.add_input("target_compartment", "diffusion__3OC6HSL_molecule_2", Variable('x'), notify=[target_0_net])
+		bacterialconsortium_net.add_output("target_compartment", "diffusion_Lac1_protein_1", Variable('x'), notify=[target_0_net])
+		bacterialconsortium_net.add_output("controller_compartment", "diffusion_Lac1_protein_2", Variable('x'), notify=[controller_0_net])
+		bacterialconsortium_net.add_output("target_compartment", "diffusion__3OC6HSL_molecule_1", Variable('x'), notify=[target_0_net])
+		bacterialconsortium_net.add_output("controller_compartment", "diffusion__3OC6HSL_molecule_2", Variable('x'), notify=[controller_0_net])
 
 		# controller_0_net arcs
 		controller_0_net.add_input("Lux1_gene", "Lux1_gene_transcription_1", Value(dot))
@@ -99,5 +105,5 @@ class Bacterialconsortium(Module):
 		target_0_net.add_output("_3OC6HSL_LuxR_complex", "protein_complex_formation_1", Value(dot), notify=[bacterialconsortium_net.place('target_compartment')])
 		target_0_net.add_output("GFP_gene", "GFP_gene_transcription_1", Value(dot))
 		target_0_net.add_output("GFP_mrna", "GFP_gene_transcription_1", Value(dot))
-		target_0_net.add_output("GFP_protein", "GFP_mrna_translation_1", Value(dot), notify=[bacterialconsortium_net.place('target_compartment')])
+		target_0_net.add_output("GFP_protein", "GFP_mrna_translation_1", MultiArc([Value(dot)]*2), notify=[bacterialconsortium_net.place('target_compartment')])
 		return bacterialconsortium_net
