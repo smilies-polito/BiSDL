@@ -438,3 +438,29 @@ class ModuleListenerImpl(ModuleListener):
         rule = f"Expression(\"str(x) == {repr(molecule)}\")"
         transition = self._unique_t_name(f"juxtacrine_signaling_{molecule}_{src_scope}_{dest_scope}")
         self._juxtacrine_transitions.append((net, transition, rule, src_scope, dest_scope))
+
+    # Enter a parse tree produced by ModuleParser#diffusion.
+    def enterDiffusion(self, ctx: ModuleParser.DiffusionContext):
+        pass
+
+    #TODO: è sufficiente far passare solo le proteine (e "molecule", cioè non GENE e MRNA)?
+    # Exit a parse tree produced by ModuleParser#diffusion.
+    def exitDiffusion(self, ctx: ModuleParser.DiffusionContext):
+        scopes = ctx.ID()
+        assert len(scopes) == 2
+        s1, s2 = [_x.getText() for _x in scopes]
+        assert s1 in self._parent_places.keys(), f"scope {s1} not declared"
+        assert s2 in self._parent_places.keys(), f"scope {s2} not declared"
+
+        net = self._parent_net
+        rule = f"Expression(\"'_protein' in str(x)\")"
+        token_type = f"Variable('x')"
+        #rule = None
+        t1 = self._unique_t_name(f"diffusion_{s1}_{s2}")
+        t2 = self._unique_t_name(f"diffusion_{s2}_{s1}")
+        self._make_transition(net, t1, rule)
+        self._make_transition(net, t2, rule)
+        self._make_input_arc(self._parent_net, s1, t1, token_type=token_type)
+        self._make_output_arc(self._parent_net, s2, t1, token_type=token_type)
+        self._make_input_arc(self._parent_net, s2, t2, token_type=token_type)
+        self._make_output_arc(self._parent_net, s1, t2, token_type=token_type)

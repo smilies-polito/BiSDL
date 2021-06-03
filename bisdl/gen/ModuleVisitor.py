@@ -134,5 +134,10 @@ class ModuleVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by ModuleParser#diffusion.
+    def visitDiffusion(self, ctx:ModuleParser.DiffusionContext):
+        return self.visitChildren(ctx)
+
+
 
 del ModuleParser
