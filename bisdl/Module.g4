@@ -33,9 +33,11 @@ molecule       : GENE #type_gene
                | MOLECULE #type_molecule
                | COMPLEX #type_complex
                ;
-paracrine_signals  : 'PARACRINE_SIGNALS' molecule (COMMA molecule)* ; //TODO: molecule->PROTEIN; test
-juxtacrine_signal  : 'JUXTACRINE_SIGNAL' molecule RARROW ID ;
-diffusion          : 'DIFFUSION' ID COMMA ID ;
+signal         : PROTEIN | MOLECULE | COMPLEX ;
+signals        : signal (COMMA signal)* ;
+paracrine_signals  : 'PARACRINE_SIGNALS' signals ; //TODO: molecule->PROTEIN; test
+juxtacrine_signal  : 'JUXTACRINE_SIGNAL' signal RARROW ID ;
+diffusion          : 'DIFFUSION' ID COMMA ID COMMA SO signals SC ;
 
 // lexer rules
 GENE : (MULT STAR)?ID'_gene' ;
