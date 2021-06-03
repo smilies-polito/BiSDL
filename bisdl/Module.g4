@@ -31,6 +31,7 @@ molecule       : GENE #type_gene
                | MRNA #type_mrna
                | PROTEIN #type_protein
                | MOLECULE #type_molecule
+               | COMPLEX #type_complex
                ;
 paracrine_signals  : 'PARACRINE_SIGNALS' molecule (COMMA molecule)* ; //TODO: molecule->PROTEIN; test
 juxtacrine_signal  : 'JUXTACRINE_SIGNAL' molecule RARROW ID ;
@@ -42,6 +43,7 @@ MRNA : (MULT STAR)?ID'_mrna' ;
 PROTEIN : (MULT STAR)?ID'_protein' ;
 RECEPTOR : (MULT STAR)?ID'_receptor'ID* ;
 MOLECULE : (MULT STAR)?ID'_molecule' ;
+COMPLEX : (MULT STAR)?ID'_complex' ;
 ID   : [a-zA-Z_][a-zA-Z_0-9]* ;
 INT  : '0' | [1-9][0-9]* ;
 RO : '(' ;
