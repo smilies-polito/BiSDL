@@ -461,16 +461,16 @@ class ModuleListenerImpl(ModuleListener):
         assert s1 in self._parent_places.keys(), f"scope {s1} not declared"
         assert s2 in self._parent_places.keys(), f"scope {s2} not declared"
         net = self._parent_net
-        _molecules = ctx.signals().getText().split(',')
-        e = " or ".join(["str(x) == '" + _m + "'" for _m in _molecules])
-        rule = f"Expression(\"{e}\")"
         token_type = f"Variable('x')"
-        #rule = None
-        t1 = self._unique_t_name(f"diffusion_{s1}_{s2}")
-        t2 = self._unique_t_name(f"diffusion_{s2}_{s1}")
-        self._make_transition(net, t1, rule)
-        self._make_transition(net, t2, rule)
-        self._make_input_arc(self._parent_net, s1, t1, token_type=token_type)
-        self._make_output_arc(self._parent_net, s2, t1, token_type=token_type)
-        self._make_input_arc(self._parent_net, s2, t2, token_type=token_type)
-        self._make_output_arc(self._parent_net, s1, t2, token_type=token_type)
+        _molecules = ctx.signals().getText().split(',')
+        for _m in _molecules:
+            e = " or ".join(["str(x) == '" + _m + "'" for _m in _molecules])
+            rule = f"Expression(\"str(x) == {repr(_m)}\")"
+            _t1 = self._unique_t_name(f"diffusion_{_m}")
+            _t2 = self._unique_t_name(f"diffusion_{_m}")
+            self._make_transition(net, _t1, rule)
+            self._make_transition(net, _t2, rule)
+            self._make_input_arc(self._parent_net, s1, _t1, token_type=token_type)
+            self._make_output_arc(self._parent_net, s2, _t1, token_type=token_type)
+            self._make_input_arc(self._parent_net, s2, _t2, token_type=token_type)
+            self._make_output_arc(self._parent_net, s1, _t2, token_type=token_type)
