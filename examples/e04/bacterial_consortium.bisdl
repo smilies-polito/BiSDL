@@ -1,0 +1,13 @@
+MODULE bacterialConsortium
+TIMESCALE 1
+SCOPE controller_compartment (5, 5)
+    PROCESS controller
+        TIMESCALE 1
+        TRANSCRIPTION(_3OC6HSL_gene, _3OC6HSL_mrna)
+        TRANSLATION(_3OC6HSL_mrna, _3OC6HSL_protein, INHIBITORS: 3*Lac1_protein)
+SCOPE target_compartment (5, 6)
+    PROCESS target
+        TIMESCALE 1
+        TRANSCRIPTION(GFP_gene, GFP_mrna, INDUCERS: _3OC6HSL_protein)
+        TRANSLATION(GFP_mrna, GFP_protein)
+DIFFUSION controller_compartment, target_compartment
