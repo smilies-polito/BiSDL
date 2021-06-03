@@ -1,7 +1,7 @@
 grammar Module ;
 
 // parser rules
-root           : 'MODULE' ID timescale? scopes paracrine_signals? ;
+root           : 'MODULE' ID timescale? scopes paracrine_signals? diffusion*;
 timescale      : 'TIMESCALE' INT ;
 scopes         : ( 'SCOPE' scope )* ;
 scope          : ID coords processes? juxtacrine_signal* ;
@@ -34,6 +34,7 @@ molecule       : GENE #type_gene
                ;
 paracrine_signals  : 'PARACRINE_SIGNALS' molecule (COMMA molecule)* ; //TODO: molecule->PROTEIN; test
 juxtacrine_signal  : 'JUXTACRINE_SIGNAL' molecule RARROW ID ;
+diffusion          : 'DIFFUSION' ID COMMA ID ;
 
 // lexer rules
 GENE : (MULT STAR)?ID'_gene' ;
