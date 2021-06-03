@@ -351,7 +351,16 @@ class ModuleListenerImpl(ModuleListener):
 
     # Exit a parse tree produced by ModuleParser#protein_complex_formation.
     def exitProtein_complex_formation(self, ctx: ModuleParser.Protein_complex_formationContext):
-        pass
+        _molecules_in = _mlist_to_dict(ctx.m_list().getText())
+        _molecule_out = ctx.molecule().getText()
+        _transition = self._unique_t_name(f"protein_complex_formation")
+        self._make_transition(self._sub_net, _transition)
+        for _m in _molecules_in:
+            self._make_place(self._sub_net, _m)
+            self._make_input_arc(self._sub_net, _m, _transition)
+        self._make_place(self._sub_net, _molecule_out)
+        self._make_output_arc(self._sub_net, _molecule_out, _transition)
+
 
     # Exit a parse tree produced by ModuleParser#enzymatic_reaction.
     def exitEnzymatic_reaction(self, ctx: ModuleParser.Enzymatic_reactionContext):
@@ -412,7 +421,7 @@ class ModuleListenerImpl(ModuleListener):
     # Exit a parse tree produced by ModuleParser#paracrine_signals.
     def exitParacrine_signals(self, ctx: ModuleParser.Paracrine_signalsContext):
         net = self._parent_net
-        molecules = set([m.getText() for m in ctx.molecule()])
+        molecules = set([m.getText() for m in ctx.signals()])
         rule = "Expression(\"" + (" or ".join([("str(x) == " + repr(m)) for m in molecules])) + "\")"
         for n1, n1_neighbors in self._neighbors.items():
             for n2 in n1_neighbors:
@@ -432,7 +441,7 @@ class ModuleListenerImpl(ModuleListener):
     # Exit a parse tree produced by ModuleParser#juxtacrine_signal.
     def exitJuxtacrine_signal(self, ctx: ModuleParser.Juxtacrine_signalContext):
         src_scope = ctx.parentCtx.ID().getText()
-        molecule = ctx.molecule().getText()
+        molecule = ctx.signal().getText()
         dest_scope = ctx.ID().getText()
         net = self._parent_net
         rule = f"Expression(\"str(x) == {repr(molecule)}\")"
@@ -451,9 +460,10 @@ class ModuleListenerImpl(ModuleListener):
         s1, s2 = [_x.getText() for _x in scopes]
         assert s1 in self._parent_places.keys(), f"scope {s1} not declared"
         assert s2 in self._parent_places.keys(), f"scope {s2} not declared"
-
         net = self._parent_net
-        rule = f"Expression(\"'_molecule' in str(x) or '_protein' in str(x)\")"
+        _molecules = ctx.signals().getText().split(',')
+        e = " or ".join(["str(x) == '" + _m + "'" for _m in _molecules])
+        rule = f"Expression(\"{e}\")"
         token_type = f"Variable('x')"
         #rule = None
         t1 = self._unique_t_name(f"diffusion_{s1}_{s2}")
