@@ -453,7 +453,7 @@ class ModuleListenerImpl(ModuleListener):
         assert s2 in self._parent_places.keys(), f"scope {s2} not declared"
 
         net = self._parent_net
-        rule = f"Expression(\"'_protein' in str(x)\")"
+        rule = f"Expression(\"'_molecule' in str(x) or '_protein' in str(x)\")"
         token_type = f"Variable('x')"
         #rule = None
         t1 = self._unique_t_name(f"diffusion_{s1}_{s2}")
