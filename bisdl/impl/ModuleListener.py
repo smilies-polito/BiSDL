@@ -337,7 +337,8 @@ class ModuleListenerImpl(ModuleListener):
         self._make_output_arc(self._sub_net, protein, transition, mult=protein_mult)
         # self._make_regulation(_transitions, mrna, protein)
         addToken = self._make_regulation(_transitions, mrna, protein, mult=protein_mult)
-        self._make_place(self._sub_net, protein)
+        #TODO: check. urgent.
+        self._make_place(self._sub_net, protein, activation=addToken)
 
     # Exit a parse tree produced by ModuleParser#degradation.
     def exitDegradation(self, ctx: ModuleParser.DegradationContext):
@@ -387,15 +388,18 @@ class ModuleListenerImpl(ModuleListener):
 
     # Exit a parse tree produced by ModuleParser#custom_process.
     def exitCustom_process(self, ctx:ModuleParser.Custom_processContext):
-        id1, id2 = [_x.getText() for _x in ctx.molecule()]
-        m1, p1 = id1.split("*") if "*" in id1 else ["1", id1]
-        m2, p2 = id2.split("*") if "*" in id2 else ["1", id2]
+        mlist_in, mlist_out = [_x.getText().split(',') for _x in ctx.m_list()]
+        #id1, id2 = [_x.getText() for _x in ctx.molecule()]
         transition = self._unique_t_name(f"process")
         self._make_transition(self._sub_net, transition)
-        self._make_place(self._sub_net, p1)
-        self._make_place(self._sub_net, p2)
-        self._make_input_arc(self._sub_net, p1, transition, mult=m1)
-        self._make_output_arc(self._sub_net, p2, transition, mult=m2)
+        for _molecule in mlist_in:
+            m1, p1 = _molecule.split("*") if "*" in _molecule else ["1", _molecule]
+            self._make_place(self._sub_net, p1)
+            self._make_input_arc(self._sub_net, p1, transition, mult=m1)
+        for _molecule in mlist_out:
+            m2, p2 = _molecule.split("*") if "*" in _molecule else ["1", _molecule]
+            self._make_place(self._sub_net, p2)
+            self._make_output_arc(self._sub_net, p2, transition, mult=m2)
 
     # Exit a parse tree produced by ModuleParser#type_inhibitors.
     def exitType_inhibitors(self, ctx: ModuleParser.Type_inhibitorsContext):
@@ -463,14 +467,16 @@ class ModuleListenerImpl(ModuleListener):
         net = self._parent_net
         token_type = f"Variable('x')"
         _molecules = ctx.signals().getText().split(',')
-        for _m in _molecules:
-            e = " or ".join(["str(x) == '" + _m + "'" for _m in _molecules])
-            rule = f"Expression(\"str(x) == {repr(_m)}\")"
-            _t1 = self._unique_t_name(f"diffusion_{_m}")
-            _t2 = self._unique_t_name(f"diffusion_{_m}")
-            self._make_transition(net, _t1, rule)
-            self._make_transition(net, _t2, rule)
-            self._make_input_arc(self._parent_net, s1, _t1, token_type=token_type)
-            self._make_output_arc(self._parent_net, s2, _t1, token_type=token_type)
-            self._make_input_arc(self._parent_net, s2, _t2, token_type=token_type)
-            self._make_output_arc(self._parent_net, s1, _t2, token_type=token_type)
+        for _it in _molecules:
+            _mult, _mol = _it.split("*") if "*" in _it else ["1", _it]
+            #expr = " or ".join(["str(x) == '" + _m + "'" for _m in _molecules])
+            rule = f"Expression(\"str(x) == {repr(_mol)}\")"
+            for _ in range(int(_mult)):
+                _t1 = self._unique_t_name(f"diffusion_{_mol}")
+                _t2 = self._unique_t_name(f"diffusion_{_mol}")
+                self._make_transition(net, _t1, rule)
+                self._make_transition(net, _t2, rule)
+                self._make_input_arc(self._parent_net, s1, _t1, token_type=token_type)
+                self._make_output_arc(self._parent_net, s2, _t1, token_type=token_type)
+                self._make_input_arc(self._parent_net, s2, _t2, token_type=token_type)
+                self._make_output_arc(self._parent_net, s1, _t2, token_type=token_type)
