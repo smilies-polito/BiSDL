@@ -152,16 +152,20 @@ class ModuleListenerImpl(ModuleListener):
                         self._make_transition(self._sub_net, _t)
                         self._make_input_arc(self._sub_net, molecule, _t)
                         self._make_input_arc(self._sub_net, src, _t)
+                        if "gene" in src:
+                            self._make_output_arc(self._sub_net, src, _t)
             elif regulation_type == "INDUCERS":
                 for _t in transitions:
                     for molecule, count in molecules.items():
                         self._make_place(self._sub_net, molecule)
                         self._make_input_arc(self._sub_net, molecule, _t)
+                        if "gene" in src:
+                            self._make_output_arc(self._sub_net, src, _t)
             elif regulation_type == "ACTIVATORS":
                 for _t in transitions:
                     for molecule, count in molecules.items():
                         self._make_place(self._sub_net, molecule)
-                        for i in range(int(count)):
+                        for _ in range(int(count)):
                             addToken += 1
                             _tt = self._unique_t_name(_t + "_activated_" + molecule)# + ("_" + str(i) if i > 0 else ""))
                             self._make_transition(self._sub_net, _tt)
