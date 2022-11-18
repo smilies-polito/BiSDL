@@ -113,7 +113,8 @@ class ModuleListenerImpl(ModuleListener):
         a = net + ".add_input(\"" + place + "\", \"" + transition + "\", " + tk + ((", notify=" + notify) if notify is not None else "") + ")"
         if not "input_arcs" in self._nodes[net].keys():
             self._nodes[net]["input_arcs"] = list()
-        self._nodes[net]["input_arcs"].append(a)
+        if a not in self._nodes[net]["input_arcs"]:
+            self._nodes[net]["input_arcs"].append(a)
 
     def _make_output_arc(self, net, place, transition, mult="1", token_type="Value(dot)"):
         tk = token_type if mult == "1" else "MultiArc([" + token_type + "]*" + mult + ")"
@@ -125,7 +126,8 @@ class ModuleListenerImpl(ModuleListener):
         a = net + ".add_output(\"" + place + "\", \"" + transition + "\", " + tk + ((", notify=" + notify) if notify is not None else "") + ")"
         if not "output_arcs" in self._nodes[net].keys():
             self._nodes[net]["output_arcs"] = list()
-        self._nodes[net]["output_arcs"].append(a)
+        if a not in self._nodes[net]["output_arcs"]:
+            self._nodes[net]["output_arcs"].append(a)
 
     def _build_neighborhood(self):
         for i, (n1, coord1) in enumerate(self._place_coords.items()):
@@ -358,33 +360,35 @@ class ModuleListenerImpl(ModuleListener):
     def exitProtein_complex_formation(self, ctx: ModuleParser.Protein_complex_formationContext):
         _molecules_in = _mlist_to_dict(ctx.m_list().getText())
         _molecule_out = ctx.molecule().getText()
+        _m_out_mult, _m_out = _molecule_out.split("*") if "*" in _molecule_out else ["1", _molecule_out]
         _transition = self._unique_t_name(f"protein_complex_formation")
         self._make_transition(self._sub_net, _transition)
-        for _m in _molecules_in:
+        for _m, _mult in _molecules_in.items():
             self._make_place(self._sub_net, _m)
-            self._make_input_arc(self._sub_net, _m, _transition)
-        self._make_place(self._sub_net, _molecule_out)
-        self._make_output_arc(self._sub_net, _molecule_out, _transition)
+            self._make_input_arc(self._sub_net, _m, _transition, _mult)
+        self._make_place(self._sub_net, _m_out)
+        self._make_output_arc(self._sub_net, _m_out, _transition, _m_out_mult)
 
 
     # Exit a parse tree produced by ModuleParser#enzymatic_reaction.
     def exitEnzymatic_reaction(self, ctx: ModuleParser.Enzymatic_reactionContext):
         e = ctx.PROTEIN().getText()
+        e_mult, e_name = e.split("*") if "*" in e else ["1", e]
         l0 = ctx.m_list()[0].getText()
         l1 = ctx.m_list()[1].getText()
         proteins_in = _mlist_to_dict(l0)
         proteins_out = _mlist_to_dict(l1)
         transition = self._unique_t_name(f"enzymatic_reaction")
         self._make_transition(self._sub_net, transition)
-        self._make_place(self._sub_net, e)
-        self._make_input_arc(self._sub_net, e, transition)
-        self._make_output_arc(self._sub_net, e, transition) # altrimenti se il marking è 0 la transizione non scatta mai! -> usa degradation
-        for p in proteins_in:
-            self._make_place(self._sub_net, p)
-            self._make_input_arc(self._sub_net, p, transition)
-        for p in proteins_out:
-            self._make_place(self._sub_net, p)
-            self._make_output_arc(self._sub_net, p, transition)
+        self._make_place(self._sub_net, e_name)
+        self._make_input_arc(self._sub_net, e_name, transition, mult=e_mult)
+        self._make_output_arc(self._sub_net, e_name, transition, mult=e_mult) # altrimenti se il marking è 0 la transizione non scatta mai! -> usa degradation
+        for pin, pin_mult in proteins_in.items():
+            self._make_place(self._sub_net, pin)
+            self._make_input_arc(self._sub_net, pin, transition, pin_mult)
+        for pout, pout_mult in proteins_out.items():
+            self._make_place(self._sub_net, pout)
+            self._make_output_arc(self._sub_net, pout, transition, pout_mult)
 
     # Enter a parse tree produced by ModuleParser#custom_process.
     def enterCustom_process(self, ctx:ModuleParser.Custom_processContext):
@@ -396,7 +400,7 @@ class ModuleListenerImpl(ModuleListener):
         #id1, id2 = [_x.getText() for _x in ctx.molecule()]
         transition = self._unique_t_name(f"process")
         self._make_transition(self._sub_net, transition)
-        for _molecule in mlist_in:
+        for _molecule, _mult in mlist_in:
             m1, p1 = _molecule.split("*") if "*" in _molecule else ["1", _molecule]
             self._make_place(self._sub_net, p1)
             self._make_input_arc(self._sub_net, p1, transition, mult=m1)

@@ -40,7 +40,7 @@ juxtacrine_signal  : 'JUXTACRINE_SIGNAL' signal RARROW ID ;
 diffusion          : 'DIFFUSION' ID COMMA ID COMMA SO signals SC ;
 
 // lexer rules
-GENE : (MULT STAR)?ID'_gene' ;
+GENE : ID'_gene' ;
 MRNA : (MULT STAR)?ID'_mrna' ;
 PROTEIN : (MULT STAR)?ID'_protein' ;
 RECEPTOR : (MULT STAR)?ID'_receptor'ID* ;

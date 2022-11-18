@@ -106,7 +106,6 @@ class ModuleListener(ParseTreeListener):
     def exitDegradation(self, ctx:ModuleParser.DegradationContext):
         pass
 
-
     # Enter a parse tree produced by ModuleParser#protein_complex_formation.
     def enterProtein_complex_formation(self, ctx:ModuleParser.Protein_complex_formationContext):
         pass
