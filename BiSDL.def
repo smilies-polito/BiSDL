@@ -23,7 +23,7 @@ Stage: build
     pip3 --no-cache-dir install matplotlib==3.7.1
     pip3 --no-cache-dir install pandas==1.5.3
 
-    pip3 --no-cache-dir antlr4-python3-runtime==4.9.2
+    pip3 --no-cache-dir install antlr4-python3-runtime==4.9.2
 
     #pip3 --no-cache-dir -e git+https://github.com/smilies-polito/nwn-nwn-snakess.git#egg=snakes
 
