@@ -13,20 +13,18 @@ Stage: build
     
     # Install R, Python, misc. utilities
      
-    apt-get install -y python3 python3-pip python3-dev
+    apt-get install -y python3 python3-pip python3-dev graphviz
 
     apt-get upgrade -y
 
     # Install required Pyhton packages
    
-    apt-get install -y graphviz 
     pip3 --no-cache-dir install numpy==1.23.5
     pip3 --no-cache-dir install matplotlib==3.7.1
     pip3 --no-cache-dir install pandas==1.5.3
-
     pip3 --no-cache-dir install antlr4-python3-runtime==4.9.2
 
-    #pip3 --no-cache-dir -e git+https://github.com/smilies-polito/nwn-nwn-snakess.git#egg=snakes
+    pip3 install -e git+https://github.com/smilies-polito/nwn-snakes.git#egg=snakes
 
     apt-get clean
     apt-get update -y
@@ -35,5 +33,10 @@ Stage: build
 %runscript
     
     #!/bin/sh
-    echo $1
+    echo "Compiling BiSDL descriptions into nwn-snakes models for $1"
+    python3 bisdl2snakes.py examples/$1/$1.bisdl
+
+    echo "Starting petrisim simulation for $1 with $2 simulation steps"
+    python3 run_simulation.py $1 $2 
+ 
 
