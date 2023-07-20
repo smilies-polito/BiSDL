@@ -9,7 +9,7 @@ Stage: build
     echo "export DEBIAN_FRONTEND=noninteractive" >> $SINGULARITY_ENVIRONMENT
 
     apt-get update
-    apt-get install -y --no-install-recommends apt-utils wget
+    apt-get install -y --no-install-recommends apt-utils wget git-all
     
     # Install R, Python, misc. utilities
      
@@ -18,7 +18,8 @@ Stage: build
     apt-get upgrade -y
 
     # Install required Pyhton packages
-    
+   
+    apt-get install -y graphviz 
     pip3 --no-cache-dir install numpy==1.23.5
     pip3 --no-cache-dir install matplotlib==3.7.1
     pip3 --no-cache-dir install pandas==1.5.3
