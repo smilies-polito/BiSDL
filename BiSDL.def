@@ -20,6 +20,8 @@ Stage: build
 
     pip3 --no-cache-dir antlr4-python3-runtime==4.9.2
 
+    #pip3 --no-cache-dir -e git+https://github.com/smilies-polito/nwn-nwn-snakess.git#egg=snakes
+
     apt-get clean
     apt-get update -y
     
