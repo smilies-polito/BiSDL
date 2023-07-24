@@ -77,7 +77,10 @@ class Simulator:
         tree = lambda: defaultdict(tree)
         d = tree()
         m = self._markings
+
         for step in list(m.keys()):
+            print(step)
+            print(m[step])
             for net in m[step].keys():
                 for place in m[step][net].keys():
                     for tk, n in m[step][net][place].items():
