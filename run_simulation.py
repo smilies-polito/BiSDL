@@ -34,10 +34,10 @@ s.draw_nets(os.path.join(output_path, "../topology"))
 
 for _ in range(n_steps):
 
-    if _%1==0:
+    if _%2==0:
         marking = test_module.get_marking()
-        marking['controller_0_net']['Lac1_protein'].add([BlackToken()]*10)
-        #s.set_initial_marking(marking)
+        marking['controller_0_net']['Lac1_protein'].add([BlackToken()]*1)
+        s.set_initial_marking(marking)
 
     s.step()
 
