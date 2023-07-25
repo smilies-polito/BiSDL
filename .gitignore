@@ -2,7 +2,7 @@
 .bash_history
 .cache
 .config
-./idea
+.idea/
 
 *pycache*
 venv
