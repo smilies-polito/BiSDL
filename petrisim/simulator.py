@@ -89,12 +89,24 @@ class Simulator:
                             custom_cmap[str(tk)] = None
 
         tk_count = len(custom_cmap)
-        cmap = plt.cm.get_cmap('Dark2_r')
+        cmap = plt.cm.get_cmap('viridis')
         colors = cmap(np.linspace(0, 1, tk_count))
         for i, tk in enumerate(sorted(custom_cmap.keys())):
             custom_cmap[tk] = colors[i]
 
+        # setting ymax
+        ymax = 0
         for net in d:
+            for place in d[net]:
+                for i, token in enumerate(d[net][place]):
+                    if not "_net" in token:
+                        Y = d[net][place][token].values()
+                        if max(Y) > ymax:
+                            ymax = max(Y)
+
+
+        for net in d:
+
             for place in d[net]:
                 if any(e in place for e in exclude):
                     continue
@@ -104,24 +116,28 @@ class Simulator:
                 plt.ylabel("# tokens")
                 title = "place " + place + " (" + net + ")"
                 plt.title(title)
-                ymax = 0
+
+
                 for i, token in enumerate(d[net][place]):
                     if not "_net" in token:
                         X = d[net][place][token].keys()
                         Y = d[net][place][token].values()
                         ax.plot(X, Y, label=token.lstrip("_"), color=custom_cmap[token])
-                        if max(Y) > ymax:
-                            ymax = max(Y)
+
 
                 plt.xlim(xmin=0)
-                plt.ylim(ymin=0)
+                plt.ylim(ymin=0, ymax=ymax)
                 ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))
                 ax.yaxis.set_major_locator(plt.MaxNLocator(integer=True))
                 ax.xaxis.set_ticks(np.arange(0, self._curr_step + 1, int(self._curr_step / 10) if self._curr_step >= 100 else self._curr_step))
                 ax.yaxis.set_ticks(np.arange(0, ymax + np.ceil(ymax / 10),
                                              1 if ymax <= 10 else 5 if ymax <= 50 else 10 if ymax <= 100 else 50))
-                fig.legend()
+
+                #ax.yaxis.set_ticks(np.arange(0, 16,
+                                              #1 if ymax <= 10 else 5 if ymax <= 50 else 10 if ymax <= 100 else 50))
+
                 # plt.show()
+                fig.legend(bbox_to_anchor=(1.2 , 0.3))
                 plt.savefig(os.path.join(self._output_path, title), bbox_inches="tight")
                 plt.close()
         print(f"Simulation results saved to {self._output_path}")
