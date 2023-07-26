@@ -14,6 +14,7 @@ process_type   : transcription //#type_transcription
                  | protein_complex_formation //#type_protein_complex_formation
                  | enzymatic_reaction //#type_enzymatic_reaction
                  | custom_process //#type_custom_process
+//                 | constant
                  ;
 transcription  : 'TRANSCRIPTION' RO GENE COMMA MRNA (COMMA regulation )* RC ;
 translation    : 'TRANSLATION' RO MRNA COMMA PROTEIN (COMMA regulation )* RC ;
@@ -21,6 +22,7 @@ degradation    : 'DEGRADATION' RO molecule RC ;
 protein_complex_formation : 'PROTEIN_COMPLEX_FORMATION' RO m_list COMMA molecule RC ;
 enzymatic_reaction : 'ENZYMATIC_REACTION' RO PROTEIN COMMA SO m_list SC COMMA SO m_list SC RC ;
 custom_process : 'CUSTOM_PROCESS' RO SO m_list SC COMMA SO m_list SC (COMMA regulation )* RC ;
+//constant       : 'CONSTANT' RO molecule RC ;
 regulation     : regulation_type COLON m_list ;
 regulation_type : 'INHIBITORS' #type_inhibitors
                 | 'INDUCERS' #type_inducers

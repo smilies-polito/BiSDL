@@ -13,8 +13,8 @@ import numpy as np
 # TODO contatore globale per avere nomi univoci (correggere nomi transizioni già fatte)
 
 
-from bisdl_language.gen.ModuleParser import ModuleParser
-from bisdl_language.gen.ModuleListener import ModuleListener
+from bisdl.gen.ModuleParser import ModuleParser
+from bisdl.gen.ModuleListener import ModuleListener
 
 tree = lambda: defaultdict(tree)
 
@@ -356,6 +356,21 @@ class ModuleListenerImpl(ModuleListener):
             self._make_transition(self._sub_net, transition)
             self._make_input_arc(self._sub_net, molecule, transition)
 
+
+    # # Exit a parse tree produced by ModuleParser#constant.
+    # def exitConstant(self, ctx: ModuleParser.ConstantContext):
+    #     id = ctx.molecule().getText()
+    #     _mult, _molecule = id.split("*") if "*" in id else ["1", id]
+    #     # for i in range(int(_mult)):
+    #     #     transition = self._unique_t_name(_molecule + "_constant" + ("_" + str(i) if i > 0 else ""))
+    #     #     self._make_transition(self._sub_net, transition)
+    #     #     self._make_input_arc(self._sub_net, _molecule, transition)
+    #     #     self._make_output_arc(self._sub_net, _molecule, transition)
+    #     transition = self._unique_t_name(_molecule + "_constant")
+    #     self._make_transition(self._sub_net, transition)
+    #     self._make_place(self._sub_net, _molecule)
+    #     self._make_output_arc(self._sub_net, _molecule, transition, _mult)
+
     # Exit a parse tree produced by ModuleParser#protein_complex_formation.
     def exitProtein_complex_formation(self, ctx: ModuleParser.Protein_complex_formationContext):
         _molecules_in = _mlist_to_dict(ctx.m_list().getText())
@@ -477,14 +492,24 @@ class ModuleListenerImpl(ModuleListener):
         _molecules = ctx.signals().getText().split(',')
         for _it in _molecules:
             _mult, _mol = _it.split("*") if "*" in _it else ["1", _it]
-            #expr = " or ".join(["str(x) == '" + _m + "'" for _m in _molecules])
+            # expr = " or ".join(["str(x) == '" + _m + "'" for _m in _molecules])
             rule = f"Expression(\"str(x) == {repr(_mol)}\")"
-            for _ in range(int(_mult)):
-                _t1 = self._unique_t_name(f"diffusion_{_mol}")
-                _t2 = self._unique_t_name(f"diffusion_{_mol}")
-                self._make_transition(net, _t1, rule)
-                self._make_transition(net, _t2, rule)
-                self._make_input_arc(self._parent_net, s1, _t1, token_type=token_type)
-                self._make_output_arc(self._parent_net, s2, _t1, token_type=token_type)
-                self._make_input_arc(self._parent_net, s2, _t2, token_type=token_type)
-                self._make_output_arc(self._parent_net, s1, _t2, token_type=token_type)
+            # qui venivano creati tanti archi quanti ne indicava il moltiplicatore
+            # for _ in range(int(_mult)):
+            #     _t1 = self._unique_t_name(f"diffusion_{_mol}")
+            #     _t2 = self._unique_t_name(f"diffusion_{_mol}")
+            #     self._make_transition(net, _t1, rule)
+            #     self._make_transition(net, _t2, rule)
+            #     self._make_input_arc(self._parent_net, s1, _t1, token_type=token_type)
+            #     self._make_output_arc(self._parent_net, s2, _t1, token_type=token_type)
+            #     self._make_input_arc(self._parent_net, s2, _t2, token_type=token_type)
+            #     self._make_output_arc(self._parent_net, s1, _t2, token_type=token_type)
+            # qui invece faccio creare un arco con n token, per emulare la pressione necessaria alla diffusione
+            _t1 = self._unique_t_name(f"diffusion_{_mol}")
+            _t2 = self._unique_t_name(f"diffusion_{_mol}")
+            self._make_transition(net, _t1, rule)
+            self._make_transition(net, _t2, rule)
+            self._make_input_arc(self._parent_net, s1, _t1, mult=_mult, token_type=token_type)
+            self._make_output_arc(self._parent_net, s2, _t1, mult=_mult, token_type=token_type)
+            self._make_input_arc(self._parent_net, s2, _t2, mult=_mult, token_type=token_type)
+            self._make_output_arc(self._parent_net, s1, _t2, mult=_mult, token_type=token_type)
