@@ -41,10 +41,12 @@ SCOPE receiver_cell_5_6 (5, 6)
         TRANSCRIPTION(GFP_receptor_gene, GFP_receptor_mrna)
         TRANSLATION(GFP_receptor_mrna, GFP_receptor_protein)
         ENZYMATIC_REACTION(GFP_receptor_active_protein, [GFP_receptor_protein], [GFP_activation_mediator_protein])
+        DEGRADATION(GFP_receptor_active_protein)
 
         TRANSCRIPTION(CD19_mCherry_receptor_gene, CD19_mCherry_receptor_mrna)
         TRANSLATION(CD19_mCherry_receptor_mrna, CD19_mCherry_receptor_protein)
         ENZYMATIC_REACTION(CD19_mCherry_receptor_active_protein, [CD19_mCherry_receptor_protein], [CD19_mCherry_activation_mediator_protein])
+        DEGRADATION(CD19_mCherry_receptor_active_protein)
 
         TRANSCRIPTION(CD19_mCherry_gene, CD19_mCherry_mrna, INDUCERS: GFP_activation_mediator_protein)
         TRANSLATION(CD19_mCherry_mrna, 5*CD19_mCherry_protein)
@@ -52,8 +54,8 @@ SCOPE receiver_cell_5_6 (5, 6)
         TRANSCRIPTION(BFP_gene, BFP_mrna, INDUCERS: CD19_mCherry_activation_mediator_protein)
         TRANSLATION(BFP_mrna, BFP_protein)
 
-        DEGRADATION(GFP_receptor_active_protein)
-        DEGRADATION(CD19_mCherry_receptor_active_protein)
+
+
 
     JUXTACRINE_SIGNAL CD19_mCherry_protein -> receiver_cell_5_7
 

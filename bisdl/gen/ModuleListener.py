@@ -1,4 +1,4 @@
-# Generated from /home/lg/PycharmProjects/BiSDL/bisdl/Module.g4 by ANTLR 4.9.1
+# Generated from bisdl/Module.g4 by ANTLR 4.9.1
 from antlr4 import *
 if __name__ is not None and "." in __name__:
     from .ModuleParser import ModuleParser
@@ -105,6 +105,7 @@ class ModuleListener(ParseTreeListener):
     # Exit a parse tree produced by ModuleParser#degradation.
     def exitDegradation(self, ctx:ModuleParser.DegradationContext):
         pass
+
 
     # Enter a parse tree produced by ModuleParser#protein_complex_formation.
     def enterProtein_complex_formation(self, ctx:ModuleParser.Protein_complex_formationContext):

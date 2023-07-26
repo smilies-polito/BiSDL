@@ -1,4 +1,4 @@
-# Generated from /home/lg/PycharmProjects/BiSDL/bisdl/Module.g4 by ANTLR 4.9.1
+# Generated from bisdl/Module.g4 by ANTLR 4.9.1
 # encoding: utf-8
 from antlr4 import *
 from io import StringIO
@@ -160,7 +160,7 @@ class ModuleParser ( Parser ):
     RULE_diffusion = 22
 
     ruleNames =  [ "root", "timescale", "scopes", "scope", "coords", "processes", 
-                   "process", "process_type", "transcription", "translation",
+                   "process", "process_type", "transcription", "translation", 
                    "degradation", "protein_complex_formation", "enzymatic_reaction", 
                    "custom_process", "regulation", "regulation_type", "m_list", 
                    "molecule", "signal", "signals", "paracrine_signals", 

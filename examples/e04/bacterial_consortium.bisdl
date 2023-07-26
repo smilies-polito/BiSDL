@@ -5,9 +5,11 @@ SCOPE controller_compartment (5, 5)
         TIMESCALE 1
 
         DEGRADATION(Lac1_protein)
+        DEGRADATION(SAM_molecule)
 
         TRANSCRIPTION(Lux1_gene, Lux1_mrna)
-        TRANSLATION(3*Lux1_mrna, 3*Lux1_protein, INHIBITORS: Lac1_protein)
+        TRANSLATION(Lux1_mrna, Lux1_protein, INHIBITORS: Lac1_protein)
+        TRANSLATION(Lux1_mrna, Lux1_protein, INHIBITORS: Lac1_protein)
         DEGRADATION(Lux1_protein)
 
         TRANSCRIPTION(ACP_gene, ACP_mrna)
@@ -15,6 +17,9 @@ SCOPE controller_compartment (5, 5)
         DEGRADATION(ACP_protein)
 
         ENZYMATIC_REACTION(Lux1_protein, [SAM_molecule, ACP_protein], [_3OC6HSL_molecule])
+        ENZYMATIC_REACTION(Lux1_protein, [SAM_molecule, ACP_protein], [_3OC6HSL_molecule])
+        ENZYMATIC_REACTION(Lux1_protein, [SAM_molecule, ACP_protein], [_3OC6HSL_molecule])
+        DEGRADATION(_3OC6HSL_molecule)
 
 SCOPE target_compartment (5, 6)
     PROCESS target
@@ -25,9 +30,11 @@ SCOPE target_compartment (5, 6)
         DEGRADATION(LuxR_protein)
 
         PROTEIN_COMPLEX_FORMATION(_3OC6HSL_molecule, LuxR_protein, _3OC6HSL_LuxR_complex)
+        DEGRADATION(_3OC6HSL_molecule)
+        DEGRADATION(_3OC6HSL_LuxR_complex)
 
-        TRANSCRIPTION(GFP_gene, 2*GFP_mrna, INDUCERS: _3OC6HSL_LuxR_complex)
-        TRANSLATION(GFP_mrna, GFP_protein)
+        TRANSCRIPTION(GFP_gene, 3*GFP_mrna, INDUCERS: _3OC6HSL_LuxR_complex)
+        TRANSLATION(GFP_mrna, 2*GFP_protein)
         DEGRADATION(GFP_protein)
 
         DEGRADATION(Lac1_protein)
