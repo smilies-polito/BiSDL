@@ -1,4 +1,4 @@
-MODULE rgb_toda
+MODULE rgb
 TIMESCALE 1
 
 SCOPE green_3_3 (3, 3)
