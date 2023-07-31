@@ -126,7 +126,7 @@ class Simulator:
 
 
                 plt.xlim(xmin=0)
-                plt.ylim(ymin=0, ymax=ymax)
+                plt.ylim(ymin=0, ymax=ymax+1)
                 ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))
                 ax.yaxis.set_major_locator(plt.MaxNLocator(integer=True))
                 ax.xaxis.set_ticks(np.arange(0, self._curr_step + 1, int(self._curr_step / 10) if self._curr_step >= 100 else self._curr_step))
