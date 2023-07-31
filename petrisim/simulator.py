@@ -83,10 +83,14 @@ class Simulator:
             print(m[step])
             for net in m[step].keys():
                 for place in m[step][net].keys():
-                    for tk, n in m[step][net][place].items():
-                        d[net][place][str(tk)][step] = n
-                        if str(tk) not in custom_cmap:
-                            custom_cmap[str(tk)] = None
+                    if len(m[step][net][place].items()) == 0:
+                        d[net][place][str(tk)][step] = 0
+                    else:
+                        for tk, n in m[step][net][place].items():
+                            d[net][place][str(tk)][step] = n
+
+                    if str(tk) not in custom_cmap:
+                        custom_cmap[str(tk)] = None
 
         tk_count = len(custom_cmap)
         cmap = plt.cm.get_cmap('viridis')
@@ -122,7 +126,7 @@ class Simulator:
                     if not "_net" in token:
                         X = d[net][place][token].keys()
                         Y = d[net][place][token].values()
-                        ax.plot(X, Y, label=token.lstrip("_"), color=custom_cmap[token])
+                        ax.plot(X, Y, label=token.lstrip("_"), color=custom_cmap[token], linewidth=3)
 
 
                 plt.xlim(xmin=0)
