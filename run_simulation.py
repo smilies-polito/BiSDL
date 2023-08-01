@@ -25,22 +25,26 @@ s.draw_nets(os.path.join(output_path, "../topology"))
 if example == "bacterial_consortium":
     if condition == "noLacI":
         for _ in range(n_steps):
-            s.step()
+            marking = test_module.get_marking()
+            marking['AHL_production_0_net']['SAM_molecule'].add([BlackToken()] * 1)
+            s.step(init_marking=marking)
+
 
     elif condition == "lowLacI":
         for _ in range(n_steps):
-            if _ % 5 == 0:
+            if _ % 50 == 0:
                 marking = test_module.get_marking()
-                marking['controller_0_net']['Lac1_protein'].add([BlackToken()] * 1)
-                s.step(init_marking=marking)
+                marking['AHL_production_0_net']['LacI_protein'].add([BlackToken()] * 1)
+                s.set_initial_marking(marking)
+            s.step()
 
     elif condition == "highLacI":
         for _ in range(n_steps):
-            if _ % 2 == 0:
+            if _ % 5 == 0:
                 marking = test_module.get_marking()
-                marking['controller_0_net']['Lac1_protein'].add([BlackToken()] * 1)
-                s.step(init_marking=marking)
-
+                marking['AHL_production_0_net']['LacI_protein'].add([BlackToken()] * 1)
+                s.set_initial_marking(marking)
+            s.step()
 
     else:
         print("Insert valid condition among the following: noLacI, lowLacI, highLacI")
