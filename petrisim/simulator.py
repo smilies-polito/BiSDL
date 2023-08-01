@@ -2,9 +2,12 @@ import errno
 import os
 from collections import defaultdict
 
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+
+matplotlib.rcParams.update({'font.size': 15})
 
 
 # TODO controlli!
@@ -19,7 +22,7 @@ class Simulator:
         self._draw_nets = draw_nets
         self._markings = {}
         if not os.path.exists(self._output_path):
-            os.mkdir(self._output_path)
+            os.makedirs(self._output_path)
 
     # TODO sistemare il marking iniziale
     # TODO livello di output (quiet, verbose, debug), tipi di output (csv e/o img)
@@ -93,9 +96,9 @@ class Simulator:
                         custom_cmap[str(tk)] = None
 
         tk_count = len(custom_cmap)
-        cmap = plt.cm.get_cmap('viridis')
+        cmap = plt.cm.get_cmap('tab20')
         colors = cmap(np.linspace(0, 1, tk_count))
-        for i, tk in enumerate(sorted(custom_cmap.keys())):
+        for i, tk in enumerate(custom_cmap.keys()):
             custom_cmap[tk] = colors[i]
 
         # setting ymax
@@ -141,7 +144,7 @@ class Simulator:
                                               #1 if ymax <= 10 else 5 if ymax <= 50 else 10 if ymax <= 100 else 50))
 
                 # plt.show()
-                fig.legend(bbox_to_anchor=(1.2 , 0.3))
+                fig.legend(bbox_to_anchor=(1.3, 0.3))
                 plt.savefig(os.path.join(self._output_path, title), bbox_inches="tight")
                 plt.close()
-        print(f"Simulation results saved to {self._output_path}")
+        #print(f"Simulation results saved to {self._output_path}")
