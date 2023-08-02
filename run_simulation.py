@@ -34,7 +34,7 @@ if example == "bacterial_consortium":
         for _ in range(n_steps):
             marking = test_module.get_marking()
             if _ % 5 == 0:
-                marking['AHL_production_0_net']['SAM_molecule'].add([BlackToken()] * random.randint(0,5))
+                marking['AHL_production_0_net']['SAM_molecule'].add([BlackToken()] * random.randint(0,3))
             s.set_initial_marking(marking)
             s.step()
 
@@ -42,9 +42,9 @@ if example == "bacterial_consortium":
         for _ in range(n_steps):
             marking = test_module.get_marking()
             if _ % 5 == 0:
-                marking['AHL_production_0_net']['SAM_molecule'].add([BlackToken()] * random.randint(0,5))
+                marking['AHL_production_0_net']['SAM_molecule'].add([BlackToken()] * random.randint(0,3))
             if _ % 50 == 0:
-                marking['AHL_production_0_net']['LacI_protein'].add([BlackToken()] * random.randint(0,5))
+                marking['AHL_production_0_net']['LacI_protein'].add([BlackToken()] * random.randint(0,3))
             s.set_initial_marking(marking)
             s.step()
 
@@ -52,9 +52,9 @@ if example == "bacterial_consortium":
         for _ in range(n_steps):
             marking = test_module.get_marking()
             if _ % 5 == 0:
-                marking['AHL_production_0_net']['SAM_molecule'].add([BlackToken()] * random.randint(0,5))
-            if _ % 5 == 0:
-                marking['AHL_production_0_net']['LacI_protein'].add([BlackToken()] * random.randint(0,10))
+                marking['AHL_production_0_net']['SAM_molecule'].add([BlackToken()] * random.randint(0,3))
+            if _ % 3 == 0:
+                marking['AHL_production_0_net']['LacI_protein'].add([BlackToken()] * random.randint(0,3))
             s.set_initial_marking(marking)
             s.step()
 
@@ -66,6 +66,6 @@ elif example == "rgb":
         for _ in range(n_steps):
             s.step()
 #TODO remove results folder entirely before each new simulation
-s.make_charts()
+s.make_charts()#exclude=["mrna"])
 #with open(os.path.join(output_path, "ascii_net_structure.txt"), 'w') as fp:
 #    print(test_module, file=fp)
