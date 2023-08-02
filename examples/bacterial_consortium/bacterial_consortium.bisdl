@@ -8,18 +8,19 @@ SCOPE producer (1, 1)
         DEGRADATION(LacI_protein)
         DEGRADATION(SAM_molecule)
 
-        TRANSCRIPTION(LuxI_gene, LuxI_mrna, INHIBITORS: LacI_protein)
-        TRANSLATION(LuxI_mrna, 2*LuxI_protein)
-        DEGRADATION(LuxI_protein)
+        TRANSCRIPTION(LuxI_gene, 3*LuxI_mrna, INHIBITORS: LacI_protein)
+        TRANSLATION(LuxI_mrna, LuxI_protein)
         DEGRADATION(LuxI_protein)
 
-        TRANSCRIPTION(ACP_gene, ACP_mrna)
+        TRANSCRIPTION(ACP_gene, 3*ACP_mrna)
         TRANSLATION(ACP_mrna, 2*ACP_protein)
         DEGRADATION(ACP_protein)
 
         ENZYMATIC_REACTION(LuxI_protein, [SAM_molecule, ACP_protein], [AHL_molecule])
         ENZYMATIC_REACTION(LuxI_protein, [SAM_molecule, ACP_protein], [AHL_molecule])
         ENZYMATIC_REACTION(LuxI_protein, [SAM_molecule, ACP_protein], [AHL_molecule])
+        ENZYMATIC_REACTION(LuxI_protein, [SAM_molecule, ACP_protein], [AHL_molecule])
+
         DEGRADATION(AHL_molecule)
 
 SCOPE sensor (2, 2)
@@ -28,18 +29,15 @@ SCOPE sensor (2, 2)
 
         DEGRADATION(AHL_molecule)
 
-        TRANSCRIPTION(LuxR_gene, LuxR_mrna)
-        TRANSLATION(LuxR_mrna, LuxR_protein)
+        TRANSCRIPTION(LuxR_gene, 2*LuxR_mrna)
+        TRANSLATION(LuxR_mrna, 2*LuxR_protein)
         DEGRADATION(LuxR_protein)
 
         PROTEIN_COMPLEX_FORMATION(LuxR_protein, AHL_molecule, LuxR_AHL_complex)
-        PROTEIN_COMPLEX_FORMATION(LuxR_protein, AHL_molecule, LuxR_AHL_complex)
         DEGRADATION(LuxR_AHL_complex)
 
-        TRANSCRIPTION(GFP_reporter_gene, 2*GFP_reporter_mrna, INDUCERS: LuxR_AHL_complex)
-        TRANSCRIPTION(GFP_reporter_gene, 2*GFP_reporter_mrna, INDUCERS: LuxR_AHL_complex)
-        TRANSLATION(GFP_reporter_mrna, 3*GFP_reporter_protein)
-        TRANSLATION(GFP_reporter_mrna, 3*GFP_reporter_protein)
+        TRANSCRIPTION(GFP_reporter_gene, 4*GFP_reporter_mrna, INDUCERS: LuxR_AHL_complex)
+        TRANSLATION(GFP_reporter_mrna, 2*GFP_reporter_protein)
         DEGRADATION(GFP_reporter_protein)
 
 DIFFUSION producer, sensor, [1*AHL_molecule]
