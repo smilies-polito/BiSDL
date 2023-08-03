@@ -26,14 +26,17 @@ output_path = os.path.join(".", "examples", example, "results", condition)
 if os.path.isdir(output_path):
     shutil.rmtree(output_path)
 
-s = Simulator(m=test_module, output_path=output_path, draw_nets=False)
+#s = Simulator(m=test_module, output_path=output_path, draw_nets=False, mode='exploration')
+
+# uncomment the line where the mode parameter is set to 'paperFigures' to generate the figures in Giannantoni et al., 2023
+s = Simulator(m=test_module, output_path=output_path, draw_nets=False, mode='paperFigures')
+
 s.draw_nets(os.path.join(output_path, "../topology"))
 
 if example == "bacterial_consortium":
     if condition == "noLacI":
         for _ in range(n_steps):
             marking = test_module.get_marking()
-            print(marking['AHL_production_0_net']['SAM_molecule'])
 
             if _ % 3 == 0:
                 marking['AHL_production_0_net']['SAM_molecule'].add([BlackToken()] * random.randint(0,5))
