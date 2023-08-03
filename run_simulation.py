@@ -59,7 +59,7 @@ if example == "bacterial_consortium":
                 marking['AHL_production_0_net']['SAM_molecule'].add([BlackToken()] * random.randint(0, 5))
 
             if _ % 3 == 0:
-                marking['AHL_production_0_net']['LacI_protein'].add([BlackToken()] * random.randint(0,5))
+                marking['AHL_production_0_net']['LacI_protein'].add([BlackToken()] * random.randint(0,10))
             s.set_initial_marking(marking)
             s.step()
 
