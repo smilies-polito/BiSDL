@@ -12,7 +12,7 @@ matplotlib.rcParams.update({'font.size': 12})
 
 # TODO controlli!
 class Simulator:
-    def __init__(self, m, steps=None, firing_prob=0.6, output_path=".", draw_nets=False):
+    def __init__(self, m, steps=None, firing_prob=0.6, output_path=".", draw_nets=False, mode='exploration'):
         self._module = m
         self._steps = steps
         self._curr_step = 0
@@ -20,6 +20,7 @@ class Simulator:
         self._firing_prob = firing_prob
         self._output_path = output_path
         self._draw_nets = draw_nets
+        self._mode= mode
         self._markings = {}
         if not os.path.exists(self._output_path):
             os.makedirs(self._output_path)
@@ -91,7 +92,6 @@ class Simulator:
                     else:
                         for tk, n in m[step][net][place].items():
                             d[net][place][str(tk)][step] = n
-
                     if str(tk) not in custom_cmap:
                         custom_cmap[str(tk)] = None
 
@@ -107,12 +107,9 @@ class Simulator:
             for place in d[net]:
                 for i, token in enumerate(d[net][place]):
                     if not "_net" in token:
-                        if any(e in place for e in exclude):
-                            continue
                         Y = d[net][place][token].values()
                         if max(Y) > ymax:
                             ymax = max(Y)
-
 
         for net in d:
 
@@ -121,11 +118,12 @@ class Simulator:
                     continue
                 fig, ax = plt.subplots()
                 plt.subplots_adjust(right=0.75)
-                plt.xlabel("simulation step")
-                plt.ylabel("# tokens")
-                title = "place " + place + " (" + net + ")"
-                plt.title(title)
+                plt.xlabel("Simulation steps")
+                plt.ylabel("Marking (black tokens)")
 
+                ax.xaxis.set_label_position('top')
+                ax.set_xlabel("(" + net + ")")
+                ax.set_title("place " + place)
 
                 for i, token in enumerate(d[net][place]):
                     if not "_net" in token:
@@ -133,20 +131,47 @@ class Simulator:
                         Y = d[net][place][token].values()
                         ax.plot(X, Y, label=token.lstrip("_"), color=custom_cmap[token], linewidth=3)
 
+                if self._mode == 'exploration':
 
-                plt.xlim(xmin=0)
-                plt.ylim(ymin=0, ymax=10)#ymax+1)
-                ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))
-                ax.yaxis.set_major_locator(plt.MaxNLocator(integer=True))
-                ax.xaxis.set_ticks(np.arange(0, self._curr_step + 1, int(self._curr_step / 10) if self._curr_step >= 100 else self._curr_step))
-                ax.yaxis.set_ticks(np.arange(0, ymax + np.ceil(ymax / 10),
+                    for i, token in enumerate(d[net][place]):
+                        if not "_net" in token:
+                            X = d[net][place][token].keys()
+                            Y = d[net][place][token].values()
+                            ax.plot(X, Y, label=token.lstrip("_"), color=custom_cmap[token], linewidth=3)
+
+                    plt.xlim(xmin=0)
+                    plt.ylim(ymin=0, ymax=ymax+1)
+                    ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))
+                    ax.yaxis.set_major_locator(plt.MaxNLocator(integer=True))
+                    ax.xaxis.set_ticks(np.arange(0, self._curr_step + 1, int(self._curr_step / 10) if self._curr_step >= 100 else self._curr_step))
+                    ax.yaxis.set_ticks(np.arange(0, ymax + np.ceil(ymax / 10),
                                              1 if ymax <= 10 else 5 if ymax <= 50 else 10 if ymax <= 100 else 50))
 
-                #ax.yaxis.set_ticks(np.arange(0, 16,
-                                              #1 if ymax <= 10 else 5 if ymax <= 50 else 10 if ymax <= 100 else 50))
+                    fig.legend(bbox_to_anchor=(1.3, 0.3))
+                    title = "place " + place + " (" + net + ")"
+                    plt.savefig(os.path.join(self._output_path, title), bbox_inches="tight")
+                    plt.close()
 
-                # plt.show()
-                fig.legend(bbox_to_anchor=(1.3, 0.3))
-                plt.savefig(os.path.join(self._output_path, title), bbox_inches="tight")
-                plt.close()
-        #print(f"Simulation results saved to {self._output_path}")
+                if self._mode == 'paperFigures':
+
+                    for i, token in enumerate(d[net][place]):
+                        if not "_net" in token:
+                            X = d[net][place][token].keys()
+                            Y = d[net][place][token].values()
+                            ax.plot(X, Y, label=token.lstrip("_"), color='g', linewidth=5)
+
+                    plt.xlim(xmin=0)
+                    plt.ylim(ymin=0, ymax=100)
+                    ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))
+                    ax.yaxis.set_major_locator(plt.MaxNLocator(integer=True))
+                    ax.xaxis.set_ticks(np.arange(0, self._curr_step + 1,
+                                                 int(self._curr_step / 10) if self._curr_step >= 100 else self._curr_step))
+                    ax.yaxis.set_ticks(np.arange(0, 110, 10))
+
+                    fig.legend(bbox_to_anchor=(1.3, 0.3))
+                    title = "place " + place + " (" + net + ")"
+                    plt.savefig(os.path.join(self._output_path, title))
+                    plt.close()
+
+
+        print(f"Simulation results saved to {self._output_path}")
