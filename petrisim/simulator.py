@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-matplotlib.rcParams.update({'font.size': 15})
+matplotlib.rcParams.update({'font.size': 12})
 
 
 # TODO controlli!
@@ -107,6 +107,8 @@ class Simulator:
             for place in d[net]:
                 for i, token in enumerate(d[net][place]):
                     if not "_net" in token:
+                        if any(e in place for e in exclude):
+                            continue
                         Y = d[net][place][token].values()
                         if max(Y) > ymax:
                             ymax = max(Y)
@@ -133,7 +135,7 @@ class Simulator:
 
 
                 plt.xlim(xmin=0)
-                plt.ylim(ymin=0, ymax=ymax+1)
+                plt.ylim(ymin=0, ymax=10)#ymax+1)
                 ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))
                 ax.yaxis.set_major_locator(plt.MaxNLocator(integer=True))
                 ax.xaxis.set_ticks(np.arange(0, self._curr_step + 1, int(self._curr_step / 10) if self._curr_step >= 100 else self._curr_step))
