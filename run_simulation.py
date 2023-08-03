@@ -33,8 +33,11 @@ if example == "bacterial_consortium":
     if condition == "noLacI":
         for _ in range(n_steps):
             marking = test_module.get_marking()
+            print(marking['AHL_production_0_net']['SAM_molecule'])
+
             if _ % 3 == 0:
-                marking['AHL_production_0_net']['SAM_molecule'].add([BlackToken()] * random.randint(0,2))
+                marking['AHL_production_0_net']['SAM_molecule'].add([BlackToken()] * random.randint(0,5))
+
             s.set_initial_marking(marking)
             s.step()
 
@@ -42,7 +45,8 @@ if example == "bacterial_consortium":
         for _ in range(n_steps):
             marking = test_module.get_marking()
             if _ % 3 == 0:
-                marking['AHL_production_0_net']['SAM_molecule'].add([BlackToken()] * random.randint(0,2))
+                marking['AHL_production_0_net']['SAM_molecule'].add([BlackToken()] * random.randint(0, 3))
+
             if _ % 10 == 0:
                 marking['AHL_production_0_net']['LacI_protein'].add([BlackToken()] * random.randint(0,3))
             s.set_initial_marking(marking)
@@ -52,9 +56,10 @@ if example == "bacterial_consortium":
         for _ in range(n_steps):
             marking = test_module.get_marking()
             if _ % 3 == 0:
-                marking['AHL_production_0_net']['SAM_molecule'].add([BlackToken()] * random.randint(0,2))
+                marking['AHL_production_0_net']['SAM_molecule'].add([BlackToken()] * random.randint(0, 5))
+
             if _ % 3 == 0:
-                marking['AHL_production_0_net']['LacI_protein'].add([BlackToken()] * random.randint(0,3))
+                marking['AHL_production_0_net']['LacI_protein'].add([BlackToken()] * random.randint(0,5))
             s.set_initial_marking(marking)
             s.step()
 
