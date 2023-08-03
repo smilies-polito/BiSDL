@@ -209,7 +209,7 @@ class Module(ABC):
         return transitions
 
     # TODO parametrizzare la percentuale di transizioni pescate per modello
-    def fire(self, step, prob=0.4):
+    def fire(self, step, prob=0.6):
         print("step", step)
         to_fire = []
         for node in self._transitions.keys():
