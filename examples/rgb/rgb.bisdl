@@ -43,7 +43,7 @@ SCOPE grey_0_0 (0, 0)
         DEGRADATION(GFP_receptor_active_protein)
 
         TRANSCRIPTION(mCherry_gene, mCherry_mrna, INDUCERS: 2*GFP_activation_mediator_protein)
-        TRANSLATION(mCherry_mrna, 10*mCherry_protein)
+        TRANSLATION(mCherry_mrna, 3*mCherry_protein)
         DEGRADATION(mCherry_protein)
 
 
