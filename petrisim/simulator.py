@@ -161,12 +161,12 @@ class Simulator:
                             ax.plot(X, Y, label=token.lstrip("_"), color='g', linewidth=5)
 
                     plt.xlim(xmin=0)
-                    plt.ylim(ymin=0, ymax=100)
+                    plt.ylim(ymin=0, ymax=50)
                     ax.xaxis.set_major_locator(plt.MaxNLocator(integer=True))
                     ax.yaxis.set_major_locator(plt.MaxNLocator(integer=True))
                     ax.xaxis.set_ticks(np.arange(0, self._curr_step + 1,
                                                  int(self._curr_step / 10) if self._curr_step >= 100 else self._curr_step))
-                    ax.yaxis.set_ticks(np.arange(0, 110, 10))
+                    ax.yaxis.set_ticks(np.arange(0, 50, 10))
 
                     fig.legend(bbox_to_anchor=(1.3, 0.3))
                     title = "place " + place + " (" + net + ")"
