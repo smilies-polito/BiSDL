@@ -95,17 +95,18 @@ class Simulator:
         return ret
 
     def filter_csv(self, csv_file):
+
         # each cell in this dataframe is a string that looks like a dictionary.
         # but some keys are PetriNet('blabla') so you can't convert automatically
         df = pd.read_csv(csv_file, index_col=[0])#os.path.join(os.getcwd(), csv_file), index_col=[0])
-        # df = df.dropna(axis=1, how='all')
+
         # filter only the columns I'm interested in, starting with a Cartesian product
         _cols = [color + str(j) + "_" + str(k) for color in ["red_", "green_", "blue_"] for j in [1, 2, 3, 4, 5] for k
                  in [1, 2, 3, 4, 5]]
         # dropping column names that do not exist in the dataframe
         _cols = [_col for _col in _cols if _col in df.columns]
         del df['grey_0_0']
-        # print(_cols)
+
         # here _col is a place name. i am only interested in those with colored tokens (i.e. R G or B cells)
         for _col in _cols:
             _res = self.mangle_dict_value(df[_col], ['BFP_protein', 'mCherry_protein', 'GFP_protein'])
@@ -117,8 +118,7 @@ class Simulator:
 
         marking_file_path = os.path.join(self._output_path, "marking_rgb_net.csv")
         df = self.filter_csv(marking_file_path)
-        # print(df.head())
-        # df.to_csv("pippo")
+
         green_coords = OrderedDict({'green_3_3': (3, 3)})
         red_coords = OrderedDict(("red_" + str(i) + "_" + str(j), (i, j)) for i in [2, 3, 4] for j in [2, 3, 4] if
                                  "red_" + str(i) + "_" + str(j) in df.columns)
@@ -128,7 +128,6 @@ class Simulator:
         all_coords = OrderedDict()
         for d in [green_coords, red_coords, blue_coords]:
             all_coords.update(d)
-        # print(df.loc[[0]])
 
         _colors = ['mCherry_protein', 'GFP_protein', 'BFP_protein']
         datapoints = OrderedDict()
@@ -142,30 +141,18 @@ class Simulator:
                 tot = sum(val_dict.values())
                 rgb = tuple([round(val_dict[_color] / tot, 2) if tot > 0 else 0 for _color in _colors])
                 datapoints[i][col] = rgb
-                pass
 
         X, Y = list(map(list, zip(*[all_coords[_k] for _k in sorted(all_coords.keys())])))
-        # scatter data a little bit
-        # X = list(map(add, X, (0.8 * np.random.rand(len(X)))**2))
-        # Y = list(map(add, Y, (0.8 * np.random.rand(len(Y)))**2))
-        X = list(map(add, X, [0.1 * randrange(-1, 1) for _ in range(len(X))]))
-        Y = list(map(add, Y, [0.1 * randrange(-1, 1) for _ in range(len(Y))]))
-        # S = 1500
-        S = list(map(add, [1500 for _ in range(len(X))],
-                     [randrange(-400, 400) for _ in range(len(X))]))  # list(1500 * 0.9 * np.random.rand(len(X))**2)
+        S = 1700
         for _t in range(0, len(datapoints), 1):
             fig, ax = plt.subplots()
-
             C = list(datapoints[_t].values())
 
             ax.scatter(X, Y, c=C, s=S, alpha=0.5)
-
             ax.set_xlabel(r'$x$', fontsize=15)
             ax.set_ylabel(r'$y$', fontsize=15)
             ax.set_title(f"t = {_t}")
             ax.margins(0.2, 0.2)
-
-            # fig.tight_layout()
 
             if not os.path.isdir(os.path.join(self._output_path, "spatial_charts")):
                 os.makedirs(os.path.join(self._output_path, "spatial_charts"))
