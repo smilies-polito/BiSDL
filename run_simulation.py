@@ -26,10 +26,10 @@ output_path = os.path.join(".", "examples", example, "results", condition)
 if os.path.isdir(output_path):
     shutil.rmtree(output_path)
 
-#s = Simulator(m=test_module, output_path=output_path, draw_nets=False, mode='exploration')
+s = Simulator(m=test_module, output_path=output_path, draw_nets=False, mode='exploration')
 
 # uncomment the line where the mode parameter is set to 'paperFigures' to generate the figures in Giannantoni et al., 2023
-s = Simulator(m=test_module, output_path=output_path, draw_nets=False, mode='paperFigures')
+#s = Simulator(m=test_module, output_path=output_path, draw_nets=False, mode='paperFigures')
 
 s.draw_nets(os.path.join(output_path, "../topology"))
 
@@ -73,7 +73,10 @@ elif example == "rgb":
     if condition == "rgb":
         for _ in range(n_steps):
             s.step()
-#TODO remove results folder entirely before each new simulation
+
+    s.make_spatial_charts()
+
+
 s.make_charts()#exclude=["mrna"])
 #with open(os.path.join(output_path, "ascii_net_structure.txt"), 'w') as fp:
 #    print(test_module, file=fp)
