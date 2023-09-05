@@ -17,7 +17,7 @@ Stage: build
 
     apt-get upgrade -y
 
-    # Install required Pyhton packages
+    # Install required Python packages
    
     pip3 --no-cache-dir install numpy==1.23.5
     pip3 --no-cache-dir install matplotlib==3.7.1
@@ -33,10 +33,26 @@ Stage: build
 %runscript
     
     #!/bin/sh
-    echo "Compiling BiSDL descriptions into nwn-snakes models for $1"
+    echo "Compiling BiSDL descriptions into nwn-snakes models for case study: $1"
     python3 bisdl2snakes.py examples/$1/$1.bisdl
 
-    echo "Starting petrisim simulation for example $1, condition $2, with $3 simulation steps"
-    python3 run_simulation.py $1 $2 $3
- 
+    if [ $1 = "bacterial_consortium" ]; then
+
+        echo "Starting petrisim simulation for case study: $1; experimental condition: noLacI; simulation steps: 300"
+        python3 run_simulation.py $1 noLacI 300
+
+        echo "Starting petrisim simulation for case study: $1; experimental condition: lowLacI; simulation steps: 300"
+        python3 run_simulation.py $1 lowLacI 300
+
+        echo "Starting petrisim simulation for case study: $1; experimental condition: highLacI; simulation steps: 300"
+        python3 run_simulation.py $1 highLacI 300
+
+    fi
+
+    if [ $1 = "rgb" ]; then
+
+        echo "Starting petrisim simulation for case study: $1; experimental condition: rgb; simulation steps: 60"
+        python3 run_simulation.py $1 rgb 60
+
+    fi
 
