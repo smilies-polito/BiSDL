@@ -138,12 +138,12 @@ singularity run --no-home --bind  /local/path/to/BiSDL:/local/path/to/home/ BiSD
 
 ```
 |
-├── bisdl_language                                       // The implementation of the BiSDL language
-|    ├── gen                                       // Code implementing the parser and lexer of the BiSDL language 
+├── bisdl_language                    // The implementation of the BiSDL language
+|    ├── gen                          // Code implementing the parser and lexer of the BiSDL language 
 |    |    └── ...
-|    ├── impl                                       // Code supporting the compilation of the BiSDL language into nwn-snakes models
+|    ├── impl                         // Code supporting the compilation of the BiSDL language into nwn-snakes models
 |    |    └── ...
-|    └── Module.g4                                       // BiSDL grammar Module
+|    └── Module.g4                    // BiSDL grammar Module
 |   
 ├── examples                                    // The two case studies provided in Giannantoni et al., 2023
 |    |
