@@ -76,7 +76,7 @@ class Module(ABC):
         self._net_timescales = self.collect_timescales()
         self._transitions = self.collect_transitions()
         self._marking_count = self.get_marking_count()
-        self._watch = None #TODO places to watch
+        self._watch = None
 
     @abstractmethod
     def build_net_structure(self) -> PetriNet:
@@ -208,7 +208,6 @@ class Module(ABC):
             return transitions
         return transitions
 
-    # TODO parametrizzare la percentuale di transizioni pescate per modello
     def fire(self, step, prob=0.6):
         print("step", step)
         to_fire = []
@@ -232,9 +231,7 @@ class Module(ABC):
                 pass
                 #print("\t-- transition", t.name, "did not fire: ")
                 #print(e)
-        #TODO spostare qua l'aggiornamento del count marking
 
-    #TODO aggiungere filtro sui token da plottare (impostabile dall'esterno, es. main della simulazione)
     def draw(self, path):
         self._draw(self._net, path)
 

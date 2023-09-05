@@ -14,8 +14,6 @@ import pandas as pd
 
 matplotlib.rcParams.update({'font.size': 12})
 
-
-# TODO controlli!
 class Simulator:
     def __init__(self, m, steps=None, firing_prob=0.6, output_path=".", draw_nets=False, mode='exploration'):
         self._module = m
@@ -30,8 +28,6 @@ class Simulator:
         if not os.path.exists(self._output_path):
             os.makedirs(self._output_path)
 
-    # TODO sistemare il marking iniziale
-    # TODO livello di output (quiet, verbose, debug), tipi di output (csv e/o img)
     def execute(self, nstep=None, initial_marking=None, stimuli=None):
         assert not(self._steps is None and nstep is None), f"Number of steps is None."
         if initial_marking is not None:

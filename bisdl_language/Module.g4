@@ -37,7 +37,7 @@ molecule       : GENE #type_gene
                ;
 signal         : PROTEIN | MOLECULE | COMPLEX ;
 signals        : signal (COMMA signal)* ;
-paracrine_signals  : 'PARACRINE_SIGNALS' signals ; //TODO: molecule->PROTEIN; test
+paracrine_signals  : 'PARACRINE_SIGNALS' signals ;
 juxtacrine_signal  : 'JUXTACRINE_SIGNAL' signal RARROW ID ;
 diffusion          : 'DIFFUSION' ID COMMA ID COMMA SO signals SC ;
 
