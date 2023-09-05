@@ -138,26 +138,47 @@ singularity run --no-home --bind  /local/path/to/BiSDL:/local/path/to/home/ BiSD
 
 ```
 |
-├── bisdl_language                                       // ...
-|    ├── gen
-|    ├── impl
-|    └── Module.g4
+├── bisdl_language                                       // The implementation of the BiSDL language
+|    ├── gen                                       // Code implementing the parser and lexer of the BiSDL language 
+|    |    └── ...
+|    ├── impl                                       // Code supporting the compilation of the BiSDL language into nwn-snakes models
+|    |    └── ...
+|    └── Module.g4                                       // BiSDL grammar Module
 |   
-├── examples                                    // ...
-|    ├── bacterial_consortium
-|    └── rgb
-|  
-├── petrisim                                    // ...
+├── examples                                    // The two case studies provided in Giannantoni et al., 2023
+|    |
+|    ├── bacterial_consortium                   // The bacterial_consortium case study provided in Giannantoni et al., 2023
+|    |     ├── bacterial_consortium.bisdl       // BiSDL description of the bacterial_consortium case study
+|    |     ├── bacterial_consortium.py          // Python nwn-snakes model file compiled from BiSDL description of the bacterial_consortium case study
+|    |     └── results                          // Simulation results for different experimental conditions in the bacterial_consortium case study
+|    |          ├── highLacI                    // Simulation results for the highLacI experimental condition in the bacterial_consortium case study
+|    |          |    └── ...                    // .csv marking files and .png simulation evolution plots
+|    |          ├── lowLacI                     // Simulation results for the lowLacI experimental condition in the bacterial_consortium case study
+|    |          |    └── ...                    // .csv marking files and .png simulation evolution plots
+|    |          ├── noLacI                      // Simulation results for the noLacI experimental condition in the bacterial_consortium case study
+|    |          |    └── ...                    // .csv marking files and .png simulation evolution plots
+|    |          └── topology                    // Visualized network architectures for the bacterial_consortium case study
+|    | 
+|    | 
+|    └── rgb                     // The RGB synthetic morphogen system case study provided in Giannantoni et al., 2023
+|         ├── rgb.bisdl          // BiSDL description of the rgb case study
+|         ├── rgb.py             // Python nwn-snakes model file compiled from BiSDL description of the rgb case study
+|          └── results           // Simulation results for different experimental conditions in the rgb case study
+|               ├── rgb          // Simulation results for the only experimental condition in the rgb case study
+|               |    └── ...     // .csv marking files and .png simulation evolution plots
+|               └── topology     // Visualized network architectures for the rgb case study
+|   
+├── petrisim                                    // Python code implementing the petrisim prototype simulator for nwn-snakes models
 |    ├── simulator.py
 |    └── utils.py
 |  
-├── .gitignore                                  // ...
+├── .gitignore                                  // .gitignore file for the BiSDL repository
 |  
-├── BiSDL.def                                    // ...
+├── BiSDL.def                                   // The BiSDL Singularity recipe file
 |  
-├── bisdl2snakes.py                                   // ...
+├── bisdl2snakes.py                             // Python code implementing the prototype BiSDL compiler generating nwn-snakes models 
 |  
-├── run_simulation.py                                  // ...
+├── run_simulation.py                           // Python code running simulations for the case studies provided in Giannantoni et al., 2023
 |    
-└── README.md                                                     // This README file          
+└── README.md                                   // This README file          
 ```
