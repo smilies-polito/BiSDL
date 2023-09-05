@@ -116,7 +116,7 @@ The `run_simulation.py` script calls the prototype BiSDL simulator implemented i
 To reproduce the only experimental condition for the `rgb` case study, run the simulator once: 
 
 ```
-Singularity> python3 run_simulation.py rgb rgb 300
+Singularity> python3 run_simulation.py rgb rgb 60
 ```
 Each simulation run generates a `results/` subfolder within the `rgb` folder, where all simulation outputs are stored and organized under the one experimental condition. 
 
