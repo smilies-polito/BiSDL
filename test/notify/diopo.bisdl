@@ -1,6 +1,0 @@
-MODULE diopo
-TIMESCALE 1
-SCOPE controller_compartment (5, 5)
-    PROCESS controller
-        TIMESCALE 1
-        ENZYMATIC_REACTION(Lux1_protein, [SAM_molecule, ACP_molecule], [_3OC6HSL_molecule])
