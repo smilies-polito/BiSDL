@@ -4,20 +4,10 @@ from copy import deepcopy
 
 import numpy as np
 
-# TODO leggere i signals all'inizio del parsing, poi nella sottorete generica (process) inserire il
-# notify per i posti della rete superiore che hanno quel nome
-# TODO mettere il controllo dell'esistenza del posto in make_place e toglierlo altrove
-# TODO usare il moltiplicatore mult nelle funzioni make_xxx_arc
-# TODO testare se mettendo i posti nella rete di sopra all'inizio, funziona lo stesso tutto
-# TODO check numeri > 0
-# TODO contatore globale per avere nomi univoci (correggere nomi transizioni già fatte)
-
-
-from bisdl.gen.ModuleParser import ModuleParser
-from bisdl.gen.ModuleListener import ModuleListener
+from bisdl_language.gen.ModuleParser import ModuleParser
+from bisdl_language.gen.ModuleListener import ModuleListener
 
 tree = lambda: defaultdict(tree)
-
 
 def _starts_with_number(s):
     numbers = [str(i) for i in range(0, 10)]
@@ -246,7 +236,7 @@ class ModuleListenerImpl(ModuleListener):
         for place, nets in self._parent_places.items():
             net_tokens = ", [ " + ", ".join(nets) + " ]" if len(nets) > 0 else ""
             self._make_place(self._parent_net, place, net_tokens)
-        # TODO assert all src_ and dest_ scopes exist
+
         for _jt in self._juxtacrine_transitions:
             net, transition, rule, src_scope, dest_scope = _jt
             self._make_transition(net, transition, rule)
@@ -280,9 +270,7 @@ class ModuleListenerImpl(ModuleListener):
             data = self._def_processes[_p_id]
 
         _net = f'{_p_id}_{data["COUNT"]}_net'
-        # se il PROCESS esisteva già (cioè count>0):
-        # copia le stringhe di quella net/process (places, transitions, in/out arcs)
-        # e sostituisci il nome della net
+
         if data['COUNT'] > 0:
             self._nodes[_net] = deepcopy(self._nodes[f'{_p_id}_0_net'])
             recursive_replace(self._nodes[_net], "0", str(data['COUNT']))
@@ -335,7 +323,7 @@ class ModuleListenerImpl(ModuleListener):
         self._make_place(self._sub_net, mrna)
         self._make_place(self._sub_net, protein)
         _transitions = list()
-        # for i in range(int(mult)):
+
         transition = self._unique_t_name(f"{mrna}_translation")  # + ("_" + str(i) if i > 0 else "")
         _transitions.append(transition)
         self._make_transition(self._sub_net, transition)
@@ -355,21 +343,6 @@ class ModuleListenerImpl(ModuleListener):
             transition = self._unique_t_name(molecule + "_degradation" + ("_" + str(i) if i > 0 else ""))
             self._make_transition(self._sub_net, transition)
             self._make_input_arc(self._sub_net, molecule, transition)
-
-
-    # # Exit a parse tree produced by ModuleParser#constant.
-    # def exitConstant(self, ctx: ModuleParser.ConstantContext):
-    #     id = ctx.molecule().getText()
-    #     _mult, _molecule = id.split("*") if "*" in id else ["1", id]
-    #     # for i in range(int(_mult)):
-    #     #     transition = self._unique_t_name(_molecule + "_constant" + ("_" + str(i) if i > 0 else ""))
-    #     #     self._make_transition(self._sub_net, transition)
-    #     #     self._make_input_arc(self._sub_net, _molecule, transition)
-    #     #     self._make_output_arc(self._sub_net, _molecule, transition)
-    #     transition = self._unique_t_name(_molecule + "_constant")
-    #     self._make_transition(self._sub_net, transition)
-    #     self._make_place(self._sub_net, _molecule)
-    #     self._make_output_arc(self._sub_net, _molecule, transition, _mult)
 
     # Exit a parse tree produced by ModuleParser#protein_complex_formation.
     def exitProtein_complex_formation(self, ctx: ModuleParser.Protein_complex_formationContext):
@@ -397,7 +370,7 @@ class ModuleListenerImpl(ModuleListener):
         self._make_transition(self._sub_net, transition)
         self._make_place(self._sub_net, e_name)
         self._make_input_arc(self._sub_net, e_name, transition, mult=e_mult)
-        self._make_output_arc(self._sub_net, e_name, transition, mult=e_mult) # altrimenti se il marking è 0 la transizione non scatta mai! -> usa degradation
+        self._make_output_arc(self._sub_net, e_name, transition, mult=e_mult)
         for pin, pin_mult in proteins_in.items():
             self._make_place(self._sub_net, pin)
             self._make_input_arc(self._sub_net, pin, transition, pin_mult)
@@ -412,7 +385,6 @@ class ModuleListenerImpl(ModuleListener):
     # Exit a parse tree produced by ModuleParser#custom_process.
     def exitCustom_process(self, ctx:ModuleParser.Custom_processContext):
         mlist_in, mlist_out = [_x.getText().split(',') for _x in ctx.m_list()]
-        #id1, id2 = [_x.getText() for _x in ctx.molecule()]
         transition = self._unique_t_name(f"process")
         self._make_transition(self._sub_net, transition)
         for _molecule, _mult in mlist_in:
@@ -443,8 +415,6 @@ class ModuleListenerImpl(ModuleListener):
     def exitM_list(self, ctx: ModuleParser.M_listContext):
         pass
 
-    # TODO va inserita invece la logica di notification da reti inferiori a posti nella rete superiore (molecule sotto == posto sopra)
-    # idea: cerco nelle strutture dati d'appoggio se nella rete sotto c'è la molecola (posto), allora mi segno che è da notificare al suo posto padre
     # Exit a parse tree produced by ModuleParser#paracrine_signals.
     def exitParacrine_signals(self, ctx: ModuleParser.Paracrine_signalsContext):
         net = self._parent_net
@@ -462,9 +432,6 @@ class ModuleListenerImpl(ModuleListener):
                 self._make_input_arc(net, n2, transition, token_type="Variable('x')")
                 self._make_output_arc(net, n1, transition, token_type="Variable('x')")
 
-    # TODO in una versione futura si potrebbe rimuovere la necessità di scrivere un JUXTACRINE_SIGNAL per ogni vicino:
-    # TODO il vicinato viene costruito dopo il signaling! spostare la roba qua sotto in un altro listener (oppure spostare build_neighborhood)
-    # TODO forse meglio cercare le coordinate dello scope dest e calcolare la distanza dentro questa funzione, senza spostare nulla
     # Exit a parse tree produced by ModuleParser#juxtacrine_signal.
     def exitJuxtacrine_signal(self, ctx: ModuleParser.Juxtacrine_signalContext):
         src_scope = ctx.parentCtx.ID().getText()
@@ -479,7 +446,6 @@ class ModuleListenerImpl(ModuleListener):
     def enterDiffusion(self, ctx: ModuleParser.DiffusionContext):
         pass
 
-    #TODO: è sufficiente far passare solo le proteine (e "molecule", cioè non GENE e MRNA)?
     # Exit a parse tree produced by ModuleParser#diffusion.
     def exitDiffusion(self, ctx: ModuleParser.DiffusionContext):
         scopes = ctx.ID()
@@ -492,19 +458,8 @@ class ModuleListenerImpl(ModuleListener):
         _molecules = ctx.signals().getText().split(',')
         for _it in _molecules:
             _mult, _mol = _it.split("*") if "*" in _it else ["1", _it]
-            # expr = " or ".join(["str(x) == '" + _m + "'" for _m in _molecules])
             rule = f"Expression(\"str(x) == {repr(_mol)}\")"
-            # qui venivano creati tanti archi quanti ne indicava il moltiplicatore
-            # for _ in range(int(_mult)):
-            #     _t1 = self._unique_t_name(f"diffusion_{_mol}")
-            #     _t2 = self._unique_t_name(f"diffusion_{_mol}")
-            #     self._make_transition(net, _t1, rule)
-            #     self._make_transition(net, _t2, rule)
-            #     self._make_input_arc(self._parent_net, s1, _t1, token_type=token_type)
-            #     self._make_output_arc(self._parent_net, s2, _t1, token_type=token_type)
-            #     self._make_input_arc(self._parent_net, s2, _t2, token_type=token_type)
-            #     self._make_output_arc(self._parent_net, s1, _t2, token_type=token_type)
-            # qui invece faccio creare un arco con n token, per emulare la pressione necessaria alla diffusione
+
             _t1 = self._unique_t_name(f"diffusion_{_mol}")
             _t2 = self._unique_t_name(f"diffusion_{_mol}")
             self._make_transition(net, _t1, rule)

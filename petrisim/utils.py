@@ -1,4 +1,5 @@
 import collections
+import os.path
 from abc import ABC, abstractmethod
 from collections import defaultdict
 from enum import Enum
@@ -75,7 +76,7 @@ class Module(ABC):
         self._net_timescales = self.collect_timescales()
         self._transitions = self.collect_transitions()
         self._marking_count = self.get_marking_count()
-        self._watch = None #TODO places to watch
+        self._watch = None
 
     @abstractmethod
     def build_net_structure(self) -> PetriNet:
@@ -148,7 +149,7 @@ class Module(ABC):
     def print_marking_count(self, i, output_path = "."):
         marking = self.get_marking_count()
         for d in marking.keys():
-            out = os.path.join(output_path, "marking_" + d + " .csv")
+            out = os.path.join(output_path, "marking_" + d + ".csv")
             header = not os.path.exists(out)
             with open(out, 'a') as f:
                 pd.DataFrame.from_dict({i: marking[d]}).stack().unstack(level=[0]).to_csv(f, header=header)
@@ -207,7 +208,6 @@ class Module(ABC):
             return transitions
         return transitions
 
-    # TODO parametrizzare la percentuale di transizioni pescate per modello
     def fire(self, step, prob=0.6):
         print("step", step)
         to_fire = []
@@ -229,10 +229,9 @@ class Module(ABC):
                 # if here: one of the previous transitions selected during this same simulation step
                 # consumed a token that was needed by this transition to fire
                 pass
+                #print("\t-- transition", t.name, "did not fire: ")
                 #print(e)
-        #TODO spostare qua l'aggiornamento del count marking
 
-    #TODO aggiungere filtro sui token da plottare (impostabile dall'esterno, es. main della simulazione)
     def draw(self, path):
         self._draw(self._net, path)
 

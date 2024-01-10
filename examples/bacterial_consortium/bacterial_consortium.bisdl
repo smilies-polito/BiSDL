@@ -8,18 +8,20 @@ SCOPE producer (1, 1)
         DEGRADATION(LacI_protein)
         DEGRADATION(SAM_molecule)
 
-        TRANSCRIPTION(LuxI_gene, LuxI_mrna, INHIBITORS: LacI_protein)
-        TRANSLATION(LuxI_mrna, 2*LuxI_protein)
-        DEGRADATION(LuxI_protein)
+        TRANSCRIPTION(LuxI_gene, 2*LuxI_mrna, INHIBITORS: 5*LacI_protein)
+        TRANSLATION(3*LuxI_mrna, 2*LuxI_protein, INHIBITORS: 5*LacI_protein)
         DEGRADATION(LuxI_protein)
 
         TRANSCRIPTION(ACP_gene, ACP_mrna)
-        TRANSLATION(ACP_mrna, 2*ACP_protein)
+        TRANSLATION(ACP_mrna, 4*ACP_protein)
         DEGRADATION(ACP_protein)
 
-        ENZYMATIC_REACTION(LuxI_protein, [SAM_molecule, ACP_protein], [AHL_molecule])
-        ENZYMATIC_REACTION(LuxI_protein, [SAM_molecule, ACP_protein], [AHL_molecule])
-        ENZYMATIC_REACTION(LuxI_protein, [SAM_molecule, ACP_protein], [AHL_molecule])
+        ENZYMATIC_REACTION(3*LuxI_protein, [SAM_molecule, ACP_protein], [AHL_molecule])
+        ENZYMATIC_REACTION(3*LuxI_protein, [SAM_molecule, ACP_protein], [AHL_molecule])
+        ENZYMATIC_REACTION(3*LuxI_protein, [SAM_molecule, ACP_protein], [AHL_molecule])
+        ENZYMATIC_REACTION(3*LuxI_protein, [SAM_molecule, ACP_protein], [AHL_molecule])
+        ENZYMATIC_REACTION(3*LuxI_protein, [SAM_molecule, ACP_protein], [AHL_molecule])
+
         DEGRADATION(AHL_molecule)
 
 SCOPE sensor (2, 2)
@@ -29,17 +31,65 @@ SCOPE sensor (2, 2)
         DEGRADATION(AHL_molecule)
 
         TRANSCRIPTION(LuxR_gene, LuxR_mrna)
-        TRANSLATION(LuxR_mrna, LuxR_protein)
+        TRANSLATION(LuxR_mrna, 4*LuxR_protein)
         DEGRADATION(LuxR_protein)
 
-        PROTEIN_COMPLEX_FORMATION(LuxR_protein, AHL_molecule, LuxR_AHL_complex)
-        PROTEIN_COMPLEX_FORMATION(LuxR_protein, AHL_molecule, LuxR_AHL_complex)
+        PROTEIN_COMPLEX_FORMATION(3*LuxR_protein, 3*AHL_molecule, 3*LuxR_AHL_complex)
+        PROTEIN_COMPLEX_FORMATION(3*LuxR_protein, 3*AHL_molecule, 3*LuxR_AHL_complex)
+
         DEGRADATION(LuxR_AHL_complex)
 
-        TRANSCRIPTION(GFP_reporter_gene, GFP_reporter_mrna, INDUCERS: LuxR_AHL_complex)
-        TRANSCRIPTION(GFP_reporter_gene, GFP_reporter_mrna, INDUCERS: LuxR_AHL_complex)
-        TRANSLATION(GFP_reporter_mrna, 3*GFP_reporter_protein)
-        TRANSLATION(GFP_reporter_mrna, 3*GFP_reporter_protein)
+        TRANSCRIPTION(GFP_reporter_gene, 3*GFP_reporter_mrna, INDUCERS: 2*LuxR_AHL_complex)
+        TRANSLATION(2*GFP_reporter_mrna, 2*GFP_reporter_protein)
+        DEGRADATION(GFP_reporter_protein)
+
+DIFFUSION producer, sensor, [1*AHL_molecule]
+DIFFUSION producer, sensor, [1*AHL_molecule]
+DIFFUSION producer, sensor, [1*AHL_molecule]
+DIFFUSION producer, sensor, [1*AHL_molecule]
+DIFFUSION producer, sensor, [1*AHL_molecule]MODULE bacterialConsortium
+TIMESCALE 1
+
+SCOPE producer (1, 1)
+    PROCESS AHL_production
+        TIMESCALE 2
+
+        DEGRADATION(LacI_protein)
+        DEGRADATION(SAM_molecule)
+
+        TRANSCRIPTION(LuxI_gene, 2*LuxI_mrna, INHIBITORS: 5*LacI_protein)
+        TRANSLATION(3*LuxI_mrna, 2*LuxI_protein, INHIBITORS: 5*LacI_protein)
+        DEGRADATION(LuxI_protein)
+
+        TRANSCRIPTION(ACP_gene, ACP_mrna)
+        TRANSLATION(ACP_mrna, 4*ACP_protein)
+        DEGRADATION(ACP_protein)
+
+        ENZYMATIC_REACTION(3*LuxI_protein, [SAM_molecule, ACP_protein], [AHL_molecule])
+        ENZYMATIC_REACTION(3*LuxI_protein, [SAM_molecule, ACP_protein], [AHL_molecule])
+        ENZYMATIC_REACTION(3*LuxI_protein, [SAM_molecule, ACP_protein], [AHL_molecule])
+        ENZYMATIC_REACTION(3*LuxI_protein, [SAM_molecule, ACP_protein], [AHL_molecule])
+        ENZYMATIC_REACTION(3*LuxI_protein, [SAM_molecule, ACP_protein], [AHL_molecule])
+
+        DEGRADATION(AHL_molecule)
+
+SCOPE sensor (2, 2)
+    PROCESS GFP_production
+        TIMESCALE 3
+
+        DEGRADATION(AHL_molecule)
+
+        TRANSCRIPTION(LuxR_gene, LuxR_mrna)
+        TRANSLATION(LuxR_mrna, 4*LuxR_protein)
+        DEGRADATION(LuxR_protein)
+
+        PROTEIN_COMPLEX_FORMATION(3*LuxR_protein, 3*AHL_molecule, 3*LuxR_AHL_complex)
+        PROTEIN_COMPLEX_FORMATION(3*LuxR_protein, 3*AHL_molecule, 3*LuxR_AHL_complex)
+
+        DEGRADATION(LuxR_AHL_complex)
+
+        TRANSCRIPTION(GFP_reporter_gene, 3*GFP_reporter_mrna, INDUCERS: 2*LuxR_AHL_complex)
+        TRANSLATION(2*GFP_reporter_mrna, 2*GFP_reporter_protein)
         DEGRADATION(GFP_reporter_protein)
 
 DIFFUSION producer, sensor, [1*AHL_molecule]

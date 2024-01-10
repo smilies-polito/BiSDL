@@ -3,8 +3,8 @@ import sys
 from pathlib import Path
 from antlr4 import *
 
-from bisdl.gen.ModuleLexer import ModuleLexer
-from bisdl.impl.ModuleListener import *
+from bisdl_language.gen.ModuleLexer import ModuleLexer
+from bisdl_language.impl.ModuleListener import *
 
 
 class BiSDLCompiler(object):
@@ -32,8 +32,6 @@ class BiSDLCompiler(object):
             output.write("\n".join(model.buf))
             print(f'Compiled file saved to {self._dest}')
 
-
-# TODO controllo errori
 def main(argc, argv):
     if argc < 2:
         help()
