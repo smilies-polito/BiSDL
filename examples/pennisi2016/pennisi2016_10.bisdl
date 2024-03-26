@@ -1,0 +1,39 @@
+MODULE pennisi2016
+TIMESCALE 1
+
+SCOPE victim (1, 1)
+    PROCESS hs
+    TIMESCALE 1
+
+    CUSTOM_PROCESS([ANTIGEN_molecule], [2*ANTIGEN_molecule])
+
+    CUSTOM_PROCESS([MP_molecule], [10*MP_molecule])
+
+    CUSTOM_PROCESS([MP_molecule, ANTIGEN_molecule], [MP_ANTIGEN_molecule])
+    CUSTOM_PROCESS([10*MP_ANTIGEN_molecule], [10*MP_ACTIVE_molecule])
+
+    CUSTOM_PROCESS([TH_molecule], [10*TH_molecule])
+
+    CUSTOM_PROCESS([TH_molecule, MP_ACTIVE_molecule], [TH_ACTIVE_molecule, MP_ACTIVE_molecule])
+
+    CUSTOM_PROCESS([B_molecule], [10*B_molecule])
+
+    CUSTOM_PROCESS([B_molecule, ANTIGEN_molecule], [B_ACTIVE_molecule, 5*IGM_molecule])
+    CUSTOM_PROCESS([B_ACTIVE_molecule, ANTIGEN_molecule], [B_PRESENTING_molecule])
+
+    CUSTOM_PROCESS([3*B_PRESENTING_molecule, 3*TH_ACTIVE_molecule], [B_MEMORY_molecule, B_PLASMA_molecule, 10*TH_ACTIVE_molecule])
+    CUSTOM_PROCESS([B_MEMORY_molecule, ANTIGEN_molecule], [B_PLASMA_molecule, B_MEMORY_molecule])
+
+    CUSTOM_PROCESS([3*B_PLASMA_molecule], [3*B_PLASMA_molecule, 10*IGG_molecule])
+
+    CUSTOM_PROCESS([ANTIGEN_molecule, 5*IGG_molecule], [VOID_molecule])
+
+    CUSTOM_PROCESS([ANTIGEN_molecule, 5*IGM_molecule], [VOID_molecule])
+
+    DEGRADATION(ANTIGEN_molecule)
+    DEGRADATION(MP_molecule)
+    DEGRADATION(TH_molecule)
+    DEGRADATION(B_molecule)
+    DEGRADATION(B_PLASMA_molecule)
+    DEGRADATION(3*IGM_molecule)
+    DEGRADATION(8*IGG_molecule)
