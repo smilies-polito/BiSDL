@@ -1,4 +1,4 @@
-MODULE mozhaiskiy
+MODULE mozhayskiy
 TIMESCALE 1
 
 SCOPE donor (0, 0)
@@ -30,9 +30,9 @@ SCOPE donor (0, 0)
 
         CUSTOM_PROCESS([pilus_molecule], [2*pilus_molecule])
 
-        CUSTOM_PROCESS([T4_plasmid_molecule, 20*pilus_molecule], [T4_plasmid_strand_molecule, T4_plasmid_molecule])
-        CUSTOM_PROCESS([T5_plasmid_molecule, 20*pilus_molecule], [T5_plasmid_strand_molecule, T5_plasmid_molecule])
-        CUSTOM_PROCESS([T6_plasmid_molecule, 20*pilus_molecule], [T6_plasmid_strand_molecule, T6_plasmid_molecule])
+        CUSTOM_PROCESS([T4_plasmid_molecule, 5*pilus_molecule], [T4_plasmid_strand_molecule, T4_plasmid_molecule])
+        CUSTOM_PROCESS([T5_plasmid_molecule, 5*pilus_molecule], [T5_plasmid_strand_molecule, T5_plasmid_molecule])
+        CUSTOM_PROCESS([T6_plasmid_molecule, 5*pilus_molecule], [T6_plasmid_strand_molecule, T6_plasmid_molecule])
 
         DEGRADATION(T0_protein_molecule)
         DEGRADATION(T1_protein_molecule)
