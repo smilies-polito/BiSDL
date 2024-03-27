@@ -1,0 +1,81 @@
+Module Mozhayskiy:
+N mozhayskiy_net
+		P donor
+			T N donor_0_net
+					P T0_plasmid_molecule
+						T dot 
+					P T0_protein_molecule
+						T dot 
+					P T2_protein_molecule
+					P T5_protein_molecule
+					P T0_mod_protein_molecule
+					P T1_plasmid_molecule
+						T dot 
+					P T1_protein_molecule
+						T dot 
+					P T3_protein_molecule
+					P T1_mod_protein_molecule
+					P T2_plasmid_molecule
+						T dot 
+					P S1_molecule
+					P T2_mod_protein_molecule
+					P T3_plasmid_molecule
+						T dot 
+					P T3_mod_protein_molecule
+					P S2_molecule
+					P T4_plasmid_molecule
+						T dot 
+					P T4_protein_molecule
+					P T5_plasmid_molecule
+						T dot 
+					P T6_protein_molecule
+					P T5_mod_protein_molecule
+					P T6_plasmid_molecule
+						T dot 
+					P pilus_molecule
+					P T4_plasmid_strand_molecule
+					P T5_plasmid_strand_molecule
+					P T6_plasmid_strand_molecule
+					P T4_mod_protein_molecule
+					P T6_mod_protein_molecule
+
+		P recipient
+			T N recipient_0_net
+					P T0_plasmid_molecule
+						T dot 
+					P T0_protein_molecule
+						T dot 
+					P T2_protein_molecule
+					P T5_protein_molecule
+					P T0_mod_protein_molecule
+					P T1_plasmid_molecule
+						T dot 
+					P T1_protein_molecule
+						T dot 
+					P T3_protein_molecule
+					P T1_mod_protein_molecule
+						T dot 
+					P T2_plasmid_molecule
+						T dot 
+					P S1_molecule
+					P T2_mod_protein_molecule
+					P T3_plasmid_molecule
+						T dot 
+					P T3_mod_protein_molecule
+					P S2_molecule
+					P T4_plasmid_molecule
+						T dot 
+					P T4_protein_molecule
+					P T5_plasmid_molecule
+						T dot 
+					P T6_protein_molecule
+					P T5_mod_protein_molecule
+					P T6_plasmid_molecule
+						T dot 
+					P T4_plasmid_strand_molecule
+					P T5_plasmid_strand_molecule
+					P T6_plasmid_strand_molecule
+					P T4_mod_protein_molecule
+					P T6_mod_protein_molecule
+
+
