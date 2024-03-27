@@ -3,7 +3,7 @@ import random
 import sys
 import shutil
 import stat
-from petrisim.simulator import *
+from petrisim.simulator_roberta import *
 from snakes.nets import *
 from examples.bacterial_consortium.bacterial_consortium import Bacterialconsortium
 from examples.rgb.rgb import Rgb
