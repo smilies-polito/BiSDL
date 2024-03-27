@@ -384,10 +384,12 @@ class ModuleListenerImpl(ModuleListener):
 
     # Exit a parse tree produced by ModuleParser#custom_process.
     def exitCustom_process(self, ctx:ModuleParser.Custom_processContext):
+        _transitions = []
         mlist_in, mlist_out = [_x.getText().split(',') for _x in ctx.m_list()]
         transition = self._unique_t_name(f"process")
         self._make_transition(self._sub_net, transition)
-        for _molecule, _mult in mlist_in:
+        _transitions.append(transition)
+        for _molecule in mlist_in:
             m1, p1 = _molecule.split("*") if "*" in _molecule else ["1", _molecule]
             self._make_place(self._sub_net, p1)
             self._make_input_arc(self._sub_net, p1, transition, mult=m1)
@@ -395,6 +397,14 @@ class ModuleListenerImpl(ModuleListener):
             m2, p2 = _molecule.split("*") if "*" in _molecule else ["1", _molecule]
             self._make_place(self._sub_net, p2)
             self._make_output_arc(self._sub_net, p2, transition, mult=m2)
+
+        for _in in mlist_in:
+            for _out in mlist_out:
+                m1, p1 = _in.split("*") if "*" in _in else ["1", _in]
+                m2, p2 = _out.split("*") if "*" in _out else ["1", _out]
+                addToken = self._make_regulation(_transitions, p1, p2, mult=m2)
+                # TODO: check. urgent.
+                self._make_place(self._sub_net, p2, activation=addToken)
 
     # Exit a parse tree produced by ModuleParser#type_inhibitors.
     def exitType_inhibitors(self, ctx: ModuleParser.Type_inhibitorsContext):
