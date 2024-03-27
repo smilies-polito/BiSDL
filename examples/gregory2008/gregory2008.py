@@ -24,7 +24,7 @@ class Gregory2008(Module):
 		transconjugant_0_net.add_transition(Transition("process_5"))
 		transconjugant_0_net.add_transition(Transition("R_plasmid_strand_molecule_inhibition_R_plasmid_molecule_1"))
 		transconjugant_0_net.add_transition(Transition("R_protein_molecule_degradation_2"))
-		transconjugant_0_net.add_transition(Transition("R_plasmid_strand_molecule_degradation_1"))
+		transconjugant_0_net.add_transition(Transition("R_plasmid_strand_molecule_degradation_2"))
 
 		# donor_0_net places
 		donor_0_net.add_place(Place("R_plasmid_molecule"))
@@ -37,6 +37,7 @@ class Gregory2008(Module):
 		donor_0_net.add_transition(Transition("process_2"))
 		donor_0_net.add_transition(Transition("process_3"))
 		donor_0_net.add_transition(Transition("R_protein_molecule_degradation_1"))
+		donor_0_net.add_transition(Transition("R_plasmid_strand_molecule_degradation_1"))
 		donor_0_net.add_transition(Transition("pilus_molecule_degradation_1"))
 
 		# gregory2008_net places
@@ -54,12 +55,13 @@ class Gregory2008(Module):
 		donor_0_net.add_input("R_plasmid_molecule", "process_1", Value(dot), notify=[gregory2008_net.place('donor')])
 		donor_0_net.add_input("pilus_molecule", "process_2", Value(dot), notify=[gregory2008_net.place('donor')])
 		donor_0_net.add_input("R_plasmid_molecule", "process_3", Value(dot), notify=[gregory2008_net.place('donor')])
-		donor_0_net.add_input("pilus_molecule", "process_3", MultiArc([Value(dot)]*10), notify=[gregory2008_net.place('donor')])
+		donor_0_net.add_input("pilus_molecule", "process_3", MultiArc([Value(dot)]*5), notify=[gregory2008_net.place('donor')])
 		donor_0_net.add_input("R_protein_molecule", "R_protein_molecule_degradation_1", Value(dot), notify=[gregory2008_net.place('donor')])
+		donor_0_net.add_input("R_plasmid_strand_molecule", "R_plasmid_strand_molecule_degradation_1", Value(dot), notify=[gregory2008_net.place('donor')])
 		donor_0_net.add_input("pilus_molecule", "pilus_molecule_degradation_1", Value(dot), notify=[gregory2008_net.place('donor')])
-		donor_0_net.add_output("R_protein_molecule", "process_1", MultiArc([Value(dot)]*5), notify=[gregory2008_net.place('donor')])
+		donor_0_net.add_output("R_protein_molecule", "process_1", Value(dot), notify=[gregory2008_net.place('donor')])
 		donor_0_net.add_output("R_plasmid_molecule", "process_1", Value(dot), notify=[gregory2008_net.place('donor')])
-		donor_0_net.add_output("pilus_molecule", "process_2", MultiArc([Value(dot)]*5), notify=[gregory2008_net.place('donor')])
+		donor_0_net.add_output("pilus_molecule", "process_2", MultiArc([Value(dot)]*2), notify=[gregory2008_net.place('donor')])
 		donor_0_net.add_output("R_plasmid_strand_molecule", "process_3", Value(dot), notify=[gregory2008_net.place('donor')])
 		donor_0_net.add_output("R_plasmid_molecule", "process_3", Value(dot), notify=[gregory2008_net.place('donor')])
 
@@ -69,8 +71,8 @@ class Gregory2008(Module):
 		transconjugant_0_net.add_input("R_plasmid_molecule", "R_plasmid_strand_molecule_inhibition_R_plasmid_molecule_1", Value(dot), notify=[gregory2008_net.place('transconjugant')])
 		transconjugant_0_net.add_input("R_plasmid_strand_molecule", "R_plasmid_strand_molecule_inhibition_R_plasmid_molecule_1", Value(dot), notify=[gregory2008_net.place('transconjugant')])
 		transconjugant_0_net.add_input("R_protein_molecule", "R_protein_molecule_degradation_2", Value(dot), notify=[gregory2008_net.place('transconjugant')])
-		transconjugant_0_net.add_input("R_plasmid_strand_molecule", "R_plasmid_strand_molecule_degradation_1", Value(dot), notify=[gregory2008_net.place('transconjugant')])
-		transconjugant_0_net.add_output("R_protein_molecule", "process_4", MultiArc([Value(dot)]*5), notify=[gregory2008_net.place('transconjugant')])
+		transconjugant_0_net.add_input("R_plasmid_strand_molecule", "R_plasmid_strand_molecule_degradation_2", Value(dot), notify=[gregory2008_net.place('transconjugant')])
+		transconjugant_0_net.add_output("R_protein_molecule", "process_4", Value(dot), notify=[gregory2008_net.place('transconjugant')])
 		transconjugant_0_net.add_output("R_plasmid_molecule", "process_4", Value(dot), notify=[gregory2008_net.place('transconjugant')])
 		transconjugant_0_net.add_output("R_plasmid_molecule", "process_5", Value(dot), notify=[gregory2008_net.place('transconjugant')])
 		return gregory2008_net

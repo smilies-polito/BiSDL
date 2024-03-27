@@ -5,11 +5,12 @@ SCOPE donor (0, 0)
 
     PROCESS donor
         TIMESCALE 1
-        CUSTOM_PROCESS([R_plasmid_molecule], [5*R_protein_molecule, R_plasmid_molecule])
-        CUSTOM_PROCESS([pilus_molecule], [5*pilus_molecule])
-        CUSTOM_PROCESS([R_plasmid_molecule, 10*pilus_molecule], [R_plasmid_strand_molecule, R_plasmid_molecule])
+        CUSTOM_PROCESS([R_plasmid_molecule], [R_protein_molecule, R_plasmid_molecule])
+        CUSTOM_PROCESS([pilus_molecule], [2*pilus_molecule])
+        CUSTOM_PROCESS([R_plasmid_molecule, 5*pilus_molecule], [R_plasmid_strand_molecule, R_plasmid_molecule])
 
         DEGRADATION(R_protein_molecule)
+        DEGRADATION(R_plasmid_strand_molecule)
         DEGRADATION(pilus_molecule)
 
         JUXTACRINE_SIGNAL R_plasmid_strand_molecule -> transconjugant
@@ -19,7 +20,7 @@ SCOPE transconjugant (0, 1)
 
     PROCESS transconjugant
         TIMESCALE 1
-        CUSTOM_PROCESS([R_plasmid_molecule], [5*R_protein_molecule, R_plasmid_molecule])
+        CUSTOM_PROCESS([R_plasmid_molecule], [R_protein_molecule, R_plasmid_molecule])
         CUSTOM_PROCESS([R_plasmid_strand_molecule], [R_plasmid_molecule], INHIBITORS: R_plasmid_molecule)
 
         DEGRADATION(R_protein_molecule)
