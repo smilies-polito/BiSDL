@@ -13,13 +13,13 @@ BiSDL v1.0:
 
 ### BiSDL Primary publications
 
-* L. Giannantoni, R. Bardini, A. Savino and S. D. Carlo, "Biology System Description Language (BiSDL): a modeling language for the design of multicellular synthetic biological systems", preprint available at [insert biorXiv link and doi], submitted for publication in BMC Bioinformatics. 
+* L. Giannantoni, R. Bardini, A. Savino and S. D. Carlo, "Biology System Description Language (BiSDL): a modeling language for the design of multicellular synthetic biological systems", preprint available at biorXiv (https://doi.org/10.1101/2024.01.13.575499), submitted for publication in BMC Bioinformatics. 
 
 * F. Muggianu, A. Benso, R. Bardini, E. Hu, G. Politano and S. D. Carlo, "Modeling biological complexity using Biology System Description Language (BiSDL)," 2018 IEEE International Conference on Bioinformatics and Biomedicine (BIBM), Madrid, Spain, 2018, pp. 713-717, doi: 10.1109/BIBM.2018.8621533.
 
 ## Experimental setup
 
-Follow these steps to setup for reproducing the experiments provided in _Giannantoni et al., 2023_.
+Follow these steps to setup for reproducing the experiments provided in _Giannantoni et al., 2024_.
 1) Install `Singularity` from https://docs.sylabs.io/guides/3.0/user-guide/installation.html:
     * Install `Singularity` release 3.10.2, with `Go` version 1.18.4
     * Suggestion: follow instructions provided in _Download and install singularity from a release_ section after installing `Go`
@@ -41,7 +41,7 @@ singularity build --fakeroot BiSDL.sif BiSDL.def
 
 # Reproducing results of BiSDL case studies
 
-BiSDL validation relies on two case studies, as described in _Giannantoni et al., 2023_:
+BiSDL validation relies on two case studies, as described in _Giannantoni et al., 2024_:
 
 ### The bacterial consortium
 
@@ -50,6 +50,11 @@ The first case study presents a proof-of-concept design in which two parts of a 
 ### The RGB synthetic morphogen system
 
 The second case study describes a synthetic morphogen system whose design involves multiple cells and their spatial interactions and organization from which a spatial pattern of red, green, and blue (RGB) fluorescent markers expression emerges.
+
+
+### The conjugative plasmid transfer
+
+The third case study describes antibiotic resistance (R) conjugative plasmid transfer across bacterial cells.
 
 
 ## Reproducing the analysis interactively within the BiSDL Singularity container
@@ -120,9 +125,31 @@ Singularity> python3 run_simulation.py rgb rgb 60
 ```
 Each simulation run generates a `results/` subfolder within the `rgb` folder, where all simulation outputs are stored and organized under the one experimental condition. 
 
+### The RGB synthetic morphogen system
+1) Compile the provided BiSDL description:
+
+```
+Singularity> python3 bisdl2snakes.py examples/pt/pt.bisdl
+```
+
+The `bisdl2snakes.py` script implements the prototype BiSDL compiler generating `nwn-snakes` model file from BiSDL descriptions in their same folder.
+
+2) Run the simulation:
+```
+Singularity> python3 run_simulation.py <case_study> <experimental_condition> <simulation_steps> 
+```
+The `run_simulation.py` script calls the prototype BiSDL simulator implemented in `petrisim/` to simulate the specified case study (in this case, `pt`) and experimental condition (only `pt` for `pt`), running for an `int` number of simulations steps.
+
+To reproduce the only experimental condition for the `pt` case study, run the simulator once: 
+
+```
+Singularity> python3 run_simulation.py pt pt 60
+```
+Each simulation run generates a `results/` subfolder within the `pt` folder, where all simulation outputs are stored and organized under the one experimental condition. 
+
 ## Reproducing the analysis running the BiSDL Singularity container
 
-To reproduce the analyses from _Giannantoni et al., 2023_, run the `BiSDL.sif` container with the required commandline arguments: a keyword to indicate the case study (`bacterial_consortium` or `rgb`).
+To reproduce the analyses from _Giannantoni et al., 2024_, run the `BiSDL.sif` container with the required commandline arguments: a keyword to indicate the case study (`bacterial_consortium` or `rgb`).
 
 ### The bacterial consortium
 ```
@@ -132,6 +159,11 @@ singularity run --no-home --bind  /local/path/to/BiSDL:/local/path/to/home/ BiSD
 ### The RGB synthetic morphogen system
 ```
 singularity run --no-home --bind  /local/path/to/BiSDL:/local/path/to/home/ BiSDL.sif rgb
+```
+
+### The plasmid transfer
+```
+singularity run --no-home --bind  /local/path/to/BiSDL:/local/path/to/home/ BiSDL.sif pt
 ```
 
 ## Repository structure
@@ -145,9 +177,9 @@ singularity run --no-home --bind  /local/path/to/BiSDL:/local/path/to/home/ BiSD
 |    |    └── ...
 |    └── Module.g4                    // BiSDL grammar Module
 |   
-├── examples                                    // The two case studies provided in Giannantoni et al., 2023
+├── examples                                    // The two case studies provided in Giannantoni et al., 2024
 |    |
-|    ├── bacterial_consortium                   // The bacterial_consortium case study provided in Giannantoni et al., 2023
+|    ├── bacterial_consortium                   // The bacterial_consortium case study provided in Giannantoni et al., 2024
 |    |     ├── bacterial_consortium.bisdl       // BiSDL description of the bacterial_consortium case study
 |    |     ├── bacterial_consortium.py          // Python nwn-snakes model file compiled from BiSDL description of the bacterial_consortium case study
 |    |     └── results                          // Simulation results for different experimental conditions in the bacterial_consortium case study
@@ -160,13 +192,22 @@ singularity run --no-home --bind  /local/path/to/BiSDL:/local/path/to/home/ BiSD
 |    |          └── topology                    // Visualized network architectures for the bacterial_consortium case study
 |    | 
 |    | 
-|    └── rgb                     // The RGB synthetic morphogen system case study provided in Giannantoni et al., 2023
-|         ├── rgb.bisdl          // BiSDL description of the rgb case study
-|         ├── rgb.py             // Python nwn-snakes model file compiled from BiSDL description of the rgb case study
-|          └── results           // Simulation results for different experimental conditions in the rgb case study
-|               ├── rgb          // Simulation results for the only experimental condition in the rgb case study
-|               |    └── ...     // .csv marking files and .png simulation evolution plots
-|               └── topology     // Visualized network architectures for the rgb case study
+|    ├── rgb                     // The RGB synthetic morphogen system case study provided in Giannantoni et al., 2024
+|    |    ├── rgb.bisdl          // BiSDL description of the rgb case study
+|    |    ├── rgb.py             // Python nwn-snakes model file compiled from BiSDL description of the rgb case study
+|    |    └── results           // Simulation results for the only experimental condition in the rgb case study
+|    |          ├── rgb          // Simulation results for the only experimental condition in the rgb case study
+|    |          |    └── ...     // .csv marking files and .png simulation evolution plots
+|    |          └── topology     // Visualized network architectures for the rgb case study
+|    | 
+|    | 
+|    └── pt                     // The plasmid transfer (pt) case study provided in Giannantoni et al., 2024
+|         ├── pt.bisdl          // BiSDL description of the pt case study
+|         ├── pt.py             // Python nwn-snakes model file compiled from BiSDL description of the pt case study
+|         └── results          // Simulation results for the only experimental condition in the pt case study
+|               ├── pt          // Simulation results for the only experimental condition in the pt case study
+|               |    └── ...    // .csv marking files and .png simulation evolution plots
+|               └── topology    // Visualized network architectures for the pt case study
 |   
 ├── petrisim                                    // Python code implementing the petrisim prototype simulator for nwn-snakes models
 |    ├── simulator.py
@@ -178,7 +219,7 @@ singularity run --no-home --bind  /local/path/to/BiSDL:/local/path/to/home/ BiSD
 |  
 ├── bisdl2snakes.py                             // Python code implementing the prototype BiSDL compiler generating nwn-snakes models 
 |  
-├── run_simulation.py                           // Python code running simulations for the case studies provided in Giannantoni et al., 2023
+├── run_simulation.py                           // Python code running simulations for the case studies provided in Giannantoni et al., 2024
 |    
 └── README.md                                   // This README file          
 ```

@@ -51,8 +51,15 @@ Stage: build
 
     if [ $1 = "rgb" ]; then
 
-        echo "Starting petrisim simulation for case study: $1; experimental condition: rgb; simulation steps: 60"
+        echo "Starting petrisim simulation for case study: $1; simulation steps: 60"
         python3 run_simulation.py $1 rgb 60
+
+    fi
+
+    if [ $1 = "pt" ]; then
+
+        echo "Starting petrisim simulation for case study: $1; simulation steps: 60"
+        python3 run_simulation.py $1 pt 60
 
     fi
 

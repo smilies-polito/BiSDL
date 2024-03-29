@@ -1,0 +1,55 @@
+MODULE pt
+TIMESCALE 1
+
+SCOPE donor (0, 0)
+    
+    PROCESS donor
+        TIMESCALE 2
+        CUSTOM_PROCESS([circular_plasmid_molecule], [R_mrna, circular_plasmid_molecule])
+        TRANSLATION(R_mrna, R_protein)
+
+        CUSTOM_PROCESS([circular_plasmid_molecule], [pilus_mrna, circular_plasmid_molecule])
+        TRANSLATION(pilus_mrna, pilus_protein)
+
+        CUSTOM_PROCESS([circular_plasmid_molecule, 2*pilus_protein], [circular_plasmid_molecule, linear_plasmid_molecule])
+
+        DEGRADATION(R_mrna)
+        DEGRADATION(pilus_mrna)
+        DEGRADATION(R_protein)
+        DEGRADATION(pilus_protein)
+        
+    
+    JUXTACRINE_SIGNAL linear_plasmid_molecule -> pilus
+
+SCOPE pilus (0, 1)
+    
+    PROCESS pilus
+        TIMESCALE 4
+        CUSTOM_PROCESS([linear_plasmid_molecule], [linear_plasmid_molecule])
+        
+    
+    JUXTACRINE_SIGNAL linear_plasmid_molecule -> transconjugant
+
+
+SCOPE transconjugant (0, 2)
+
+    PROCESS transconjugant
+
+        TIMESCALE 2
+
+        CUSTOM_PROCESS([linear_plasmid_molecule], [circular_plasmid_molecule])
+
+        CUSTOM_PROCESS([circular_plasmid_molecule], [R_mrna, circular_plasmid_molecule])
+        TRANSLATION(R_mrna, R_protein)
+
+        CUSTOM_PROCESS([circular_plasmid_molecule], [pilus_mrna, circular_plasmid_molecule])
+        TRANSLATION(pilus_mrna, pilus_protein)
+
+        DEGRADATION(R_mrna)
+        DEGRADATION(pilus_mrna)
+        DEGRADATION(R_protein)
+        DEGRADATION(pilus_protein)
+
+
+
+

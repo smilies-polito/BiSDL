@@ -3,11 +3,11 @@ import random
 import sys
 import shutil
 import stat
-from petrisim.simulator_roberta import *
+from petrisim.simulator import *
 from snakes.nets import *
 from examples.bacterial_consortium.bacterial_consortium import Bacterialconsortium
 from examples.rgb.rgb import Rgb
-
+from examples.pt.pt import Pt
 
 example = sys.argv[1]
 condition = sys.argv[2]
@@ -18,8 +18,12 @@ if example == "bacterial_consortium":
 
 elif example == "rgb":
     test_module = Rgb()
+
+elif example == "pt":
+    test_module = Pt()
+
 else:
-    print("Insert valid example among the following: bacterial_consortium, rgb")
+    print("Insert valid example among the following: bacterial_consortium, rgb, pt")
 
 output_path = os.path.join(".", "examples", example, "results", condition)
 
@@ -27,10 +31,11 @@ if os.path.isdir(output_path):
     shutil.rmtree(output_path)
 
 # use this line, where the mode parameter is set to 'exploration' to explore simulation results more freely
-#s = Simulator(m=test_module, output_path=output_path, draw_nets=False, mode='exploration')
+s = Simulator(m=test_module, output_path=output_path, draw_nets=False, mode='exploration')
 
-# use this line, where the mode parameter is set to 'paperFigures' to generate the figures in Giannantoni et al., 2023
-s = Simulator(m=test_module, output_path=output_path, draw_nets=False, mode='paperFigures')
+# use this line, where the mode parameter is set to 'paperFigures' to generate the figures in Giannantoni et al., 2024
+# please set the ylim parameter according to the specific case study
+#s = Simulator(m=test_module, output_path=output_path, draw_nets=False, mode='paperFigures')
 
 s.draw_nets(os.path.join(output_path, "../topology"))
 
@@ -77,5 +82,13 @@ elif example == "rgb":
 
     s.make_spatial_charts()
 
+elif example == "pt":
+    if condition == "pt":
+ 
+        for _ in range(n_steps):
+            
+            s.step()
 
-s.make_charts()
+        s.make_charts()
+
+
