@@ -31,11 +31,11 @@ if os.path.isdir(output_path):
     shutil.rmtree(output_path)
 
 # use this line, where the mode parameter is set to 'exploration' to explore simulation results more freely
-s = Simulator(m=test_module, output_path=output_path, draw_nets=False, mode='exploration')
+# s = Simulator(m=test_module, output_path=output_path, draw_nets=False, mode='exploration')
 
 # use this line, where the mode parameter is set to 'paperFigures' to generate the figures in Giannantoni et al., 2024
 # please set the ylim parameter according to the specific case study
-#s = Simulator(m=test_module, output_path=output_path, draw_nets=False, mode='paperFigures')
+s = Simulator(m=test_module, output_path=output_path, draw_nets=False, mode='paperFigures')
 
 s.draw_nets(os.path.join(output_path, "../topology"))
 
@@ -84,11 +84,15 @@ elif example == "rgb":
 
 elif example == "pt":
     if condition == "pt":
+
+        marking = test_module.get_marking()
+        marking['donor_0_net']['circular_plasmid_molecule'].add([BlackToken()] * 1)
+        s.set_initial_marking(marking)
  
         for _ in range(n_steps):
             
             s.step()
 
-        s.make_charts()
+    s.make_charts()
 
 
