@@ -9,6 +9,14 @@ BiSDL v1.0:
 
 * First release of BiSDL.
 
+BiSDL v1.1: 
+
+* Added the conjugative plasmid transfer
+
+BiSDL v1.2: 
+
+* Fixed minor issues with file organization
+
 ## How to cite
 
 ### BiSDL Primary publications
